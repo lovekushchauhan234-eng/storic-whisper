@@ -1,0 +1,46 @@
+{# Related reads + dual CTA — include on pillar pages #}
+
+<section class="sw-curiosity-band sw-reveal">
+  <p class="sw-curiosity-band__label">What most people don't realize</p>
+  <p class="sw-curiosity-band__text">{{ curiosity_text }}</p>
+  {% if curiosity_hook_2 %}
+  <p class="sw-curiosity-hook sw-reveal">{{ curiosity_hook_2 }}</p>
+  {% endif %}
+</section>
+
+<section class="sw-section sw-pillar-related">
+  <div class="sw-pillar-related__head sw-reveal">
+    <p class="sw-eyebrow">Continue exploring</p>
+    <h2 class="sw-display sw-display--sm">Deeper <em>reads</em> await</h2>
+    <p class="sw-body sw-mt-16" style="max-width:520px">
+      यह सिर्फ surface है। Articles में mechanisms, patterns और real psychology unfold होती है —
+      बिना noise के।
+    </p>
+  </div>
+
+  <div class="sw-articles-grid sw-mt-48">
+    {% for article in related_articles %}
+    <div class="sw-article-card-wrap sw-reveal">
+      <a href="{% url 'article_detail' article.slug %}" class="sw-article-card">
+        <div class="sw-article-card__thumb">
+          <div class="sw-article-card__thumb-placeholder" aria-hidden="true">◈</div>
+        </div>
+        <div class="sw-article-card__body">
+          <div class="sw-article-card__cat">{{ article.get_category_display }}</div>
+          <h3 class="sw-article-card__title">{{ article.title }}</h3>
+          <p class="sw-article-card__excerpt">{{ article.meta_description }}</p>
+        </div>
+      </a>
+    </div>
+    {% empty %}
+    <p class="sw-body sw-text-muted sw-reveal" style="grid-column:1/-1;text-align:center;padding:32px 0">
+      Articles जल्द आ रहे हैं — अभी LUPPI से अपने सवालों की शुरुआत करो।
+    </p>
+    {% endfor %}
+  </div>
+
+  <div class="sw-pillar-cta sw-reveal">
+    <a href="{% url 'article_list' %}" class="sw-btn sw-btn--outline">सभी Articles →</a>
+    <a href="{% url 'ai_assistant' %}" class="sw-btn sw-btn--primary">✦ LUPPI AI से बात करो</a>
+  </div>
+</section>
