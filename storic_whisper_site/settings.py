@@ -20,6 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -87,3 +89,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ── LUPPI AI Intelligence Layer ────────────────────────────────
 LUPPI_PROVIDER = 'local'
 LUPPI_SESSION_MAX_TURNS = 24
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dqhptutne',
+    'API_KEY': '532347431663133',
+    'API_SECRET': 'v_Ifw51Z6WiYIJMSegqJ6Ahct2o',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
