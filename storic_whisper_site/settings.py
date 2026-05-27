@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-!^m22-l+dh2-ijlta!65_t4=ym(cu35u*eyyt+rqmtizox+f*6'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -24,6 +24,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',          # ← WhiteNoise
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,19 +72,18 @@ TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 USE_TZ = True
 
-# ── Static Files ──────────────────────────────────────────────
+# ── Static Files (WhiteNoise serves these on Render) ──────────
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# ── Media Files (thumbnails, images) ─────────────────────────
+# ── Media Files ────────────────────────────────────────────────
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ── LUPPI AI Intelligence Layer ─────────────────────────────
-LUPPI_PROVIDER = 'local'  # local | anthropic
+# ── LUPPI AI Intelligence Layer ────────────────────────────────
+LUPPI_PROVIDER = 'local'
 LUPPI_SESSION_MAX_TURNS = 24
-# Phase 3 — external LLM (optional; falls back to local if missing):
-# ANTHROPIC_API_KEY = 'your-api-key-here'
