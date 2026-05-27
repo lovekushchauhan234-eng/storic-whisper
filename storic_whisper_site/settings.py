@@ -18,10 +18,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'core',
-    'cloudinary',
     'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -94,5 +94,4 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '532347431663133',
     'API_SECRET': 'v_Ifw51Z6WiYIJMSegqJ6Ahct2o',
 }
-
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
