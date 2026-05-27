@@ -1485,11 +1485,12 @@ body:has(button:hover) #sw-cursor-ring {
   opacity: 0.7;
 }
 .section a {
-  color: var(--gold);
+  color: #4a9eff;
   text-decoration: none;
+  border-bottom: 1px solid rgba(74,158,255,0.3);
   transition: color 0.25s;
 }
-.section a:hover { color: var(--gold2); }
+.section a:hover { color: #74b8ff; }
 .section.cta {
   text-align: center;
   border-top: 1px solid var(--border);
@@ -1526,4 +1527,273 @@ body:has(button:hover) #sw-cursor-ring {
 @media print {
   .sw-nav, .sw-footer, .sw-newsletter, #sw-cursor, #sw-cursor-ring { display: none; }
   body { background: white; color: black; }
+}
+/* ═══════════════════════════════════════════════════════════
+   ARTICLE DETAIL — Rich Typography
+   Add this at the END of main.css
+   ═══════════════════════════════════════════════════════════ */
+
+/* Article content wrapper */
+.sw-content-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 72px 56px 80px;
+}
+
+/* Article hero */
+.sw-article .sw-page-hero {
+  padding-bottom: 48px;
+}
+
+/* ── Headings inside article ── */
+.sw-content-wrap h1 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.1;
+  margin: 56px 0 24px;
+}
+.sw-content-wrap h2 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 400;
+  color: #c9a84c;
+  line-height: 1.2;
+  margin: 52px 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(184,151,61,0.12);
+}
+.sw-content-wrap h3 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.3;
+  margin: 40px 0 16px;
+}
+.sw-content-wrap h4 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 32px 0 12px;
+}
+
+/* ── Paragraphs ── */
+.sw-content-wrap p {
+  font-size: 16.5px;
+  color: var(--text2);
+  line-height: 1.95;
+  margin-bottom: 20px;
+}
+.sw-content-wrap p strong {
+  color: var(--text);
+  font-weight: 500;
+}
+.sw-content-wrap p em {
+  color: var(--text2);
+  font-style: italic;
+}
+
+/* ── Links inside article ── */
+.sw-content-wrap a {
+  color: #4a9eff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(74,158,255,0.35);
+  transition: color 0.25s, border-color 0.25s;
+}
+.sw-content-wrap a:hover {
+  color: #74b8ff;
+  border-bottom-color: #74b8ff;
+}
+
+/* ── Lists ── */
+.sw-content-wrap ul,
+.sw-content-wrap ol {
+  margin: 20px 0 28px;
+  padding: 0;
+  list-style: none;
+}
+.sw-content-wrap ul li,
+.sw-content-wrap ol li {
+  font-size: 16px;
+  color: var(--text2);
+  line-height: 1.85;
+  padding: 10px 0 10px 28px;
+  border-bottom: 1px solid rgba(184,151,61,0.06);
+  position: relative;
+}
+.sw-content-wrap ul li:last-child,
+.sw-content-wrap ol li:last-child {
+  border-bottom: none;
+}
+.sw-content-wrap ul li::before {
+  content: '—';
+  color: var(--gold);
+  position: absolute;
+  left: 0;
+  opacity: 0.7;
+  font-family: var(--font-display);
+}
+.sw-content-wrap ol {
+  counter-reset: article-counter;
+}
+.sw-content-wrap ol li {
+  counter-increment: article-counter;
+}
+.sw-content-wrap ol li::before {
+  content: counter(article-counter);
+  color: var(--gold);
+  position: absolute;
+  left: 0;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  top: 12px;
+}
+
+/* ── Blockquote ── */
+.sw-content-wrap blockquote {
+  border-left: 3px solid var(--gold);
+  margin: 36px 0;
+  padding: 20px 28px;
+  background: var(--bg2);
+}
+.sw-content-wrap blockquote p {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Horizontal rule ── */
+.sw-content-wrap hr {
+  border: none;
+  border-top: 1px solid rgba(184,151,61,0.15);
+  margin: 48px 0;
+}
+
+/* ── Images inside article ── */
+.sw-content-wrap img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 32px auto;
+  border: 1px solid rgba(184,151,61,0.12);
+}
+
+/* ── Code ── */
+.sw-content-wrap code {
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 14px;
+  background: var(--bg3);
+  color: var(--gold);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.sw-content-wrap pre {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 24px;
+  overflow-x: auto;
+  margin: 28px 0;
+}
+.sw-content-wrap pre code {
+  background: none;
+  padding: 0;
+  font-size: 13px;
+  color: var(--text2);
+}
+
+/* ── First paragraph drop cap feel ── */
+.sw-content-wrap > p:first-of-type {
+  font-size: 18px;
+  color: var(--text);
+  line-height: 1.85;
+}
+
+/* ── Thumbnail spacing ── */
+.sw-article-thumb-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 56px 48px;
+}
+.sw-article-thumb-wrap img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(184,151,61,0.12);
+}
+
+/* ── Reading progress bar ── */
+.sw-reading-progress {
+  position: fixed;
+  top: 68px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  z-index: 700;
+  transition: width 0.1s linear;
+}
+
+/* ── Share bar ── */
+.sw-article-share {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 56px 80px;
+  border-top: 1px solid rgba(184,151,61,0.12);
+  padding-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.sw-share-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sw-share-btn {
+  padding: 7px 16px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  transition: opacity 0.25s;
+}
+.sw-share-btn:hover { opacity: 0.8; }
+.sw-share-wa {
+  background: rgba(37,211,102,.1);
+  border: 1px solid rgba(37,211,102,.25);
+  color: #25d366;
+}
+.sw-share-tw {
+  background: rgba(29,155,240,.1);
+  border: 1px solid rgba(29,155,240,.2);
+  color: #1d9bf0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sw-content-wrap {
+    padding: 48px 22px 60px;
+  }
+  .sw-article-thumb-wrap {
+    padding: 0 22px 36px;
+  }
+  .sw-article-share {
+    padding: 24px 22px 60px;
+  }
+  .sw-content-wrap h2 { font-size: 22px; }
+  .sw-content-wrap h3 { font-size: 18px; }
+  .sw-content-wrap p  { font-size: 15.5px; }
 }

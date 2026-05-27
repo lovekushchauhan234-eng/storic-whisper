@@ -1485,11 +1485,12 @@ body:has(button:hover) #sw-cursor-ring {
   opacity: 0.7;
 }
 .section a {
-  color: var(--gold);
+  color: #4a9eff;
   text-decoration: none;
+  border-bottom: 1px solid rgba(74,158,255,0.3);
   transition: color 0.25s;
 }
-.section a:hover { color: var(--gold2); }
+.section a:hover { color: #74b8ff; }
 .section.cta {
   text-align: center;
   border-top: 1px solid var(--border);
@@ -1556,8 +1557,8 @@ body:has(button:hover) #sw-cursor-ring {
 .sw-content-wrap h2 {
   font-family: var(--font-display);
   font-size: clamp(24px, 3vw, 36px);
-  font-weight: 300;
-  color: var(--gold);
+  font-weight: 400;
+  color: #c9a84c;
   line-height: 1.2;
   margin: 52px 0 20px;
   padding-bottom: 12px;
@@ -1598,14 +1599,14 @@ body:has(button:hover) #sw-cursor-ring {
 
 /* ── Links inside article ── */
 .sw-content-wrap a {
-  color: var(--gold);
+  color: #4a9eff;
   text-decoration: none;
-  border-bottom: 1px solid rgba(184,151,61,0.3);
+  border-bottom: 1px solid rgba(74,158,255,0.35);
   transition: color 0.25s, border-color 0.25s;
 }
 .sw-content-wrap a:hover {
-  color: var(--gold2);
-  border-bottom-color: var(--gold2);
+  color: #74b8ff;
+  border-bottom-color: #74b8ff;
 }
 
 /* ── Lists ── */
