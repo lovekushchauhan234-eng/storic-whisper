@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('core.urls')),
 ]
 
-# Media files in development (thumbnails)
+# Serve media locally (when DEBUG=True)
+# On Render, Cloudinary handles media automatically
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
