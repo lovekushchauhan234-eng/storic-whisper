@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 
 class Article(models.Model):
@@ -32,10 +33,10 @@ class Article(models.Model):
     thumbnail = models.ImageField(
         upload_to='thumbs/',
         blank=True,
-        null=True
+        null=True,
+        storage=MediaCloudinaryStorage()
     )
 
-    # Rich HTML Content
     content = RichTextField()
 
     is_published = models.BooleanField(default=True)
@@ -53,18 +54,13 @@ class Article(models.Model):
         return self.title
 
     def reading_time(self):
-        """
-        Estimated reading time in minutes
-        (220 words/min average)
-        """
+        """Estimated reading time in minutes (220 words/min average)."""
         words = len(self.content.split())
         return max(1, round(words / 220))
 
 
 class Subscriber(models.Model):
-    """
-    Newsletter subscribers
-    """
+    """Newsletter subscribers."""
 
     email = models.EmailField(unique=True)
 
