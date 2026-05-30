@@ -1797,3 +1797,9 @@ body:has(button:hover) #sw-cursor-ring {
   .sw-content-wrap h3 { font-size: 18px; }
   .sw-content-wrap p  { font-size: 15.5px; }
 }
+/* Article Table Headers */
+.article-content th,
+table th {
+    color: #B22222 !important;
+    font-weight: 700 !important;
+}
