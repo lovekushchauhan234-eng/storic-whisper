@@ -1,15 +1,17 @@
 """
 Django settings for storic_whisper_site project.
 """
+
 from pathlib import Path
 import os
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-!^m22-l+dh2-ijlta!65_t4=ym(cu35u*eyyt+rqmtizox+f*6'
 
-# ── DEBUG: True locally, False on Render ──────────────────────
-DEBUG = os.environ.get('RENDER') is None   # Render sets RENDER=true automatically
+# Render पर DEBUG=False, locally DEBUG=True
+DEBUG = os.environ.get('RENDER') is None
 
 ALLOWED_HOSTS = ['*']
 
@@ -20,7 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.sitemaps',
-    'cloudinary_storage',              # ← cloudinary_storage BEFORE staticfiles
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
     'ckeditor',
@@ -58,12 +60,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'storic_whisper_site.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# ── Database ────────────────────────────────────────────────────
+# Render पर DATABASE_URL environment variable automatically set होती है
+# Locally SQLite use होगा
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if DATABASE_URL:
+    # Render PostgreSQL
+    DATABASES = {
+        'default': dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
-}
+else:
+    # Local development — SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -77,13 +95,13 @@ TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 USE_TZ = True
 
-# ── Static Files ───────────────────────────────────────────────
+# ── Static Files ────────────────────────────────────────────────
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# ── Media / Cloudinary ─────────────────────────────────────────
+# ── Media / Cloudinary ──────────────────────────────────────────
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dqhptutne',
     'API_KEY':    '532347431663133',
@@ -95,6 +113,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ── LUPPI AI ───────────────────────────────────────────────────
-LUPPI_PROVIDER        = 'local'
+# ── LUPPI AI ────────────────────────────────────────────────────
+LUPPI_PROVIDER          = 'local'
 LUPPI_SESSION_MAX_TURNS = 24
