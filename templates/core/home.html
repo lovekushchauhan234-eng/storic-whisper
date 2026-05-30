@@ -4,10 +4,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="google-site-verification" content="hSWT_csKa-dFwomKqk95uilDtbPfTrFhgf03DZHntpc" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- ✅ Google Search Console Verification -->
+<meta name="google-site-verification" content="hSWT_csKa-dFwomKqk95uilDtbPfTrFhgf03DZHntpc">
+
 <title>Storic Whisper — Psychology Without Noise</title>
+<meta name="description" content="Breakup Recovery, Women Psychology, Dark Psychology, Stoicism — बिना noise के psychology की clarity। हिंदी में।">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://storicwhisper.com">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Storic Whisper — Psychology Without Noise">
+<meta property="og:description" content="Breakup Recovery, Women Psychology, Dark Psychology — बिना noise के।">
+<meta property="og:url" content="https://storicwhisper.com">
+<meta property="og:site_name" content="Storic Whisper">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Storic Whisper">
+<meta name="twitter:description" content="Psychology Without Noise">
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --void:#050508;
@@ -47,7 +70,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;o
 ::-webkit-scrollbar-thumb{background:rgba(184,151,61,.25);border-radius:2px}
 ::selection{background:rgba(184,151,61,.22);color:var(--cream)}
 
-/* ── NAV ─────────────────────────────────────── */
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;height:70px;padding:0 56px;display:flex;align-items:center;justify-content:space-between;transition:background .5s,border-color .5s}
 nav.scrolled{background:rgba(5,5,8,.94);border-bottom:1px solid var(--border);backdrop-filter:blur(24px)}
 .logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none}
@@ -68,10 +91,8 @@ a.topic-cta{text-decoration:none}
 .mob-menu a{font-family:'Playfair Display',serif;font-size:34px;font-weight:400;color:var(--cream);text-decoration:none;transition:color .25s;cursor:pointer}
 .mob-menu a:hover{color:var(--gold)}
 
-/* ── HERO ────────────────────────────────────── */
+/* HERO */
 .hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-
-/* ocean layers */
 .ocean{position:absolute;inset:0;overflow:hidden}
 .ocean-bg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 50% 110%,#0a1a2e 0%,#060a12 40%,var(--void) 70%)}
 .wave{position:absolute;bottom:0;left:-200%;width:600%;border-radius:40%;animation:wave linear infinite}
@@ -80,41 +101,31 @@ a.topic-cta{text-decoration:none}
 .w3{height:110px;background:rgba(4,10,24,.35);animation-duration:13s;animation-delay:-3s;bottom:10px}
 .w4{height:80px;background:rgba(10,20,50,.25);animation-duration:9s;animation-delay:-1s;bottom:30px}
 @keyframes wave{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-/* light rays */
 .rays{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .ray{position:absolute;top:0;width:1px;transform-origin:top center;opacity:.03;animation:ray-pulse 8s ease-in-out infinite}
 .ray:nth-child(1){left:25%;height:70%;background:linear-gradient(var(--gold),transparent);animation-delay:0s}
 .ray:nth-child(2){left:50%;height:90%;background:linear-gradient(rgba(184,151,61,.6),transparent);animation-delay:2s;opacity:.05}
 .ray:nth-child(3){left:75%;height:60%;background:linear-gradient(var(--gold),transparent);animation-delay:4s}
 @keyframes ray-pulse{0%,100%{opacity:.02;transform:scaleX(1)}50%{opacity:.06;transform:scaleX(2)}}
-
-/* particle canvas */
 #hero-canvas{position:absolute;inset:0;z-index:2;pointer-events:none}
-
 .hero-overlay{position:absolute;inset:0;z-index:3;background:linear-gradient(to bottom,rgba(5,5,8,.5) 0%,rgba(5,5,8,.2) 35%,rgba(5,5,8,.5) 75%,rgba(5,5,8,1) 100%)}
 .hero-content{position:relative;z-index:4;text-align:center;max-width:940px;padding:0 32px}
-
 .hero-eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:40px;opacity:0;animation:fadeup .8s .1s both}
 .hero-eyebrow span{margin:0 14px;opacity:.35}
-
 .hero-h{font-family:'Playfair Display',serif;font-size:clamp(52px,9vw,106px);font-weight:400;line-height:1.0;color:var(--cream);margin-bottom:10px;opacity:0;animation:fadeup .9s .3s both}
 .hero-h em{font-style:italic;color:var(--gold)}
 .hero-sub{font-family:'Playfair Display',serif;font-size:clamp(17px,2.2vw,24px);font-style:italic;font-weight:400;color:var(--fog);margin-bottom:56px;opacity:0;animation:fadeup .8s .5s both}
-
 .hero-vline{width:1px;height:56px;background:linear-gradient(var(--gold),transparent);margin:0 auto 56px;opacity:0;animation:fadeup .7s .55s both}
-
 .hero-btns{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeup .8s .7s both}
 .btn-gold{background:var(--gold);color:var(--void);padding:15px 38px;border:none;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;font-weight:500;cursor:pointer;font-family:'Jost',sans-serif;transition:all .3s}
 .btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
 .btn-ghost{background:transparent;color:var(--cream);padding:15px 38px;border:1px solid rgba(228,221,211,.2);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;transition:all .3s}
 .btn-ghost:hover{border-color:rgba(228,221,211,.5);transform:translateY(-2px)}
-
 .scroll-cue{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:10px;animation:float 3s ease-in-out infinite}
 .scroll-cue span{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--fog)}
 .scroll-line{width:1px;height:48px;background:linear-gradient(var(--gold),transparent)}
 
-/* ── SHARED SECTION STYLES ────────────────────── */
+/* SHARED */
 .wrap{max-width:1160px;margin:0 auto;padding:0 56px}
 .sec-label{font-size:10px;letter-spacing:4.5px;text-transform:uppercase;color:var(--gold);font-weight:400}
 .sec-h{font-family:'Playfair Display',serif;font-weight:400;line-height:1.05;color:var(--cream)}
@@ -124,13 +135,11 @@ a.topic-cta{text-decoration:none}
 .sec-h--md{font-size:clamp(26px,3vw,38px)}
 .sec-body{font-size:16px;color:var(--cream2);line-height:1.95}
 .gold-line{width:44px;height:1px;background:var(--gold)}
-
-/* reveal */
 .r{opacity:0;transform:translateY(30px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
 .r.on{opacity:1;transform:none}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
 
-/* ── MANIFESTO ────────────────────────────────── */
+/* MANIFESTO */
 .manifesto{padding:130px 0;background:var(--void);position:relative;overflow:hidden}
 .manifesto::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(transparent,var(--border))}
 .manifesto-inner{max-width:820px;margin:0 auto;text-align:center;padding:0 56px}
@@ -140,17 +149,15 @@ a.topic-cta{text-decoration:none}
 .manifesto-body{font-size:17px;color:var(--cream2);line-height:2;margin-bottom:48px}
 .manifesto-body strong{color:var(--cream);font-weight:400}
 .pillars-row{display:flex;justify-content:center;gap:0;margin-top:64px;flex-wrap:wrap;border:1px solid var(--border)}
-.pillar{padding:28px 36px;flex:1;min-width:140px;border-right:1px solid var(--border);text-align:center;transition:background .3s;cursor:default}
+.pillar{padding:28px 36px;flex:1;min-width:140px;border-right:1px solid var(--border);text-align:center;transition:background .3s;cursor:default;color:inherit}
 .pillar:last-child{border-right:none}
 .pillar:hover{background:var(--golda)}
 .pillar-icon{font-size:22px;margin-bottom:10px}
 .pillar-name{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--fog);transition:color .3s}
 .pillar:hover .pillar-name{color:var(--gold)}
-a.pillar{text-decoration:none;color:inherit;display:block}
+a.pillar{text-decoration:none;display:block}
 
-/* ── IMMERSIVE TOPIC SECTIONS ─────────────────── */
-
-/* Breakup */
+/* TOPIC SECTIONS */
 .breakup-sec{padding:0;background:var(--void);position:relative;overflow:hidden}
 .breakup-inner{display:grid;grid-template-columns:1fr 1fr;min-height:620px}
 .breakup-visual{background:linear-gradient(135deg,#0a0510 0%,#160820 50%,#0d0510 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
@@ -160,7 +167,6 @@ a.pillar{text-decoration:none;color:inherit;display:block}
 .breakup-icon-wrap .big-icon{font-size:72px;filter:grayscale(.3)}
 .breakup-glow{width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(122,79,94,.2),transparent 70%);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:glow-pulse 4s ease-in-out infinite}
 @keyframes glow-pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.3);opacity:1}}
-
 .topic-content{padding:72px 64px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border)}
 .topic-tag{font-size:9.5px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
 .topic-h{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,46px);font-weight:400;color:var(--cream);line-height:1.1;margin-bottom:20px}
@@ -174,16 +180,12 @@ a.pillar{text-decoration:none;color:inherit;display:block}
 .topic-cta{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;cursor:pointer;transition:gap .3s;border:none;background:none;font-family:'Jost',sans-serif}
 .topic-cta:hover{gap:16px}
 .topic-cta-arrow{font-size:16px}
-
-/* Women Psych */
 .women-sec{padding:0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .women-inner{display:grid;grid-template-columns:1fr 1fr;min-height:620px}
 .women-visual{background:linear-gradient(135deg,#080c18 0%,#0e1220 50%,#06080f 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;order:2}
 .women-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 40% 50%,rgba(100,130,180,.12) 0%,transparent 70%)}
 .women-num{font-family:'Playfair Display',serif;font-size:200px;font-weight:700;color:rgba(184,151,61,.04);position:absolute;bottom:-40px;left:-20px;line-height:1;user-select:none}
 .women-glow{width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(100,130,200,.12),transparent 70%);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:glow-pulse 5s ease-in-out infinite}
-
-/* Dark Psych */
 .dark-sec{padding:0;background:var(--void);position:relative}
 .dark-inner{display:grid;grid-template-columns:1fr 1fr;min-height:620px}
 .dark-visual{background:linear-gradient(135deg,#0a0505 0%,#150808 50%,#0a0505 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
@@ -191,8 +193,6 @@ a.pillar{text-decoration:none;color:inherit;display:block}
 .dark-num{font-family:'Playfair Display',serif;font-size:200px;font-weight:700;color:rgba(184,151,61,.04);position:absolute;bottom:-40px;right:-20px;line-height:1;user-select:none}
 .dark-glow{width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(155,40,40,.15),transparent 70%);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:glow-pulse 4.5s ease-in-out infinite}
 .danger-bar{display:inline-flex;align-items:center;gap:8px;background:rgba(155,40,40,.12);border:1px solid rgba(155,40,40,.2);padding:6px 16px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#c45;margin-bottom:20px}
-
-/* Stoicism */
 .stoic-sec{padding:0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .stoic-inner{display:grid;grid-template-columns:1fr 1fr;min-height:620px}
 .stoic-visual{background:linear-gradient(135deg,#080808 0%,#0f0f0e 50%,#080808 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;order:2}
@@ -203,10 +203,10 @@ a.pillar{text-decoration:none;color:inherit;display:block}
 .stoic-qtext{font-family:'Playfair Display',serif;font-size:clamp(16px,2vw,20px);font-style:italic;color:var(--cream2);line-height:1.7;margin-bottom:16px}
 .stoic-qby{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
 
-/* ── MORE PILLARS STRIP ───────────────────────── */
+/* PILLARS STRIP */
 .pillars-strip{background:var(--lift);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 0}
 .pillars-strip-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border)}
-.pillar-card{background:var(--lift);padding:48px 44px;transition:background .35s;cursor:pointer;position:relative;overflow:hidden}
+.pillar-card{background:var(--lift);padding:48px 44px;transition:background .35s;cursor:pointer;position:relative;overflow:hidden;color:inherit}
 .pillar-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--golda),transparent);opacity:0;transition:opacity .35s}
 .pillar-card:hover{background:var(--panel)}
 .pillar-card:hover::before{opacity:1}
@@ -219,9 +219,9 @@ a.pillar{text-decoration:none;color:inherit;display:block}
 .pillar-card:hover .pc-topic{border-color:rgba(184,151,61,.25);color:var(--cream2)}
 .pc-arrow{position:absolute;bottom:28px;right:28px;color:var(--gold);opacity:0;transform:translateX(-8px);transition:all .3s;font-size:18px}
 .pillar-card:hover .pc-arrow{opacity:1;transform:translateX(0)}
-a.pillar-card{text-decoration:none;color:inherit;display:block}
+a.pillar-card{text-decoration:none;display:block}
 
-/* ── LUPPI AI ──────────────────────────────────── */
+/* LUPPI */
 .luppi-sec{padding:140px 0;background:var(--void);position:relative;overflow:hidden}
 .luppi-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,#0f0820 0%,transparent 70%)}
 .luppi-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
@@ -235,8 +235,6 @@ a.pillar-card{text-decoration:none;color:inherit;display:block}
 .luppi-features{display:flex;flex-direction:column;gap:12px;margin-bottom:44px}
 .luppi-feat{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--cream2)}
 .luppi-feat-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
-
-/* LUPPI Interface mock */
 .luppi-interface{background:var(--surface);border:1px solid var(--border);position:relative}
 .luppi-interface::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--rose2),transparent)}
 .luppi-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px}
@@ -257,14 +255,12 @@ a.pillar-card{text-decoration:none;color:inherit;display:block}
 .luppi-send{background:var(--gold);color:var(--void);border:none;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:background .25s;flex-shrink:0}
 .luppi-send:hover{background:var(--gold2)}
 
-/* ── FEATURED ARTICLES ────────────────────────── */
+/* ARTICLES */
 .articles-sec{padding:130px 0;background:var(--surface);border-top:1px solid var(--border)}
 .art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:60px}
 .art-card{background:var(--surface);overflow:hidden;transition:background .35s;cursor:pointer;display:block;text-decoration:none;position:relative}
 .art-card:hover{background:var(--lift)}
 .art-thumb{aspect-ratio:16/9;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.art-thumb-bg{position:absolute;inset:0;opacity:.6;transition:opacity .4s,transform .5s}
-.art-card:hover .art-thumb-bg{opacity:.85;transform:scale(1.04)}
 .art-thumb-icon{font-family:'Playfair Display',serif;font-size:56px;color:rgba(184,151,61,.12);position:relative;z-index:1}
 .art-body{padding:28px 32px 36px}
 .art-cat{font-size:9.5px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
@@ -273,13 +269,13 @@ a.pillar-card{text-decoration:none;color:inherit;display:block}
 .art-excerpt{font-size:13.5px;color:var(--fog);line-height:1.8}
 .art-meta{display:flex;gap:16px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:11.5px;color:var(--fog)}
 
-/* ── QUOTE BREAK ──────────────────────────────── */
+/* QUOTE */
 .quote-break{padding:120px 0;text-align:center;position:relative;overflow:hidden;background:var(--void)}
 .quote-break::before{content:'"';font-family:'Playfair Display',serif;font-size:360px;color:rgba(184,151,61,.035);position:absolute;top:-100px;left:50%;transform:translateX(-50%);line-height:1;pointer-events:none;user-select:none}
 .qb-text{font-family:'Playfair Display',serif;font-size:clamp(24px,3.8vw,48px);font-weight:400;font-style:italic;color:var(--cream);max-width:820px;margin:0 auto 24px;line-height:1.3;position:relative;z-index:1}
 .qb-by{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
 
-/* ── NEWSLETTER ────────────────────────────────── */
+/* NEWSLETTER */
 .nl-sec{padding:120px 0;background:var(--surface);border-top:1px solid var(--border);text-align:center}
 .nl-inner{max-width:580px;margin:0 auto;padding:0 24px}
 .nl-h{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,48px);font-weight:400;color:var(--cream);margin:20px 0 10px;line-height:1.1}
@@ -293,49 +289,48 @@ a.pillar-card{text-decoration:none;color:inherit;display:block}
 .nl-btn:hover{background:var(--gold2)}
 .nl-note{font-size:12px;color:var(--fog);margin-top:16px}
 
-/* ── FOOTER ────────────────────────────────────── */
+/* FOOTER */
 footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56px 52px}
 .foot-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;padding-bottom:56px;border-bottom:1px solid var(--border)}
 .foot-brand{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);letter-spacing:2.5px;margin-bottom:14px}
 .foot-tag{font-size:14px;color:var(--fog);line-height:1.85;max-width:260px;margin-bottom:28px}
 .foot-col-h{font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 .foot-links{list-style:none;display:flex;flex-direction:column;gap:9px}
-.foot-links a{font-size:13.5px;color:var(--fog);text-decoration:none;transition:color .25s;cursor:pointer}
+.foot-links a{font-size:13.5px;color:var(--fog);text-decoration:none;transition:color .25s}
 .foot-links a:hover{color:var(--cream)}
 .foot-bottom{max-width:1160px;margin:0 auto;padding-top:36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .foot-copy{font-size:12.5px;color:var(--fog)}
 .foot-social{width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--fog);text-decoration:none;font-size:13px;transition:all .3s}
 .foot-social:hover{border-color:var(--gold);color:var(--gold)}
 
-/* ── KEYFRAMES ─────────────────────────────────── */
+/* KEYFRAMES */
 @keyframes fadeup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
 
-/* ── RESPONSIVE ─────────────────────────────────── */
+/* RESPONSIVE */
 @media(max-width:900px){
   nav{padding:0 22px}
   .navl{display:none}
   .burger{display:flex}
   .wrap{padding:0 22px}
   .breakup-inner,.women-inner,.dark-inner,.stoic-inner,.luppi-grid{grid-template-columns:1fr}
-  .breakup-visual,.women-visual,.dark-visual,.stoic-visual{min-height:260px;order:0}
-  .women-visual{order:0}
-  .stoic-visual{order:0}
-  .topic-content{padding:44px 28px}
+  .breakup-visual,.women-visual,.dark-visual,.stoic-visual{min-height:260px;order:0!important}
+  .topic-content{padding:44px 28px;border-left:none;border-top:1px solid var(--border)}
   .art-grid{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
   footer{padding:60px 22px 40px}
   .nl-form{flex-direction:column}
-  .nl-input{border-right:1px solid var(--border)}
+  .nl-input{border-right:1px solid var(--border);border-bottom:none}
   .manifesto-inner{padding:0 22px}
   .pillars-row{border:none;gap:1px;background:var(--border)}
   .pillar{border-right:none;border-bottom:1px solid var(--border)}
   .luppi-grid{gap:40px}
+  .pillars-strip-inner{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   .foot-grid{grid-template-columns:1fr}
-  .pillars-strip-inner{grid-template-columns:1fr}
   .hero-h{font-size:42px}
+  .art-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -344,7 +339,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
 <div id="dot"></div>
 <div id="ring"></div>
 
-<!-- ══ NAV ══════════════════════════════════════ -->
+<!-- NAV -->
 <nav id="nav">
   <a class="logo" href="{% url 'home' %}">Storic<em> Whisper</em></a>
   <ul class="navl">
@@ -372,21 +367,15 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   <a href="{% url 'ai_assistant' %}" style="color:var(--gold)">✦ LUPPI AI</a>
 </div>
 
-<!-- ══ HERO ══════════════════════════════════════ -->
+<!-- HERO -->
 <section class="hero">
   <div class="ocean">
     <div class="ocean-bg"></div>
-    <div class="rays">
-      <div class="ray"></div><div class="ray"></div><div class="ray"></div>
-    </div>
-    <div class="wave w1"></div>
-    <div class="wave w2"></div>
-    <div class="wave w3"></div>
-    <div class="wave w4"></div>
+    <div class="rays"><div class="ray"></div><div class="ray"></div><div class="ray"></div></div>
+    <div class="wave w1"></div><div class="wave w2"></div><div class="wave w3"></div><div class="wave w4"></div>
   </div>
   <canvas id="hero-canvas"></canvas>
   <div class="hero-overlay"></div>
-
   <div class="hero-content">
     <p class="hero-eyebrow"><span>—</span> Psychology • Stoicism • Self-Discovery <span>—</span></p>
     <h1 class="hero-h">The Mind<br><em>Understands Itself</em></h1>
@@ -397,29 +386,20 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
       <a href="{% url 'ai_assistant' %}" class="btn-ghost">✦ LUPPI AI से बात करो</a>
     </div>
   </div>
-
-  <div class="scroll-cue">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
-<!-- ══ MANIFESTO ══════════════════════════════════ -->
+<!-- MANIFESTO -->
 <section class="manifesto r">
   <div class="manifesto-inner">
     <p class="manifesto-pre">Our Philosophy</p>
     <h2 class="manifesto-h">Psychology without <em>noise</em>,<br>clarity without <em>judgment</em></h2>
-    <p class="manifesto-body">
-      Internet पर psychology के नाम पर shortcuts, mind games और fake motivation बेचा जाता है।<br>
-      हम उस <strong>noise के खिलाफ हैं।</strong><br><br>
-      यहाँ कोई tricks नहीं — सिर्फ <strong>honest clarity</strong> है। दर्द को समझना, खुद को जानना,<br>
-      और उस knowledge से अपनी life को consciously design करना।
-    </p>
+    <p class="manifesto-body">Internet पर psychology के नाम पर shortcuts, mind games और fake motivation बेचा जाता है।<br>हम उस <strong>noise के खिलाफ हैं।</strong><br><br>यहाँ कोई tricks नहीं — सिर्फ <strong>honest clarity</strong> है।</p>
     <div class="pillars-row">
-      <div class="pillar"><div class="pillar-icon">💔</div><div class="pillar-name">Breakup</div></div>
-      <div class="pillar"><div class="pillar-icon">🧠</div><div class="pillar-name">Women Psych</div></div>
-      <div class="pillar"><div class="pillar-icon">🌑</div><div class="pillar-name">Dark Psych</div></div>
-      <div class="pillar"><div class="pillar-icon">⚡</div><div class="pillar-name">Stoicism</div></div>
+      <a href="{% url 'breakup' %}" class="pillar"><div class="pillar-icon">💔</div><div class="pillar-name">Breakup</div></a>
+      <a href="{% url 'women' %}" class="pillar"><div class="pillar-icon">🧠</div><div class="pillar-name">Women Psych</div></a>
+      <a href="{% url 'dark' %}" class="pillar"><div class="pillar-icon">🌑</div><div class="pillar-name">Dark Psych</div></a>
+      <a href="{% url 'stoicism' %}" class="pillar"><div class="pillar-icon">⚡</div><div class="pillar-name">Stoicism</div></a>
       <a href="{% url 'dopamine' %}" class="pillar"><div class="pillar-icon">🔬</div><div class="pillar-name">Dopamine</div></a>
       <a href="{% url 'human_behavior' %}" class="pillar"><div class="pillar-icon">🌐</div><div class="pillar-name">Human Behavior</div></a>
       <a href="{% url 'self_transform' %}" class="pillar"><div class="pillar-icon">🔄</div><div class="pillar-name">Self-Transform</div></a>
@@ -428,20 +408,18 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   </div>
 </section>
 
-<!-- ══ BREAKUP SECTION ════════════════════════════ -->
+<!-- BREAKUP -->
 <section class="breakup-sec">
   <div class="breakup-inner">
     <div class="breakup-visual r">
       <div class="breakup-glow"></div>
-      <div class="breakup-icon-wrap">
-        <div class="big-icon">💔</div>
-      </div>
+      <div class="breakup-icon-wrap"><div class="big-icon">💔</div></div>
       <div class="breakup-num">01</div>
     </div>
     <div class="topic-content r d2">
       <div class="topic-tag">01 — Breakup & Attachment System</div>
       <h2 class="topic-h">दर्द एक signal है —<br><em>weakness नहीं</em></h2>
-      <p class="topic-body">Breakup सिर्फ किसी को खोना नहीं होता। यह तुम्हारी <strong style="color:var(--cream)">identity, routine और emotional safety</strong> का टूटना होता है। इसीलिए दर्द logic से नहीं — nervous system से जुड़ा होता है।</p>
+      <p class="topic-body">Breakup सिर्फ किसी को खोना नहीं होता। यह तुम्हारी <strong style="color:var(--cream)">identity, routine और emotional safety</strong> का टूटना होता है।</p>
       <ul class="topic-items">
         <li>Attachment Styles — तुम्हारा कौन सा है?</li>
         <li>No Contact Psychology — Science of Healing</li>
@@ -455,7 +433,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   </div>
 </section>
 
-<!-- ══ WOMEN PSYCHOLOGY ═══════════════════════════ -->
+<!-- WOMEN -->
 <section class="women-sec">
   <div class="women-inner">
     <div class="topic-content r">
@@ -474,29 +452,25 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
     </div>
     <div class="women-visual r d2">
       <div class="women-glow"></div>
-      <div class="breakup-icon-wrap">
-        <div class="big-icon">🧠</div>
-      </div>
+      <div class="breakup-icon-wrap"><div class="big-icon">🧠</div></div>
       <div class="women-num">02</div>
     </div>
   </div>
 </section>
 
-<!-- ══ DARK PSYCHOLOGY ════════════════════════════ -->
+<!-- DARK -->
 <section class="dark-sec">
   <div class="dark-inner">
     <div class="dark-visual r">
       <div class="dark-glow"></div>
-      <div class="breakup-icon-wrap">
-        <div class="big-icon">🌑</div>
-      </div>
+      <div class="breakup-icon-wrap"><div class="big-icon">🌑</div></div>
       <div class="dark-num">03</div>
     </div>
     <div class="topic-content r d2">
       <div class="danger-bar">⚠ Handle with Awareness</div>
       <div class="topic-tag">03 — Dark Psychology</div>
       <h2 class="topic-h">पहचानो — <em>before it's too late</em></h2>
-      <p class="topic-body">Dark psychology को जानना weakness नहीं — <strong style="color:var(--cream)">protection है।</strong> जो manipulation को नहीं पहचानता, वो उसका शिकार बनता है। Defense तभी possible है जब awareness हो।</p>
+      <p class="topic-body">Dark psychology को जानना weakness नहीं — <strong style="color:var(--cream)">protection है।</strong> जो manipulation को नहीं पहचानता, वो उसका शिकार बनता है।</p>
       <ul class="topic-items">
         <li>Gaslighting — When Reality Gets Twisted</li>
         <li>Narcissism & The Dark Triad Explained</li>
@@ -510,7 +484,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   </div>
 </section>
 
-<!-- ══ STOICISM ════════════════════════════════════ -->
+<!-- STOICISM -->
 <section class="stoic-sec">
   <div class="stoic-inner">
     <div class="topic-content r">
@@ -538,7 +512,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   </div>
 </section>
 
-<!-- ══ MORE PILLARS STRIP ═════════════════════════ -->
+<!-- MORE PILLARS -->
 <div class="pillars-strip">
   <div class="wrap">
     <div class="r" style="margin-bottom:56px">
@@ -546,69 +520,45 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
       <h2 class="sec-h sec-h--lg">A Complete <em>Psychological Universe</em></h2>
     </div>
     <div class="pillars-strip-inner">
-
       <a href="{% url 'dopamine' %}" class="pillar-card r d1">
         <div class="pc-num">05</div>
         <div class="pc-title">Dopamine & Modern Mind</div>
         <div class="pc-desc">Social media, porn psychology और instant gratification कैसे तुम्हारे brain को hijack करते हैं।</div>
-        <div class="pc-topics">
-          <span class="pc-topic">Dopamine Addiction</span>
-          <span class="pc-topic">Attention Collapse</span>
-          <span class="pc-topic">Brain Fog</span>
-          <span class="pc-topic">Overstimulation</span>
-        </div>
+        <div class="pc-topics"><span class="pc-topic">Dopamine Addiction</span><span class="pc-topic">Attention Collapse</span><span class="pc-topic">Brain Fog</span></div>
         <div class="pc-arrow">→</div>
       </a>
-
       <a href="{% url 'human_behavior' %}" class="pillar-card r d2">
         <div class="pc-num">06</div>
         <div class="pc-title">Human Behavior & Social Psychology</div>
         <div class="pc-desc">Why humans lie, group psychology, status dynamics और social conditioning की deep understanding।</div>
-        <div class="pc-topics">
-          <span class="pc-topic">Power Psychology</span>
-          <span class="pc-topic">Fear Science</span>
-          <span class="pc-topic">Loneliness</span>
-          <span class="pc-topic">Trust Building</span>
-        </div>
+        <div class="pc-topics"><span class="pc-topic">Power Psychology</span><span class="pc-topic">Fear Science</span><span class="pc-topic">Trust Building</span></div>
         <div class="pc-arrow">→</div>
       </a>
-
       <a href="{% url 'self_transform' %}" class="pillar-card r d3">
         <div class="pc-num">07</div>
         <div class="pc-title">Self-Transformation System</div>
         <div class="pc-desc">Identity rebuilding, habit psychology और masculine discipline — एक conscious life design system।</div>
-        <div class="pc-topics">
-          <span class="pc-topic">Identity Rebuild</span>
-          <span class="pc-topic">Habit Science</span>
-          <span class="pc-topic">Self-Respect</span>
-          <span class="pc-topic">Deep Work</span>
-        </div>
+        <div class="pc-topics"><span class="pc-topic">Identity Rebuild</span><span class="pc-topic">Habit Science</span><span class="pc-topic">Self-Respect</span></div>
         <div class="pc-arrow">→</div>
       </a>
-
       <a href="{% url 'ai_mind' %}" class="pillar-card r d4">
         <div class="pc-num">08</div>
         <div class="pc-title">AI + Human Mind Future</div>
-        <div class="pc-desc">AI companions, emotional AI और future human behavior — एक unique category जो कोई नहीं explore कर रहा।</div>
-        <div class="pc-topics">
-          <span class="pc-topic">AI Relationships</span>
-          <span class="pc-topic">Loneliness Future</span>
-          <span class="pc-topic">Digital Consciousness</span>
-        </div>
+        <div class="pc-desc">AI companions, emotional AI और future human behavior — एक unique category।</div>
+        <div class="pc-topics"><span class="pc-topic">AI Relationships</span><span class="pc-topic">Loneliness Future</span><span class="pc-topic">Digital Consciousness</span></div>
         <div class="pc-arrow">→</div>
       </a>
-
     </div>
   </div>
 </div>
 
-<!-- ══ QUOTE BREAK ════════════════════════════════ -->
+<!-- QUOTE -->
 <section class="quote-break">
   <p class="qb-text r">"Most people don't fail because they lack knowledge — they fail because they lack self-awareness."</p>
   <p class="qb-by r d1">Storic Whisper</p>
 </section>
 
-<!-- ══ LUPPI AI ════════════════════════════════════ -->
+<!-- LUPPI AI -->
 <section class="luppi-sec">
   <div class="wrap">
     <div class="luppi-grid">
@@ -616,7 +566,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
         <div class="luppi-badge"><span class="luppi-dot"></span>Introducing AI Companion</div>
         <div class="luppi-name"><em>LUPPI</em><br>AI</div>
         <p class="luppi-tag">Understand Yourself Better</p>
-        <p class="luppi-desc">रात 2 बजे जब कोई नहीं होता — LUPPI है। एक AI companion जो psychology समझता है, judge नहीं करता। Voice और text दोनों में।</p>
+        <p class="luppi-desc">रात 2 बजे जब कोई नहीं होता — LUPPI है। एक AI companion जो psychology समझता है, judge नहीं करता।</p>
         <div class="luppi-features">
           <div class="luppi-feat"><span class="luppi-feat-dot"></span>Breakup, attachment और emotional pain पर deep conversations</div>
           <div class="luppi-feat"><span class="luppi-feat-dot"></span>Dark psychology awareness और manipulation defense</div>
@@ -644,7 +594,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
           </div>
           <div class="lmsg lmsg-ai">
             <div class="lmsg-av">🌙</div>
-            <div class="lbubble">यह neurochemistry है। जब तुम किसी के साथ time बिताते हो, तुम्हारा brain oxytocin और dopamine को उस person के साथ link कर देता है।<br><br>Breakup के बाद वो chemicals अभी भी trigger होते हैं — इसीलिए यह addiction जैसा feel होता है। यह weakness नहीं, biology है। 🌙</div>
+            <div class="lbubble">यह neurochemistry है। Brain oxytocin और dopamine को उस person के साथ link कर देता है।<br><br>Breakup के बाद वो chemicals अभी भी trigger होते हैं — यह weakness नहीं, biology है। 🌙</div>
           </div>
         </div>
         <div class="luppi-inp-row">
@@ -656,7 +606,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   </div>
 </section>
 
-<!-- ══ FEATURED ARTICLES ══════════════════════════ -->
+<!-- ARTICLES -->
 <section class="articles-sec">
   <div class="wrap">
     <div class="r" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
@@ -670,55 +620,38 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
       {% for article in featured_articles %}
       <a href="{% url 'article_detail' article.slug %}" class="art-card r d{{ forloop.counter }}">
         <div class="art-thumb" style="background:linear-gradient(135deg,#0a0510,#180828)">
-          <div class="art-thumb-icon">{% if article.category == 'breakup' %}💔{% elif article.category == 'women' %}🧠{% elif article.category == 'dark' %}🌑{% else %}⚡{% endif %}</div>
+          {% if article.thumbnail %}
+            <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" style="width:100%;height:100%;object-fit:cover">
+          {% else %}
+            <div class="art-thumb-icon">{% if article.category == 'breakup' %}💔{% elif article.category == 'women' %}🧠{% elif article.category == 'dark' %}🌑{% else %}⚡{% endif %}</div>
+          {% endif %}
         </div>
         <div class="art-body">
           <div class="art-cat">{{ article.get_category_display }}</div>
           <div class="art-title">{{ article.title }}</div>
           <div class="art-excerpt">{{ article.meta_description }}</div>
-          <div class="art-meta"><span>📅 {{ article.created_at|date:"d M Y" }}</span></div>
+          <div class="art-meta"><span>📅 {{ article.created_at|date:"d M Y" }}</span><span>⏱ {{ article.reading_time }} min</span></div>
         </div>
       </a>
       {% empty %}
       <a href="{% url 'article_list' %}" class="art-card r d1">
-        <div class="art-thumb" style="background:linear-gradient(135deg,#0a0510,#180828)">
-          <div class="art-thumb-icon">💔</div>
-        </div>
-        <div class="art-body">
-          <div class="art-cat">Breakup Recovery</div>
-          <div class="art-title">No Contact — सिर्फ punishment नहीं, यह healing का science है</div>
-          <div class="art-excerpt">जब तुम no contact करते हो, तुम्हारा nervous system reset होता है। यह उन्हें hurt करने के लिए नहीं — खुद को heal करने के लिए है।</div>
-          <div class="art-meta"><span>📅 20 May 2025</span><span>⏱ 6 min read</span></div>
-        </div>
+        <div class="art-thumb" style="background:linear-gradient(135deg,#0a0510,#180828)"><div class="art-thumb-icon">💔</div></div>
+        <div class="art-body"><div class="art-cat">Breakup Recovery</div><div class="art-title">No Contact — सिर्फ punishment नहीं, यह healing का science है</div><div class="art-excerpt">जब तुम no contact करते हो, तुम्हारा nervous system reset होता है।</div><div class="art-meta"><span>📅 20 May 2025</span><span>⏱ 6 min</span></div></div>
       </a>
       <a href="{% url 'article_list' %}" class="art-card r d2">
-        <div class="art-thumb" style="background:linear-gradient(135deg,#080c18,#0e1828)">
-          <div class="art-thumb-icon">🧠</div>
-        </div>
-        <div class="art-body">
-          <div class="art-cat">Women Psychology</div>
-          <div class="art-title">Attachment Styles — तुम्हारा कौन सा है और यह relationships को कैसे destroy करता है</div>
-          <div class="art-excerpt">Anxious, Avoidant, Secure — इन तीनों को समझना तुम्हारे relationship patterns को completely बदल सकता है।</div>
-          <div class="art-meta"><span>📅 15 May 2025</span><span>⏱ 8 min read</span></div>
-        </div>
+        <div class="art-thumb" style="background:linear-gradient(135deg,#080c18,#0e1828)"><div class="art-thumb-icon">🧠</div></div>
+        <div class="art-body"><div class="art-cat">Women Psychology</div><div class="art-title">Attachment Styles — तुम्हारा कौन सा है?</div><div class="art-excerpt">Anxious, Avoidant, Secure — इन तीनों को समझना relationships को बदल सकता है।</div><div class="art-meta"><span>📅 15 May 2025</span><span>⏱ 8 min</span></div></div>
       </a>
       <a href="{% url 'article_list' %}" class="art-card r d3">
-        <div class="art-thumb" style="background:linear-gradient(135deg,#0a0505,#200808)">
-          <div class="art-thumb-icon">🌑</div>
-        </div>
-        <div class="art-body">
-          <div class="art-cat">Dark Psychology</div>
-          <div class="art-title">Gaslighting — जब कोई तुम्हारी reality को twist करता है</div>
-          <div class="art-excerpt">अगर तुम किसी के साथ time बिताने के बाद consistently confused, guilty और doubtful feel करते हो — यह love नहीं है।</div>
-          <div class="art-meta"><span>📅 10 May 2025</span><span>⏱ 7 min read</span></div>
-        </div>
+        <div class="art-thumb" style="background:linear-gradient(135deg,#0a0505,#200808)"><div class="art-thumb-icon">🌑</div></div>
+        <div class="art-body"><div class="art-cat">Dark Psychology</div><div class="art-title">Gaslighting — जब कोई तुम्हारी reality को twist करता है</div><div class="art-excerpt">अगर तुम consistently confused और guilty feel करते हो — यह love नहीं है।</div><div class="art-meta"><span>📅 10 May 2025</span><span>⏱ 7 min</span></div></div>
       </a>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- ══ NEWSLETTER ══════════════════════════════════ -->
+<!-- NEWSLETTER -->
 <section class="nl-sec" id="newsletter">
   <div class="nl-inner r">
     <p class="sec-label">Weekly Insight</p>
@@ -729,17 +662,17 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
       <input class="nl-input" type="email" name="email" placeholder="तुम्हारा email address" id="nl-email" required autocomplete="email">
       <button class="nl-btn" type="submit" id="nl-btn">Subscribe</button>
     </form>
-    <p class="nl-note">Join 2,000+ readers who chose clarity over noise.</p>
+    <p class="nl-note">Join readers who chose clarity over noise.</p>
   </div>
 </section>
 
-<!-- ══ FOOTER ══════════════════════════════════════ -->
+<!-- FOOTER -->
 <footer>
   <div class="foot-grid">
     <div>
       <div class="foot-brand">Storic Whisper</div>
       <p class="foot-tag">A psychological exploration universe. खुद को समझो — दुनिया खुद समझ में आ जाएगी।</p>
-      <a href="https://youtube.com/@StoricWhisper" target="_blank" class="foot-social" aria-label="YouTube">▶</a>
+      <a href="https://youtube.com/@StoricWhisper" target="_blank" rel="noopener" class="foot-social">▶</a>
     </div>
     <div>
       <div class="foot-col-h">Psychology</div>
@@ -778,9 +711,8 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   </div>
 </footer>
 
-
 <script>
-/* ── CURSOR ─────────────────────────────────── */
+/* CURSOR */
 const dot=document.getElementById('dot'),ring=document.getElementById('ring');
 let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
 if(window.matchMedia('(pointer:fine)').matches){
@@ -790,94 +722,50 @@ if(window.matchMedia('(pointer:fine)').matches){
   document.addEventListener('mouseup',()=>dot.style.transform='translate(-50%,-50%) scale(1)');
 }else{dot.style.display=ring.style.display='none'}
 
-/* ── NAVBAR ─────────────────────────────────── */
+/* NAVBAR */
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50),{passive:true});
 
-/* ── MOBILE MENU ────────────────────────────── */
+/* MOBILE MENU */
 const burger=document.getElementById('burger'),mob=document.getElementById('mob');
 burger.addEventListener('click',()=>{mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':''});
 mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');document.body.style.overflow=''}));
 
-/* ── SCROLL REVEAL ──────────────────────────── */
+/* SCROLL REVEAL */
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}}),{threshold:.07,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('.r').forEach(el=>obs.observe(el));
 
-/* ── CINEMATIC DUST PARTICLES (2D Canvas) ───── */
+/* PARTICLES */
 (function(){
-  const canvas = document.getElementById('hero-canvas');
-  const hero   = document.querySelector('.hero');
-  let W = hero.clientWidth, H = hero.clientHeight;
-  const ctx = canvas.getContext('2d');
-  canvas.width = W; canvas.height = H;
-
-  /* Particle class — slow rising ocean dust */
-  function Particle(){
-    this.reset = function(fromBottom){
-      this.x    = Math.random() * W;
-      this.y    = fromBottom ? H + Math.random()*60 : Math.random() * H;
-      this.r    = Math.random() * 1.4 + 0.2;   /* tiny */
-      this.vy   = -(Math.random() * 0.18 + 0.04); /* very slow upward */
-      this.vx   = (Math.random() - 0.5) * 0.06;
-      this.life  = 0;
-      this.maxLife = 220 + Math.random() * 280;
-      /* gold or pale white */
-      this.gold = Math.random() > 0.55;
-    };
-    this.reset(false);
-  }
-
-  const COUNT = 110;
-  const particles = Array.from({length:COUNT}, () => new Particle());
-
+  const canvas=document.getElementById('hero-canvas');
+  const hero=document.querySelector('.hero');
+  let W=hero.clientWidth,H=hero.clientHeight;
+  const ctx=canvas.getContext('2d');
+  canvas.width=W;canvas.height=H;
+  function P(){this.reset=function(b){this.x=Math.random()*W;this.y=b?H+Math.random()*60:Math.random()*H;this.r=Math.random()*1.4+.2;this.vy=-(Math.random()*.18+.04);this.vx=(Math.random()-.5)*.06;this.life=0;this.maxLife=220+Math.random()*280;this.gold=Math.random()>.55};this.reset(false)}
+  const PS=Array.from({length:110},()=>new P());
   function draw(){
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
-      p.x  += p.vx + Math.sin(p.life * 0.018) * 0.05;
-      p.y  += p.vy;
-      p.life++;
-
-      /* fade in / fade out */
-      const t    = p.life / p.maxLife;
-      const fade = t < 0.15 ? t/0.15 : t > 0.75 ? 1-(t-0.75)/0.25 : 1;
-      const alpha = fade * (p.gold ? 0.28 : 0.14);
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = p.gold
-        ? `rgba(184,151,61,${alpha})`
-        : `rgba(220,210,190,${alpha})`;
-      ctx.fill();
-
-      /* soft glow for slightly bigger particles */
-      if(p.r > 1.0){
-        const grd = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
-        grd.addColorStop(0, p.gold ? `rgba(184,151,61,${alpha*0.4})` : `rgba(220,210,190,${alpha*0.25})`);
-        grd.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r*4, 0, Math.PI*2);
-        ctx.fillStyle = grd;
-        ctx.fill();
-      }
-
-      if(p.life >= p.maxLife || p.y < -10) p.reset(true);
+    ctx.clearRect(0,0,W,H);
+    PS.forEach(p=>{
+      p.x+=p.vx+Math.sin(p.life*.018)*.05;p.y+=p.vy;p.life++;
+      const t=p.life/p.maxLife,fade=t<.15?t/.15:t>.75?1-(t-.75)/.25:1,alpha=fade*(p.gold?.28:.14);
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.gold?`rgba(184,151,61,${alpha})`:`rgba(220,210,190,${alpha})`;ctx.fill();
+      if(p.r>1){const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);g.addColorStop(0,p.gold?`rgba(184,151,61,${alpha*.4})`:`rgba(220,210,190,${alpha*.25})`);g.addColorStop(1,'rgba(0,0,0,0)');ctx.beginPath();ctx.arc(p.x,p.y,p.r*4,0,Math.PI*2);ctx.fillStyle=g;ctx.fill()}
+      if(p.life>=p.maxLife||p.y<-10)p.reset(true);
     });
     requestAnimationFrame(draw);
   }
   draw();
-
-  window.addEventListener('resize', () => {
-    W = hero.clientWidth; H = hero.clientHeight;
-    canvas.width = W; canvas.height = H;
-  });
+  window.addEventListener('resize',()=>{W=hero.clientWidth;H=hero.clientHeight;canvas.width=W;canvas.height=H});
 })();
 
-/* ── NEWSLETTER ─────────────────────────────── */
+/* NEWSLETTER */
 function nlSubmit(e){
+  e.preventDefault();
   const btn=document.getElementById('nl-btn');
   const email=document.getElementById('nl-email').value;
-  if(!email.includes('@')){e.preventDefault();return false;}
-  e.preventDefault();
+  if(!email.includes('@')){return false;}
   btn.textContent='शुक्रिया! ✓';
   btn.style.background='#2d6a4f';
   setTimeout(()=>{document.getElementById('nl-form').submit();},1200);
