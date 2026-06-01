@@ -15,6 +15,9 @@ sitemaps = {
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # ── CKEditor Upload URL ──────────────────────────────────
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+
     # ── Sitemap ──────────────────────────────────────────────
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),

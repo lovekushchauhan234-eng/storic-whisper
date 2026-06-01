@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'ckeditor',
+    'ckeditor_uploader',
     'core',
 ]
 
@@ -116,3 +117,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ── LUPPI AI ────────────────────────────────────────────────────
 LUPPI_PROVIDER          = 'local'
 LUPPI_SESSION_MAX_TURNS = 24
+# CKEditor settings
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'extraPlugins': 'uploadimage,image2',
+    }
+}
