@@ -1,11 +1,11 @@
 {% extends "core/base.html" %}
 {% load static %}
 
-{% block title %}Storic Whisper | Global Edition — Deep Psychology & Human Behavior{% endblock %}
+{% block title %}Storic Whisper | English Psychology — Deep Psychology & Human Behavior{% endblock %}
 {% block meta_desc %}Premium English psychology insights: attachment, validation, dark psychology awareness, stoicism, dopamine, and the modern mind.{% endblock %}
 {% block canonical %}https://storic-whisper.onrender.com/en/{% endblock %}
 {% block body_class %}en-hub-page{% endblock %}
-{% block nav_blog %}active{% endblock %}
+{% block nav_english %}active{% endblock %}
 
 {% block extra_head %}
 <style>
@@ -28,12 +28,45 @@
 .en-card:hover{border-color:rgba(184,151,61,.35);transform:translateY(-3px)}
 .en-card-thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#0c0c18,#181830);overflow:hidden}
 .en-card-thumb img{width:100%;height:100%;object-fit:cover}
+.en-card-thumb-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:48px;color:rgba(184,151,61,.22)}
 .en-card-body{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column}
 .en-card-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);line-height:1.3;margin-bottom:10px}
+.en-read-btn{
+  align-self:flex-start;
+  margin-top:16px;
+  padding:11px 16px;
+  border:1px solid rgba(184,151,61,.35);
+  border-radius:999px;
+  background:rgba(184,151,61,.06);
+  font-size:10.5px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.en-card:hover .en-read-btn{
+  background:rgba(184,151,61,.14);
+  border-color:rgba(184,151,61,.55);
+}
 .en-card-meta{font-size:11px;color:var(--muted);margin-top:auto;padding-top:14px}
 .en-placeholder{display:flex;align-items:center;justify-content:center;min-height:140px;padding:32px;border:1px dashed rgba(184,151,61,.22);background:rgba(184,151,61,.04)}
 .en-placeholder a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;text-align:center;line-height:1.7;transition:color .25s}
 .en-placeholder a:hover{color:var(--cream)}
+.en-empty-btn{
+  margin-top:10px;
+  padding:12px 16px;
+  border:1px solid rgba(184,151,61,.35);
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(184,151,61,.06);
+  text-transform:none !important;
+  letter-spacing:0.2px !important;
+}
+.en-empty-btn:hover{
+  background:rgba(184,151,61,.14);
+  border-color:rgba(184,151,61,.55);
+}
 @media(max-width:768px){
   .en-banner-inner{padding-top:100px}
   .en-topic-grid{grid-template-columns:1fr}
@@ -42,9 +75,9 @@
 {% endblock %}
 
 {% block content %}
-<section class="en-banner" aria-label="Global Edition">
+<section class="en-banner" aria-label="English Psychology">
   <div class="en-banner-inner">
-    <p class="en-banner-eyebrow">Storic Whisper · Global Edition</p>
+    <p class="en-banner-eyebrow">Storic Whisper · English Psychology</p>
     <h1>Deep Psychology &amp; <em>Human Behavior</em> Insights</h1>
     <p>Premium English analysis for a global audience — attachment, validation, modern mind, and conscious self-transformation.</p>
   </div>
@@ -67,6 +100,8 @@
         <div class="en-card-thumb">
           {% if article.thumbnail %}
             <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" loading="lazy">
+          {% else %}
+            <div class="en-card-thumb-fallback">✦</div>
           {% endif %}
         </div>
         <div class="en-card-body">
@@ -74,6 +109,7 @@
           <p class="sw-body sw-text-muted" style="font-size:13px;line-height:1.7;margin:0">
             {{ article.meta_description|default:"Read the full analysis."|truncatechars:120 }}
           </p>
+          <span class="en-read-btn">Read Article</span>
           <p class="en-card-meta">⏱ {{ article.reading_time }} min · {{ article.created_at|date:"M d, Y" }}</p>
         </div>
       </a>
@@ -81,9 +117,12 @@
     </div>
     {% else %}
     <div class="en-placeholder">
-      <a href="https://youtube.com/@StoricWhisper" target="_blank" rel="noopener">
-        Analysis Coming Soon | Watch Our Global Video Broadcast →
-      </a>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;">
+        <p style="margin:0;font-size:14px;color:var(--fog);line-height:1.6;">
+          No articles published yet.
+        </p>
+        <a href="{% url 'english_hub' %}" class="en-empty-btn">Explore English Psychology</a>
+      </div>
     </div>
     {% endif %}
   </article>

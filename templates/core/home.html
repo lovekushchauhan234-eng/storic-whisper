@@ -379,8 +379,8 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
     <li><a href="{% url 'women' %}">Women Psych</a></li>
     <li><a href="{% url 'dark' %}">Dark Psych</a></li>
     <li><a href="{% url 'stoicism' %}">Stoicism</a></li>
-    <li><a href="{% url 'article_list' %}">Blog</a></li>
-    <li><a href="{% url 'english_hub' %}" class="nav-global">Global Edition 🌐</a></li>
+    <li><a href="{% url 'article_list' %}">Hindi Psychology</a></li>
+    <li><a href="{% url 'english_hub' %}">English Psychology</a></li>
     <li><a href="{% url 'about' %}">About</a></li>
     <li><a href="{% url 'ai_assistant' %}" class="nav-luppi">✦ LUPPI AI</a></li>
   </ul>
@@ -394,8 +394,8 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   <a href="{% url 'women' %}">Women Psychology</a>
   <a href="{% url 'dark' %}">Dark Psychology</a>
   <a href="{% url 'stoicism' %}">Stoicism</a>
-  <a href="{% url 'article_list' %}">Blog</a>
-  <a href="{% url 'english_hub' %}" style="color:var(--gold2)">Global Edition 🌐</a>
+  <a href="{% url 'article_list' %}">Hindi Psychology</a>
+  <a href="{% url 'english_hub' %}">English Psychology</a>
   <a href="{% url 'about' %}">About</a>
   <a href="{% url 'ai_assistant' %}" style="color:var(--gold)">✦ LUPPI AI</a>
 </div>
@@ -410,7 +410,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   <canvas id="hero-canvas"></canvas>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow"><span>—</span> Psychology • Stoicism • Self-Discovery <span>—</span></p>
+    <p class="hero-eyebrow"><span>—</span>  <span>—</span></p>
     <h1 class="hero-h">The Mind<br><em>Understands Itself</em></h1>
     <p class="hero-sub">खुद को समझना सबसे बड़ी journey है</p>
     <div class="hero-vline"></div>
@@ -688,7 +688,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
 <section class="global-sec" id="global-edition">
   <div class="wrap">
     <div class="global-head r">
-      <p class="sec-label">Global Edition | Premium Insights</p>
+      <p class="sec-label">English Psychology | Premium Insights</p>
       <h2 class="sec-h sec-h--lg">Deep Psychology for a <em>Global Mind</em></h2>
       <p class="global-sub">English analysis on attachment, behavior, and the modern mind — written for clarity, not clicks.</p>
     </div>
@@ -713,17 +713,18 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
       </a>
       {% empty %}
       <div class="global-card r d1" style="pointer-events:none;opacity:.85">
-        <div class="global-thumb"><div class="global-thumb-fallback">🌐</div></div>
+        <div class="global-thumb"><div class="global-thumb-fallback">EN</div></div>
         <div class="global-body">
-          <div class="global-tag">Coming Soon</div>
-          <h3 class="global-title">Global Edition launches here</h3>
-          <p class="global-excerpt">English premium insights are on the way. Explore the full hub for topic previews.</p>
+          <div class="global-tag">No articles published yet.</div>
+          <h3 class="global-title">Articles will appear here.</h3>
+          <p class="global-excerpt">Explore the English Psychology hub whenever new insights are published.</p>
+          <a href="{% url 'english_hub' %}" class="global-btn" style="text-decoration:none;text-transform:none;letter-spacing:0;gap:0;margin-top:18px;">Explore English Psychology</a>
         </div>
       </div>
       {% endfor %}
     </div>
     <div class="global-hub-cta r">
-      <a href="{% url 'english_hub' %}">Explore Global Hub <span>→</span></a>
+      <a href="{% url 'english_hub' %}">Explore English Psychology <span>→</span></a>
     </div>
   </div>
 </section>
@@ -767,7 +768,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
         <li><a href="{% url 'human_behavior' %}">Human Behavior</a></li>
         <li><a href="{% url 'self_transform' %}">Self-Transformation</a></li>
         <li><a href="{% url 'ai_mind' %}">AI + Mind Future</a></li>
-        <li><a href="{% url 'article_list' %}">Blog / Articles</a></li>
+        <li><a href="{% url 'article_list' %}">Hindi Psychology</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
       </ul>
     </div>
