@@ -30,6 +30,9 @@ urlpatterns = [
     path('privacy-policy/', views.privacy, name='privacy'),
     path('terms-and-conditions/', views.terms, name='terms'),
 
+    # ENGLISH GLOBAL HUB
+    path('en/', views.english_hub, name='english_hub'),
+
     # ARTICLES / BLOG
     path('articles/', views.article_list, name='article_list'),
     path('articles/<slug:slug>/', views.article_detail, name='article_detail'),

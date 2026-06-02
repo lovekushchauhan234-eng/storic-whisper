@@ -5,6 +5,24 @@ from cloudinary_storage.storage import MediaCloudinaryStorage
 
 class Article(models.Model):
 
+    LANGUAGE_CHOICES = [
+        ('HI', 'Hindi'),
+        ('EN', 'English'),
+    ]
+
+    TOPIC_SECTION_CHOICES = [
+        ('attachment', 'Attachment Theory'),
+        ('validation', 'Validation Psychology'),
+        ('dependency', 'Emotional Dependency'),
+        ('relationship', 'Relationship Psychology'),
+        ('behavior', 'Human Behavior'),
+        ('dark', 'Dark Psychology'),
+        ('stoicism', 'Stoicism'),
+        ('dopamine', 'Dopamine & Modern Mind'),
+        ('transformation', 'Self Transformation'),
+        ('ai_mind', 'AI & Human Mind'),
+    ]
+
     CATEGORY_CHOICES = [
         ('women',     'Women Psychology'),
         ('dark',      'Dark Psychology'),
@@ -23,6 +41,19 @@ class Article(models.Model):
     category = models.CharField(
         max_length=20,
         choices=CATEGORY_CHOICES
+    )
+
+    language = models.CharField(
+        max_length=2,
+        choices=LANGUAGE_CHOICES,
+        default='HI',
+    )
+
+    topic_section = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        choices=TOPIC_SECTION_CHOICES,
     )
 
     meta_description = models.CharField(

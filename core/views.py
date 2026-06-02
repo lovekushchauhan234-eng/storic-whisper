@@ -9,12 +9,51 @@ from .pillar_helpers import get_related_articles
 from .luppi import chat as luppi_chat
 
 
+ENGLISH_HUB_TOPICS = [
+    ('attachment', 'Attachment Theory & Traumas'),
+    ('validation', 'Validation Psychology'),
+    ('dependency', 'Emotional Dependency'),
+    ('relationship', 'Relationship Dynamics'),
+    ('dark', 'Dark Psychology Awareness'),
+    ('stoicism', 'Practical Stoicism'),
+    ('dopamine', 'Dopamine & Modern Mind'),
+    ('transformation', 'Self Transformation'),
+    ('behavior', 'Human Behavior Insights'),
+    ('ai_mind', 'AI & The Human Mind'),
+]
+
+
 # ---------- BASIC PAGES ----------
 
 def home(request):
-    featured_articles = Article.objects.filter(is_published=True).order_by('-created_at')[:3]
+    hindi_qs = Article.objects.filter(is_published=True, language='HI')
+    featured_articles = hindi_qs.order_by('-created_at')[:3]
+    english_posts = (
+        Article.objects.filter(is_published=True, language='EN')
+        .order_by('-created_at')[:6]
+    )
     return render(request, 'core/home.html', {
         'featured_articles': featured_articles,
+        'english_posts': english_posts,
+    })
+
+
+def english_hub(request):
+    base_qs = Article.objects.filter(
+        is_published=True,
+        language='EN',
+    ).order_by('-created_at')
+
+    topic_sections = []
+    for key, label in ENGLISH_HUB_TOPICS:
+        topic_sections.append({
+            'key': key,
+            'label': label,
+            'articles': list(base_qs.filter(topic_section=key)),
+        })
+
+    return render(request, 'core/english_hub.html', {
+        'topic_sections': topic_sections,
     })
 
 
@@ -109,7 +148,10 @@ def subscribe(request):
 # ---------- ARTICLES ----------
 
 def article_list(request):
-    articles = Article.objects.filter(is_published=True).order_by('-created_at')
+    articles = (
+        Article.objects.filter(is_published=True, language='HI')
+        .order_by('-created_at')
+    )
 
     return render(request, 'core/article_list.html', {
         'articles': articles

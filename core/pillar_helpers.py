@@ -3,7 +3,10 @@ from .models import Article
 
 def get_related_articles(category=None, limit=3):
     """Published articles for pillar pages; backfill from other categories if needed."""
-    base = Article.objects.filter(is_published=True).order_by('-created_at')
+    base = Article.objects.filter(
+        is_published=True,
+        language='HI',
+    ).order_by('-created_at')
     if not category:
         return list(base[:limit])
 
