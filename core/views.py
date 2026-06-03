@@ -58,15 +58,21 @@ def english_hub(request):
 
 
 def women(request):
-    return render(request, 'core/women.html')
+    return render(request, 'core/women.html', {
+        'related_articles': get_related_articles('women'),
+    })
 
 
 def stoicism(request):
-    return render(request, 'core/stoicism.html')
+    return render(request, 'core/stoicism.html', {
+        'related_articles': get_related_articles('stoic'),
+    })
 
 
 def breakup(request):
-    return render(request, 'core/breakup.html')
+    return render(request, 'core/breakup.html', {
+        'related_articles': get_related_articles('breakup'),
+    })
 
 
 def about(request):
@@ -74,7 +80,9 @@ def about(request):
 
 
 def dark_psychology(request):
-    return render(request, 'core/dark.html')
+    return render(request, 'core/dark.html', {
+        'related_articles': get_related_articles('dark'),
+    })
 
 
 def dopamine(request):
