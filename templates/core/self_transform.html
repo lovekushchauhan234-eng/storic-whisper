@@ -1,0 +1,97 @@
+{% extends "core/base.html" %}
+
+{% block title %}Self-Transformation | Storic Whisper{% endblock %}
+{% block meta_desc %}Self-transformation — identity rebuild, habit psychology, discipline और conscious life design। Motivation नहीं, architecture।{% endblock %}
+{% block body_class %}sw-pillar sw-pillar--transform{% endblock %}
+
+{% block content %}
+
+<section class="sw-pillar-hero sw-pillar-hero--transform">
+  <span class="sw-pillar-hero__num" aria-hidden="true">07</span>
+  <div class="sw-pillar-hero__inner">
+    <p class="sw-eyebrow sw-reveal">Self-Transformation</p>
+    <h1 class="sw-display sw-display--lg sw-reveal" style="transition-delay:.08s">
+      तुम नया version नहीं बनाते —<br>तुम <em>identity</em> rewrite करते हो
+    </h1>
+    <p class="sw-pillar-hero__lead sw-reveal" style="transition-delay:.16s">
+      Habits surface नहीं हैं। वो तुम्हारी self-story के <strong style="color:var(--text);font-weight:400">symptoms</strong> हैं।
+      जब तुम खुद को अलग नहीं देखते, behavior automatically पुरानी रहती है।
+    </p>
+  </div>
+</section>
+
+<section class="sw-section sw-pillar-intro">
+  <p class="sw-body-lg sw-reveal">
+    Transformation “Monday motivation” से नहीं आती।
+    यह एक slow, sometimes boring process है: छोटे proofs, छोटे boundaries,
+    छोटे moments जहाँ तुम पुराने self के patterns को interrupt करते हो।
+    Storic Whisper तुम्हें hustle culture नहीं देता —
+    यहाँ <em>psychological architecture</em> है: कौन तुम हो, किसे तुम respect देते हो,
+    और कौन सी habits उस identity को reinforce करती हैं।
+  </p>
+</section>
+
+<section class="sw-section" style="padding-top:0">
+  <p class="sw-eyebrow sw-reveal">Psychological signals</p>
+  <h2 class="sw-display sw-display--sm sw-reveal">Rebuild के <em>invisible steps</em></h2>
+
+  <div class="sw-insight-grid">
+    <article class="sw-insight-card sw-reveal">
+      <div class="sw-insight-card__icon">◇</div>
+      <h3 class="sw-insight-card__title">Identity Before Habit</h3>
+      <p class="sw-insight-card__text">
+        “मैं gym जाता हूँ” और “मैं वो इंसान हूँ जो body respect करता है” — different nervous systems।
+        Behavior follow करती है belief को — या उसका absence।
+      </p>
+      <span class="sw-insight-card__tease">Identity loops →</span>
+    </article>
+    <article class="sw-insight-card sw-reveal d1">
+      <div class="sw-insight-card__icon">⏳</div>
+      <h3 class="sw-insight-card__title">Discipline as Self-Respect</h3>
+      <p class="sw-insight-card__text">
+        Discipline punishment नहीं — promise है जो तुम खुद से करते हो।
+        हर broken promise self-trust को erode करती है।
+        और फिर तुम दूसरों पर depend करने लगते हो।
+      </p>
+      <span class="sw-insight-card__tease">The respect equation →</span>
+    </article>
+    <article class="sw-insight-card sw-reveal d2">
+      <div class="sw-insight-card__icon">▣</div>
+      <h3 class="sw-insight-card__title">Deep Work Sanctuary</h3>
+      <p class="sw-insight-card__text">
+        Focus एक personality trait नहीं — protected environment है।
+        जो हर hour reactive रहता है, कभी अपनी life design नहीं करता —
+        सिर्फ react करता है।
+      </p>
+      <span class="sw-insight-card__tease">Attention as currency →</span>
+    </article>
+    <article class="sw-insight-card sw-reveal d3">
+      <div class="sw-insight-card__icon">↻</div>
+      <h3 class="sw-insight-card__title">The Relapse Pattern</h3>
+      <p class="sw-insight-card__text">
+        Slip-up failure नहीं — data है।
+        जो relapse को shame से handle करता है, वो loop repeat करता है।
+        जो curiosity से देखता है, वो pattern तोड़ता है।
+      </p>
+      <span class="sw-insight-card__tease">Shame vs clarity →</span>
+    </article>
+  </div>
+</section>
+
+<div class="sw-pillar-cross sw-reveal">
+  <a href="{% url 'stoicism' %}">Stoicism</a>
+  <a href="{% url 'breakup' %}">Breakup Recovery</a>
+  <a href="{% url 'dopamine' %}">Dopamine</a>
+</div>
+
+<section class="sw-section sw-section--tight">
+  <ul class="sw-pillar-hooks__list">
+    <li class="sw-reveal">अगर तुम्हारी environment तुम्हारे goals support नहीं करती — willpower हारेगी।</li>
+    <li class="sw-reveal d1">Self-respect छोटे “नहीं” से बढ़ती है — बड़े speeches से नहीं।</li>
+    <li class="sw-reveal d2">तुम जो repeat करते हो — वही तुम हो। बाकी सब story है।</li>
+  </ul>
+</section>
+
+{% include "core/includes/pillar_related.html" with curiosity_text="लोग सोचते हैं change overnight होना चाहिए — जबकि identity सालों में बनी होती है, और rewrite भी time माँगती है।" curiosity_hook_2="सबसे quiet revolution: जब तुम अपने साथ honest हो जाओ — बिना audience के।" %}
+
+{% endblock %}
