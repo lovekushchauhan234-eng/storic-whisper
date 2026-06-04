@@ -55,7 +55,8 @@ _GREETING_RE = re.compile(
 
 _SMALL_TALK_RE = re.compile(
     r"(how are you|how r u|kaise ho|kya haal|what'?s up|wyd|"
-    r"thanks|thank you|shukriya|bye|goodbye|see you|ok+|okay|cool|nice|hmm+)",
+    r"thanks|thank you|shukriya|bye|goodbye|see you|ok+|okay|cool|nice|hmm+|"
+    r"what doing|kya kar|kya kar rahe|kya chal|good morning|good night)",
     re.I,
 )
 
@@ -64,6 +65,9 @@ _RELATIONSHIP_TERMS = (
     'पत्नी', 'पति', 'प्रेमी', 'प्रेमिका', 'रिश्त', 'बातचीत', 'dating',
     'marriage', 'शादी', 'cheat', 'धोख', 'toxic', 'hurt me', 'दुख', 'झगड',
     'breakup', 'ex', 'छोड', 'love', 'pyaar', 'मोहब्बत',
+    # Dating/casual terms
+    'ladki', 'girl', 'pataye', 'impress', 'approach', 'date', 'crush',
+    'पटाने', 'इम्प्रेस', 'लड़की', 'प्रपोज़',
 )
 
 _STUDY_TERMS = (
@@ -220,7 +224,7 @@ def detect_intent(message: str, memory: SessionMemory | None = None) -> IntentRe
         return IntentResult(ConversationIntent.EMOTIONAL_CHECKIN, ResponseDepth.NONE, 0.75, 'vague_emotion')
 
     # ── 6. Short casual messages ──
-    if wc <= 4 and deep_hits == 0 and rel_hits == 0:
+    if wc <= 6 and deep_hits == 0 and rel_hits == 0:
         return IntentResult(ConversationIntent.CASUAL, ResponseDepth.NONE, 0.7, 'short_casual')
 
     # ── 7. Continuation: user answering LUPPI's question ──

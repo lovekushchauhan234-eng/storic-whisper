@@ -14,37 +14,75 @@ def _pick(options: list[str]) -> str:
 
 
 GREETING_REPLIES = [
-    "Hey 🌙\nHow are you feeling today?",
-    "नमस्ते 🌙\nआज कैसा लग रहा है?",
-    "Hey — LUPPI here.\nWhat's on your mind?",
+    "Hello 👋\nAchha laga tum aaye.\nAaj kis baare mein baat karna chahoge?",
+    "नमस्ते 🌙\nमैं यहाँ हूँ। दिल की baat karni hai ya casual?",
+    "Hey there 😊\nKya chal raha hai life mein?",
+    "Hi! Main yahin hoon 😊\nTum kaise ho?",
+    "Hello! Achha hai tum aaye.\nAaj mood kaisa hai?",
 ]
 
 SMALL_TALK_REPLIES = {
     'how_are_you': [
-        "Calm tonight.\nAnd you?",
-        "यहाँ शांत हूँ 🌙\nतुम कैसे हो?",
-        "Steady.\nतुम्हारा mood कैसा है आज?",
+        "Main yahin hoon 😊\nTum kaise ho?\nAaj din kaisa ja raha hai?",
+        "यहाँ शांत हूँ 🌙\nतुम कैसे हो? Sab theek?",
+        "Steady 😊\nतुम्हारा mood कैसा है आज?",
+        "Main theek hoon, tum batao?\nKya naya hai aaj?",
+    ],
+    'what_doing': [
+        "Yahin baat kar raha hoon tumse 😊\nTum kya kar rahe ho?",
+        "Bas yahin hoon, tumhari baat sun raha hoon.\nAaj ka plan kya hai?",
+        "Kuch khaas nahi, tumse baat kar raha hoon.\nTumhara din kaisa gaya?",
     ],
     'thanks': [
-        "🌙",
-        "Anytime.",
-        "यहाँ हूँ — जब भी चाहो।",
+        "Anytime 😊\nKuch aur baat karna hai?",
+        "यहाँ हूँ — जब भी चाहो 🌙",
+        "Welcome! Main yahin hoon agar kuch help chahiye.",
     ],
     'bye': [
-        "Take care 🌙",
-        "शांति के साथ जाओ।",
+        "Take care 🌙\nPhir milte hain!",
+        "शांति के साथ जाओ। Phir kab miloge?",
+        "Bye! Achha raha tumse baat karke 😊",
+    ],
+    'good_morning': [
+        "Good morning! ☀️\nAaj ka din kaisa hai?",
+        "सुप्रभात! 🌅\nAaj kya karna hai?",
+        "Morning! Coffee pe liya? ☕",
+    ],
+    'good_night': [
+        "Good night! 🌙\nAchhi neend aaye.",
+        "शुभ रात्रि! 😴\nKal milte hain.",
+        "Sleep well! Sweet dreams ✨",
     ],
     'default': [
-        "🌙",
-        "I'm here.",
-        "सुन रहा हूँ।",
+        "🌙\nBatao, kya chal raha hai?",
+        "I'm here 😊\nKya baat karni hai?",
+        "सुन रहा हूँ। बताओ — क्या है?",
     ],
 }
 
 CASUAL_REPLIES = [
-    "सुन रहा हूँ — बताओ थोड़ा और।",
+    "सुन रहा हूँ — बताओ थोड़ा और 😊",
     "I'm listening. What's really on your mind?",
     "यहाँ हूँ। एक line में बताओ — क्या चल रहा है?",
+    "Batao, kya baat hai?\nMain yahin hoon sunne ke liye.",
+    "Hmm, interesting 😊\nAur batao.",
+]
+
+# Dating/Relationship casual conversation
+DATING_CASUAL_REPLIES = [
+    "Dating mein thoda patience chahiye hota hai 😊\nKisi specific ke baare mein baat kar rahe ho?",
+    "Relationships complex hote hain — har case alag hota hai.\nTumhara situation kya hai?",
+    "Yeh ek interesting topic hai 😊\nKya tum kisi ke saath involved ho ya planning kar rahe ho?",
+    "Sabse pehle khud ko samajhna important hai 😊\nTum kis type ki partner dhundh rahe ho?",
+    "Patana ya impress karna — dono alag cheezein hain 😊\nTum kya chahte ho exactly?",
+]
+
+# Personal questions
+PERSONAL_QUESTION_REPLIES = [
+    "Interesting question 😊\nKyun puchna chahte ho?",
+    "Yeh baat thodi personal hai, par I'm open 😊\nContext batao thoda.",
+    "Hmm, good question!\nPehle batao — tum khud kya sochte ho is baare mein?",
+    "Yeh deep topic hai 😊\nTum is baare mein kyun soch rahe ho aaj?",
 ]
 
 EMOTIONAL_CHECKIN_REPLIES = [
@@ -150,10 +188,16 @@ def _small_talk_variant(message: str) -> str:
     lower = message.lower()
     if any(x in lower for x in ('how are', 'kaise ho', 'kya haal', "what's up", 'wyd')):
         return _pick(SMALL_TALK_REPLIES['how_are_you'])
+    if any(x in lower for x in ('what doing', 'kya kar', 'kya kar rahe', 'kya chal')):
+        return _pick(SMALL_TALK_REPLIES['what_doing'])
     if any(x in lower for x in ('thank', 'shukriya', 'dhanyavad')):
         return _pick(SMALL_TALK_REPLIES['thanks'])
-    if any(x in lower for x in ('bye', 'goodbye', 'see you')):
+    if any(x in lower for x in ('bye', 'goodbye', 'see you', 'byy')):
         return _pick(SMALL_TALK_REPLIES['bye'])
+    if any(x in lower for x in ('good morning', 'morning', 'gm', 'suprabhat')):
+        return _pick(SMALL_TALK_REPLIES['good_morning'])
+    if any(x in lower for x in ('good night', 'night', 'gn', 'shubh ratri')):
+        return _pick(SMALL_TALK_REPLIES['good_night'])
     return _pick(SMALL_TALK_REPLIES['default'])
 
 
@@ -216,6 +260,20 @@ def compose_conversational(
         return base + _pick(STUDY_FOLLOW_LIGHT)
 
     if intent == ConversationIntent.RELATIONSHIP:
+        # Check if it's a casual dating question (not emotional pain)
+        lower = message.lower()
+        dating_keywords = ('ladki kaise patayen', 'kaise pataye', 'impress kaise', 'girlfriend kaise banaye', 
+                          'dating tips', 'first date', 'approach kaise', 'ladki patane ke tarike')
+        if any(k in lower for k in dating_keywords):
+            return _pick(DATING_CASUAL_REPLIES)
+        
+        # Check if it's a personal question
+        personal_keywords = ('tum kya', 'tum kaun', 'tumhara naam', 'tum kahan', 'tumse puch', 
+                           'tumhare baare mein', 'about you')
+        if any(k in lower for k in personal_keywords):
+            return _pick(PERSONAL_QUESTION_REPLIES)
+        
+        # Emotional relationship discussion
         parts = [_pick(RELATIONSHIP_OPENERS)]
         if emotion.primary in (EmotionalTone.GRIEF, EmotionalTone.ATTACHMENT, EmotionalTone.CONFUSION):
             parts[0] = "यह भारी लग रहा है — और यह valid है।"
