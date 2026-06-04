@@ -1,0 +1,78 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}LUPPI AI | Storic Whisper — Psychology Companion{% endblock %}
+{% block meta_desc %}LUPPI — Storic Whisper का AI companion। Breakup, attachment, dark psychology awareness और stoic wisdom — बिना judgment के।{% endblock %}
+{% block body_class %}sw-page--ai{% endblock %}
+{% block newsletter %}{% endblock %}
+
+{% block extra_head %}
+<meta name="csrf-token" content="{{ csrf_token }}">
+{% endblock %}
+
+{% block content %}
+<section class="sw-page-hero sw-text-center">
+  <p class="sw-eyebrow sw-reveal">Introducing AI Companion</p>
+  <h1 class="sw-display sw-display--lg sw-reveal" style="transition-delay:.08s">
+    <em>LUPPI</em> AI
+  </h1>
+  <p class="sw-page-hero__sub sw-reveal" style="transition-delay:.16s">
+    रात 2 बजे जब कोई नहीं होता — LUPPI है। Psychology समझता है, judge नहीं करता।
+  </p>
+</section>
+
+<section class="sw-section sw-section--sm" style="padding-top:0">
+  <div style="max-width:720px;margin:0 auto">
+    <div class="sw-ai-interface sw-reveal">
+      <div class="sw-ai-header">
+        <div class="sw-ai-avatar" aria-hidden="true">🌙</div>
+        <div>
+          <div class="sw-display" style="font-size:22px;line-height:1.1">LUPPI</div>
+          <div class="sw-ai-status">
+            <span class="sw-ai-dot"></span> Online — यहाँ हूँ
+          </div>
+        </div>
+      </div>
+
+      <div class="sw-ai-messages" id="sw-ai-messages" role="log" aria-live="polite">
+        <div class="sw-msg sw-msg--ai">
+          <div class="sw-msg__avatar">🌙</div>
+          <div class="sw-msg__bubble">
+            Hey 🌙<br><br>
+            मैं LUPPI हूँ — calm companion यहाँ हूँ।<br>
+            Casual बात कर सकते हो, या जो भी feel हो रहा है — बिना judge किए।
+          </div>
+        </div>
+      </div>
+
+      <div class="sw-quick-prompts">
+        <button type="button" class="sw-quick-prompt" data-prompt="Hi">Say hi</button>
+        <button type="button" class="sw-quick-prompt" data-prompt="I feel distracted while studying">Study & focus</button>
+        <button type="button" class="sw-quick-prompt" data-prompt="My relationship is hurting me">Relationship pain</button>
+        <button type="button" class="sw-quick-prompt" data-prompt="Breakup के बाद attachment क्यों feel होती है?">Breakup</button>
+        <button type="button" class="sw-quick-prompt" data-prompt="Gaslighting कैसे पहचानें?">Gaslighting</button>
+        <button type="button" class="sw-quick-prompt" data-prompt="I feel very lonely">Loneliness</button>
+        <button type="button" class="sw-quick-prompt" data-prompt="What is stoicism really about?">Stoicism</button>
+      </div>
+
+      <div class="sw-ai-input-area">
+        <button type="button" class="sw-ai-voice-btn" id="sw-ai-voice" aria-label="Voice input">🎤</button>
+        <input class="sw-ai-input" type="text" id="sw-ai-input"
+               placeholder="यहाँ लिखो या 🎤 से बोलो..." autocomplete="off">
+        <button type="button" class="sw-ai-send-btn" id="sw-ai-send" aria-label="Send message">→</button>
+      </div>
+    </div>
+
+    <p class="sw-caption sw-text-center sw-mt-24 sw-reveal">
+      Conversation-first · depth when you need it
+    </p>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.body.dataset.luppiChatUrl = "{% url 'luppi_chat' %}";
+</script>
+<script src="{% static 'js/luppi-chat.js' %}"></script>
+{% endblock %}

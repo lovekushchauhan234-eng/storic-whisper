@@ -1,0 +1,108 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Stoicism Philosophy in Hindi | Emotional Control & Discipline – Storic Whisper
+{% endblock %}
+
+{% block meta_desc %}Stoicism philosophy in Hindi — emotional control, discipline, self-mastery और life challenges को calmly handle करने की practical stoic wisdom।{% endblock %}
+{% block nav_stoic %}active{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Stoicism</h1>
+  <p class="subtitle">
+    Stoicism emotions को दबाना नहीं —
+    <strong>उन पर control सीखना</strong> है
+  </p>
+</section>
+
+<!-- INTRO -->
+<section class="section">
+  <h2>Stoicism क्या है?</h2>
+  <p>
+    Stoicism एक philosophy है
+    जो सिखाती है कि
+    जिन चीज़ों पर हमारा control नहीं है,
+    उन पर emotional energy waste मत करो।
+  </p>
+
+  <p>
+    Control बाहर की दुनिया पर नहीं,
+    <strong>अपने reaction पर</strong> होता है —
+    यही stoic mindset की foundation है।
+  </p>
+</section>
+
+<!-- CONTROL -->
+<section class="section">
+  <h2>Emotional Control का असली मतलब</h2>
+  <p>
+    Emotional control का मतलब feelingless होना नहीं है।
+    इसका मतलब है —
+    emotion महसूस करना,
+    लेकिन उसके हिसाब से react न करना।
+  </p>
+</section>
+
+<!-- DISCIPLINE -->
+<section class="section">
+  <h2>Discipline क्यों जरूरी है?</h2>
+  <p>
+    Discipline motivation का इंतज़ार नहीं करता।
+    Stoicism सिखाता है कि
+    जो काम करना है,
+    वो mood के बिना भी किया जा सकता है।
+  </p>
+</section>
+
+<!-- PAIN -->
+<section class="section">
+  <h2>Pain और Loss से कैसे deal करें?</h2>
+  <p>
+    Stoicism pain को deny नहीं करता,
+    लेकिन उसे identity नहीं बनने देता।
+    Pain temporary है,
+    लेकिन character permanent बनता है।
+  </p>
+</section>
+
+<!-- SILENCE -->
+<section class="section">
+  <h2>Stoic Silence क्यों powerful है?</h2>
+  <p>
+    Silence weakness नहीं होती।
+    Stoicism में silence
+    unnecessary explanation से बचाता है
+    और inner strength दिखाता है।
+  </p>
+</section>
+
+<!-- DAILY PRACTICE -->
+<section class="section">
+  <h2>Stoicism को daily life में कैसे apply करें?</h2>
+  <ul>
+    <li>कम react करो</li>
+    <li>Expectation कम रखो</li>
+    <li>Self-control को habit बनाओ</li>
+    <li>जो control में नहीं, उसे accept करो</li>
+  </ul>
+</section>
+
+<!-- CTA -->
+<section class="section cta">
+  <p>
+    अगर तुम emotional strength और clarity चाहते हो,
+    तो Breakup Recovery और Dark Psychology भी ज़रूर पढ़ो।
+  </p>
+
+  <p>
+    <a href="{% url 'breakup' %}">Breakup Recovery →</a> |
+    <a href="{% url 'dark' %}">Dark Psychology →</a>
+  </p>
+</section>
+
+{% include "core/includes/pillar_related.html" with curiosity_text="लोग सोचते हैं stoicism emotions को दबाना है — जबकि असल में यह emotions पर control सीखना है।" curiosity_hook_2="Silence weakness नहीं होती — यह unnecessary explanation से बचाती है।" %}
+
+{% endblock %}

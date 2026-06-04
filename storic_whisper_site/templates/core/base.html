@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="hi" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="hSWT_csKa-dFwomKqk95uilDtbPfTrFhgf03DZHntpc" />
+
+  <!-- ── Primary SEO ─────────────────────────────────── -->
+  <title>{% block title %}Storic Whisper | Psychology Without Noise{% endblock %}</title>
+  <meta name="description"
+    content="{% block meta_desc %}Storic Whisper — Breakup Recovery, Women Psychology, Dark Psychology, Stoicism. बिना noise के psychology की clarity।{% endblock %}">
+  <meta name="keywords"
+    content="{% block meta_keywords %}breakup recovery hindi, women psychology, dark psychology hindi, stoicism hindi, psychology blog{% endblock %}">
+  <meta name="author" content="Lovekush Chauhan">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{% block canonical %}https://storicwhisper.com{% endblock %}">
+
+  <!-- ── Open Graph (Facebook/WhatsApp) ──────────────── -->
+  <meta property="og:type"        content="{% block og_type %}website{% endblock %}">
+  <meta property="og:title"       content="{% block og_title %}Storic Whisper | Psychology Without Noise{% endblock %}">
+  <meta property="og:description" content="{% block og_desc %}Breakup Recovery, Women Psychology, Dark Psychology — बिना noise के।{% endblock %}">
+  <meta property="og:image"       content="{% block og_image %}{% static 'images/og-default.png' %}{% endblock %}">
+  <meta property="og:url"         content="{% block og_url %}https://storicwhisper.com{% endblock %}">
+  <meta property="og:site_name"   content="Storic Whisper">
+  <meta property="og:locale"      content="hi_IN">
+
+  <!-- ── Twitter Card ────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="{% block tw_title %}Storic Whisper{% endblock %}">
+  <meta name="twitter:description" content="{% block tw_desc %}Psychology Without Noise{% endblock %}">
+  <meta name="twitter:image"       content="{% block tw_image %}{% static 'images/og-default.png' %}{% endblock %}">
+
+  <!-- ── Favicon ─────────────────────────────────────── -->
+  <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="apple-touch-icon"          href="{% static 'images/apple-touch-icon.png' %}">
+
+  <!-- ── Fonts (Google) ──────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+        rel="stylesheet">
+
+  <!-- ── Main CSS ─────────────────────────────────────── -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+  <!-- ── Extra head per-page ─────────────────────────── -->
+  {% block extra_head %}{% endblock %}
+
+  <!-- ── Schema.org JSON-LD ──────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Storic Whisper",
+    "url": "https://storicwhisper.com",
+    "description": "Breakup Recovery, Women Psychology, Dark Psychology — बिना noise के।",
+    "publisher": {
+      "@type": "Person",
+      "name": "Lovekush Chauhan"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://storicwhisper.com/articles/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  {% block schema %}{% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+
+  <!-- Custom Cursor (hidden on touch devices via CSS) -->
+  <div id="sw-cursor"      aria-hidden="true"></div>
+  <div id="sw-cursor-ring" aria-hidden="true"></div>
+
+  <!-- Reading progress bar (only on article detail) -->
+  {% block progress_bar %}{% endblock %}
+
+  <!-- ══════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════ -->
+  <nav class="sw-nav" id="sw-nav" role="navigation" aria-label="Main navigation">
+
+    <a href="{% url 'home' %}" class="sw-logo" aria-label="Storic Whisper Home">
+      Storic<span> Whisper</span>
+    </a>
+
+    <ul class="sw-nav-links" role="list">
+      <li><a href="{% url 'home' %}"          class="sw-nav-link {% block nav_home %}{% endblock %}">Home</a></li>
+      <li><a href="{% url 'breakup' %}"       class="sw-nav-link {% block nav_breakup %}{% endblock %}">Breakup</a></li>
+      <li><a href="{% url 'women' %}"         class="sw-nav-link {% block nav_women %}{% endblock %}">Women Psych</a></li>
+      <li><a href="{% url 'dark' %}"          class="sw-nav-link {% block nav_dark %}{% endblock %}">Dark Psych</a></li>
+      <li><a href="{% url 'stoicism' %}"      class="sw-nav-link {% block nav_stoic %}{% endblock %}">Stoicism</a></li>
+      <li><a href="{% url 'article_list' %}"  class="sw-nav-link {% block nav_blog %}{% endblock %}">Hindi Psychology</a></li>
+      <li><a href="{% url 'english_hub' %}"   class="sw-nav-link {% block nav_english %}{% endblock %}">English Psychology</a></li>
+      <li><a href="{% url 'about' %}"         class="sw-nav-link {% block nav_about %}{% endblock %}">About</a></li>
+      <li>
+        <a href="{% url 'ai_assistant' %}" class="sw-nav-cta">
+          ✦ LUPPI AI
+        </a>
+      </li>
+    </ul>
+
+    <button class="sw-hamburger" id="sw-hamburger"
+            aria-label="Menu खोलें" aria-expanded="false" aria-controls="sw-mobile-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="sw-mobile-menu" id="sw-mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'breakup' %}">Breakup Recovery</a>
+    <a href="{% url 'women' %}">Women Psychology</a>
+    <a href="{% url 'dark' %}">Dark Psychology</a>
+    <a href="{% url 'stoicism' %}">Stoicism</a>
+    <a href="{% url 'article_list' %}">Hindi Psychology</a>
+    <a href="{% url 'english_hub' %}">English Psychology</a>
+    <a href="{% url 'about' %}">About</a>
+    <a href="{% url 'ai_assistant' %}" style="color:var(--gold)">✦ LUPPI AI</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════════════════════ -->
+  <main id="main-content" class="sw-page">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ══════════════════════════════════════════════════
+       NEWSLETTER (shown on all pages except AI)
+  ══════════════════════════════════════════════════ -->
+  {% block newsletter %}
+  <section class="sw-newsletter" aria-label="Newsletter signup">
+    <div style="max-width:600px;margin:0 auto;">
+      <p class="sw-eyebrow sw-mb-16">Weekly Insight</p>
+      <h2 class="sw-display sw-display--sm sw-mb-8">
+        Psychology की clarity — सीधे inbox में
+      </h2>
+      <p class="sw-body sw-text-muted sw-mt-8">
+        हर हफ्ते एक insight जो सोचने पर मजबूर करे।
+      </p>
+      <form class="sw-newsletter-form" method="post" action="{% url 'subscribe' %}" novalidate>
+        {% csrf_token %}
+        <input class="sw-newsletter-input" type="email" name="email"
+               placeholder="आपका email address" required autocomplete="email">
+        <button class="sw-newsletter-btn" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+  {% endblock %}
+
+  <!-- ══════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════ -->
+  {% block footer %}
+  <footer class="sw-footer" role="contentinfo">
+    <div class="sw-footer__grid">
+
+      <!-- Brand -->
+      <div>
+        <div class="sw-footer__brand">Storic Whisper</div>
+        <p class="sw-footer__tagline">
+          Psychology without noise.<br>
+          खुद को समझो — दुनिया खुद समझ में आ जाएगी।
+        </p>
+        <div class="sw-flex sw-gap-16 sw-mt-24">
+          <a href="https://youtube.com/@StoricWhisper" target="_blank"
+             rel="noopener" class="sw-social-link" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+
+      <!-- Pages -->
+      <div>
+        <div class="sw-footer__col-title">Pages</div>
+        <ul class="sw-footer__links">
+          <li><a href="{% url 'breakup' %}">Breakup Recovery</a></li>
+          <li><a href="{% url 'women' %}">Women Psychology</a></li>
+          <li><a href="{% url 'dark' %}">Dark Psychology</a></li>
+          <li><a href="{% url 'stoicism' %}">Stoicism</a></li>
+          <li><a href="{% url 'dopamine' %}">Dopamine</a></li>
+          <li><a href="{% url 'human_behavior' %}">Human Behavior</a></li>
+          <li><a href="{% url 'self_transform' %}">Self-Transform</a></li>
+          <li><a href="{% url 'ai_mind' %}">AI + Mind</a></li>
+          <li><a href="{% url 'article_list' %}">Hindi Psychology</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div>
+        <div class="sw-footer__col-title">Connect</div>
+        <ul class="sw-footer__links">
+          <li><a href="{% url 'ai_assistant' %}">✦ LUPPI AI</a></li>
+          <li>
+            <a href="https://youtube.com/@StoricWhisper"
+               target="_blank" rel="noopener">YouTube Channel</a>
+          </li>
+          <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
+          <li><a href="{% url 'terms' %}">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="sw-footer__bottom">
+      <span class="sw-footer__copy">
+        © {% now "Y" %} Storic Whisper — Lovekush Chauhan. सर्वाधिकार सुरक्षित।
+      </span>
+      <span class="sw-footer__copy">
+        Made with ❤ for those who are healing.
+      </span>
+    </div>
+  </footer>
+  {% endblock %}
+
+  <!-- ── Main JS ───────────────────────────────────────── -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+  <!-- ── Per-page extra JS ─────────────────────────────── -->
+  {% block extra_js %}{% endblock %}
+
+</body>
+</html>

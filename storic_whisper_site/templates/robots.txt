@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block admin and API endpoints
+Disallow: /admin/
+Disallow: /ai-saathi/chat/
+Disallow: /subscribe/
+
+# Sitemap location
+Sitemap: https://storic-whisper.onrender.com/sitemap.xml
