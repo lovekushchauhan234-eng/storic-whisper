@@ -163,5 +163,60 @@ BREAKUP_KNOWLEDGE = DomainKnowledge(
             'खुद के साथ पहले, फिर दूसरों के साथ। '
             'उस silence में बैठना — बिना phone उठाए — एक act of courage है।',
         ),
+        # Additional insights for expanded knowledge base
+        Insight(
+            'breakup_acceptance_01', Domain.BREAKUP,
+            ('accept', 'reality', 'स्वीकार', 'move forward', 'realize'),
+            'Acceptance यह नहीं कि तुम उन्हें भूल जाओ — '
+            'यह कि relationship end हो गया है और तुम उसे change नहीं कर सकते।\n\n'
+            'Resistance energy consume करती है। '
+            'Acceptance तुम्हें energy वापस देती है जो तुम खुद पर लगा सकते हो।',
+            weight=1.05,
+        ),
+        Insight(
+            'breakup_social_media_01', Domain.BREAKUP,
+            ('instagram', 'story', 'post', 'check', 'stalk', 'social media', 'देख'),
+            'Social media stalking एक self-harm loop है।\n\n'
+            'हर check तुम्हें temporary relief देता है, '
+            'पर long-term में healing delay करता है। '
+            'Delete या mute करना self-care है, punishment नहीं।',
+            weight=1.1,
+        ),
+        Insight(
+            'breakup_comparison_01', Domain.BREAKUP,
+            ('compare', 'better', 'worse', 'someone else', 'new', 'comparison'),
+            'Comparison trap dangerous है — तुम अपने chapter 5 को '
+            'उनके chapter 1 से compare कर रहे हो।\n\n'
+            'Social media curated reality दिखाता है, real नहीं। '
+            'Focus अपनी journey पर, उनके highlight reel पर नहीं।',
+            weight=1.05,
+        ),
+        Insight(
+            'breakup_future_01', Domain.BREAKUP,
+            ('future', 'alone', 'never', 'scared', 'fear', 'कभी नहीं', 'डर'),
+            '"कभी नहीं" stories brain की fabrication हैं।\n\n'
+            'Breakup के बाद brain worst-case scenarios generate करता है '
+            'protection के लिए। यह prediction नहीं, fear है। '
+            'Reality अक्सर less scary होती है।',
+            weight=1.1,
+        ),
+        Insight(
+            'breakup_self_care_01', Domain.BREAKUP,
+            ('self care', 'routine', 'sleep', 'eat', 'health', 'खाना', 'सोना'),
+            'Breakup के बाद basic self-care collapse हो जाता है।\n\n'
+            'Sleep, food, movement — ये biological needs हैं। '
+            'जब body depleted हो, emotional regulation impossible हो जाता है। '
+            'Small routine acts तुम्हें ground करते हैं।',
+            weight=1.0,
+        ),
+        Insight(
+            'breakup_friendship_01', Domain.BREAKUP,
+            ('friend', 'stay friends', 'friendship', 'talk', 'दोस्त', 'दोस्ती'),
+            'Immediately friends बनना rarely works।\n\n'
+            'यह attachment को prolong करता है और healing delay करता है। '
+            'Distance पहले, friendship maybe later — अगर healthy हो। '
+            'Don\'t force friendship out of fear of losing them completely।',
+            weight=1.0,
+        ),
     ),
 )

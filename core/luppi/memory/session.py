@@ -25,7 +25,10 @@ class SessionMemoryStore(MemoryStore):
     def load(self, session_key: str | None = None) -> SessionMemory:
         raw = self.request.session.get(SESSION_KEY)
         if not raw:
-            return SessionMemory(session_key=self._session_key())
+            return SessionMemory(
+                session_key=self._session_key(),
+                emotional_trend=[]
+            )
 
         data = json.loads(raw) if isinstance(raw, str) else raw
         turns = [ConversationTurn(**t) for t in data.get('turns', [])]
@@ -34,6 +37,7 @@ class SessionMemoryStore(MemoryStore):
             turns=turns[-self.max_turns:],
             used_insight_ids=data.get('used_insight_ids', [])[-50:],
             domain_counts=data.get('domain_counts', {}),
+            emotional_trend=data.get('emotional_trend', []),
         )
 
     def save(self, memory: SessionMemory) -> None:
@@ -42,6 +46,7 @@ class SessionMemoryStore(MemoryStore):
             'turns': [asdict(t) for t in memory.turns[-self.max_turns:]],
             'used_insight_ids': memory.used_insight_ids[-50:],
             'domain_counts': memory.domain_counts,
+            'emotional_trend': getattr(memory, 'emotional_trend', []),
         }
         self.request.session[SESSION_KEY] = json.dumps(payload)
         self.request.session.modified = True
@@ -68,6 +73,12 @@ class SessionMemoryStore(MemoryStore):
         if insight_id:
             memory.used_insight_ids.append(insight_id)
         memory.domain_counts[domain] = memory.domain_counts.get(domain, 0) + 1
+        # Track emotional trend
+        if not hasattr(memory, 'emotional_trend'):
+            memory.emotional_trend = []
+        memory.emotional_trend.append(emotion)
+        if len(memory.emotional_trend) > 20:
+            memory.emotional_trend = memory.emotional_trend[-20:]
         self.save(memory)
         return memory
 

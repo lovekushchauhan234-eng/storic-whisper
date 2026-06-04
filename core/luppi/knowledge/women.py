@@ -98,48 +98,55 @@ WOMEN_KNOWLEDGE = DomainKnowledge(
             'Attraction primarily felt safety और polarity से आती है।\n\n'
             'जो आदमी खुद में grounded है — जिसे अपना direction पता है, '
             'जो हर बात पर approve नहीं माँगता — '
-            'वो naturally interesting होता है। '
-            'Performance attraction kill करती है; presence build करती है।',
+            'वो naturally attractive होता है। '
+            'Performance kills attraction; presence builds it।',
+            weight=1.1,
+        ),
+        # Additional insights for expanded knowledge base
+        Insight(
+            'women_boundaries_01', Domain.WOMEN,
+            ('boundary', 'limit', 'no', 'refuse', 'say no', 'नहीं'),
+            'Healthy boundaries respect attract करती हैं।\n\n'
+            'जो आदमी "no" कहने में comfortable है, '
+            'वो "yes" को valuable बनाता है। '
+            'People-pleasing attraction kill करता है क्योंकि यह weakness signal करता है।',
+            weight=1.05,
+        ),
+        Insight(
+            'women_space_01', Domain.WOMEN,
+            ('space', 'distance', 'time', 'give space', 'दूरी'),
+            'Space देना rejection नहीं — respect है।\n\n'
+            'जो आदमी चिपक जाता है, वो insecurity signal करता है। '
+            'जो दूर रहता है और अपनी life जीता है, '
+            'वो mystery और self-respect signal करता है।',
             weight=1.1,
         ),
         Insight(
-            'women_hypergamy_01', Domain.WOMEN,
-            ('hypergam', 'upgrade', 'better option', 'replace', 'status', 'rich', 'successful'),
-            'Hypergamy एक evolutionary tendency है — '
-            'partner में security, status और growth देखना।\n\n'
-            'यह "gold digger" label नहीं — यह biology है। '
-            'जो men इसे bitter होकर देखते हैं, वो अपनी growth avoid करते हैं। '
-            'जो इसे understand करके खुद को build करते हैं — वो actually attractive बनते हैं।',
+            'women_validation_01', Domain.WOMEN,
+            ('validation', 'approve', 'please', 'seek', 'मान'),
+            'Validation seeking पुरुषों में भी होता है।\n\n'
+            'जो आदमी constant approval माँगता है, '
+            'वो emotionally dependent feel होता है। '
+            'Women stability को prefer करती हैं constant seeking के बजाय।',
+            weight=1.05,
         ),
         Insight(
-            'women_push_pull_01', Domain.WOMEN,
-            ('push pull', 'दूर', 'पास', 'आता है जाता है', 'available', 'unavailable', 'hot cold'),
-            'Push-pull dynamic तब बनता है जब एक person consistently '
-            'available-unavailable pattern create करे।\n\n'
-            'Brain unpredictability को reward की तरह process करता है — '
-            'इसीलिए यह addictive लगता है। '
-            'Healthy relationship में security boring नहीं लगती — '
-            'वो foundation होती है।',
+            'women_confidence_01', Domain.WOMEN,
+            ('confident', 'shy', 'nervous', 'fear', 'डर'),
+            'Confidence नहीं होना normal है — पर overcompensation नहीं।\n\n'
+            'जो आदमी अपनी nervousness छुपाने की कोशिश करता है, '
+            'वो awkward feel होता है। '
+            'Authenticity — even with nervousness — attractive है।',
+            weight=1.0,
         ),
         Insight(
-            'women_breakup_01', Domain.WOMEN,
-            ('वो चली गई', 'she left', 'छोड़ दिया', 'breakup', 'end', 'खत्म', 'reject'),
-            'जब वो छोड़ के जाती है, सबसे dangerous reaction है: '
-            '"मैंने क्या गलत किया?" पर obsess करना।\n\n'
-            'कभी-कभी कोई गलती नहीं होती — timing, compatibility, '
-            'या उनकी internal situation matter करती है। '
-            'Post-mortem उतना ही करो जितना actually कुछ सीखा जाए — '
-            'फिर forward।',
-        ),
-        Insight(
-            'women_silence_01', Domain.WOMEN,
-            ('silent', 'चुप', 'reply नहीं', 'seen', 'ghosting', 'ghost', 'बात नहीं'),
-            'जब वो suddenly silent हो जाए — '
-            'दो possibilities हैं: processing कर रही है, या distance बना रही है।\n\n'
-            'Flooding उन्हें messages से response नहीं लाता — '
-            'वो और retreat करती हैं। '
-            'एक clear, non-needy message भेजो और space दो। '
-            'Response उनका choice है — pursue करना तुम्हारा choice था।',
+            'women_consistency_01', Domain.WOMEN,
+            ('consistent', 'change', 'hot', 'cold', 'reliable'),
+            'Consistency intensity से ज़्यादा important है।\n\n'
+            'जो आदमी predictable है, वो safe feel होता है। '
+            'Hot-cold pattern anxiety create करता है। '
+            'Steady presence over dramatic gestures।',
+            weight=1.1,
         ),
     ),
 )

@@ -1,5 +1,5 @@
 """
-Structured prompt assembly — for future LLM providers (Claude, local models).
+Structured prompt assembly — for LLM providers (Gemini, Claude, local models).
 """
 from .classifier import ClassificationResult
 from .domains import Domain
@@ -9,7 +9,27 @@ from .personality import LUPPI_IDENTITY, RESPONSE_RULES
 
 
 def build_system_prompt() -> str:
-    return LUPPI_IDENTITY.strip()
+    """Build system prompt with LUPPI personality and Socratic questioning (optimized for tokens)."""
+    return f"""{LUPPI_IDENTITY.strip()}
+
+Style:
+- Socratic questioning, not lecturing
+- Conversational, explore and understand
+- Adapt to emotional state
+- Hindi-English mix natural
+
+Socratic:
+- Ask "what/how" not "why"
+- Help user discover insights
+- Probe assumptions gently
+- Encourage self-reflection
+
+Response:
+1. Acknowledge and validate
+2. Explore through questioning
+3. Offer insight if relevant
+4. Ask one follow-up
+Keep concise (2-3 paragraphs)."""
 
 
 def build_user_context_block(
@@ -31,6 +51,8 @@ def build_user_context_block(
             lines.append(f'  {prefix}: {t.content[:200]}')
     if memory and memory.domain_counts:
         lines.append(f'Domain frequency this session: {memory.domain_counts}')
+    if memory and hasattr(memory, 'emotional_trend') and memory.emotional_trend:
+        lines.append(f'Emotional trend: {memory.emotional_trend[-5:]}')
     lines.append(f'Response rules: max_paragraphs={RESPONSE_RULES["max_paragraphs"]}')
     return '\n'.join(lines)
 

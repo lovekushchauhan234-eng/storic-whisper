@@ -52,6 +52,32 @@ def process_message(request: HttpRequest, message: str, provider: str = 'local')
     domain = Domain.GENERAL
     retrieval_score = 0.0
 
+    # ── Crisis responses (highest priority - bypass normal flow) ──
+    if intent.intent in (ConversationIntent.SUICIDAL, ConversationIntent.EMERGENCY):
+        reply = compose_conversational(intent, message, emotion, memory)
+        memory_store.append_exchange(
+            user_message=message,
+            assistant_reply=reply,
+            domain='crisis',
+            emotion=emotion.primary.value,
+            insight_id=None,
+        )
+        return LuppiResponse(
+            reply=reply,
+            domain='crisis',
+            domain_label='Crisis Support',
+            emotion=emotion.primary.value,
+            insight_id=None,
+            provider=provider,
+            confidence=1.0,
+            meta={
+                'intent': intent.intent.value,
+                'depth': intent.depth.value,
+                'reason': intent.reason,
+                'session_turns': turn_count + 1,
+            },
+        )
+
     # ── Pure conversation (no psychology dump) ──
     if intent.depth == ResponseDepth.NONE:
         reply = compose_conversational(intent, message, emotion, memory)
@@ -87,7 +113,7 @@ def process_message(request: HttpRequest, message: str, provider: str = 'local')
         retrieval = retrieve_insight(
             message,
             domain,
-            exclude_ids=memory.used_insight_ids[-8:],
+            exclude_ids=memory.used_insight_ids[-16:],  # Increased from 8 to 16 for more variety
         )
         if retrieval and retrieval.is_relevant:
             insight_body = retrieval.insight.body
@@ -100,7 +126,7 @@ def process_message(request: HttpRequest, message: str, provider: str = 'local')
             if classification.is_strong and classification.domain != domain:
                 retrieval = retrieve_insight(
                     message, classification.domain,
-                    exclude_ids=memory.used_insight_ids[-8:],
+                    exclude_ids=memory.used_insight_ids[-16:],  # Increased from 8 to 16 for more variety
                 )
                 if retrieval and retrieval.is_relevant:
                     insight_body = retrieval.insight.body

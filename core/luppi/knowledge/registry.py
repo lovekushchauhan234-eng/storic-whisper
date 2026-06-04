@@ -13,6 +13,11 @@ from .human import HUMAN_KNOWLEDGE
 from .transform import TRANSFORM_KNOWLEDGE
 from .aimind import AIMIND_KNOWLEDGE
 from .general import GENERAL_KNOWLEDGE
+from .techniques import TECHNIQUES_KNOWLEDGE
+from .childhood import CHILDHOOD_KNOWLEDGE
+from .anxiety import ANXIETY_KNOWLEDGE
+from .self_esteem import SELF_ESTEEM_KNOWLEDGE
+from .family import FAMILY_KNOWLEDGE
 
 ALL_KNOWLEDGE: tuple[DomainKnowledge, ...] = (
     BREAKUP_KNOWLEDGE,
@@ -24,6 +29,11 @@ ALL_KNOWLEDGE: tuple[DomainKnowledge, ...] = (
     TRANSFORM_KNOWLEDGE,
     AIMIND_KNOWLEDGE,
     GENERAL_KNOWLEDGE,
+    TECHNIQUES_KNOWLEDGE,
+    CHILDHOOD_KNOWLEDGE,
+    ANXIETY_KNOWLEDGE,
+    SELF_ESTEEM_KNOWLEDGE,
+    FAMILY_KNOWLEDGE,
 )
 
 _BY_DOMAIN: dict[Domain, DomainKnowledge] = {k.domain: k for k in ALL_KNOWLEDGE}

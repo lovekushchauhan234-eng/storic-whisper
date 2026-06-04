@@ -45,3 +45,4 @@ class SessionMemory:
     turns: list[ConversationTurn] = field(default_factory=list)
     used_insight_ids: list[str] = field(default_factory=list)
     domain_counts: dict[str, int] = field(default_factory=dict)
+    emotional_trend: list[str] = field(default_factory=list)  # Track emotional changes

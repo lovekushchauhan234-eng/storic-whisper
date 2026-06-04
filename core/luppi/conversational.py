@@ -80,6 +80,71 @@ LONELINESS_FOLLOW = [
     "\n\nआज रात — क्या तुम्हें किसी specific person की कमी है, या बस खुद से disconnect feel हो रहा है?",
 ]
 
+# Crisis responses (safety priority)
+CRISIS_SUICIDAL_REPLIES = [
+    "मैं सुन रहा हूँ कि तुम्हें बहुत heavy लग रहा है। तुम alone नहीं हो।\n\n"
+    "अभी professional help लेना important है:\n\n"
+    "📞 India: 112 (Emergency), 9152987821 (iCall)\n"
+    "📞 International: 988 or 999 (UK/US emergency)\n\n"
+    "ये numbers 24/7 available हैं। तुम्हारी life matters है।",
+]
+
+CRISIS_EMERGENCY_REPLIES = [
+    "अगर तुम्हें immediate danger में feel हो रहा है, तो right now emergency services call करो:\n\n"
+    "📞 India: 112\n"
+    "📞 US: 911\n"
+    "📞 UK: 999\n\n"
+    "तुम्हारी safety पहले priority है।",
+]
+
+ANXIETY_SUPPORT_REPLIES = [
+    "Panic attack feel हो रहा है — यह scary है, पर temporary है।\n\n"
+    "Right now try करो:\n"
+    "1. 4-7-8 breathing: 4 sec inhale, 7 sec hold, 8 sec exhale\n"
+    "2. 5 things जो तुम देख सकते हो, 4 जो तुम touch कर सकते हो\n"
+    "3. यह pass होगा — body को time दो।",
+]
+
+DEPRESSION_SUPPORT_REPLIES = [
+    "जब सब कुछ hopeless लगे, यह depression की voice हो सकती है — reality नहीं।\n\n"
+    "यह feeling permanent नहीं है, पर अभी real लग रही है।\n\n"
+    "Professional help इस stage में बहुत help कर सकती है। "
+    "Therapist या counselor से बात करना consider करो — यह weakness नहीं, smart step है।",
+]
+
+TRIGGER_SUPPORT_REPLIES = [
+    "Trigger activate होना uncomfortable है — यह body का safety signal है।\n\n"
+    "Right now grounding try करो:\n"
+    "• Feet flat on floor, feel the ground\n"
+    "• 5 slow breaths\n"
+    "• खुद से बोलो: 'I am safe right now'\n\n"
+    "जब calm हो जाओ, तब trigger को observe करो — pattern दिखेगा।",
+]
+
+COPING_STRATEGY_REPLIES = [
+    "Coping strategies unique होती हैं — जो एक के लिए काम करता, दूसरे के लिए नहीं।\n\n"
+    "कुछ try कर सकते हो:\n"
+    "• Journaling (thoughts paper पर लिखो)\n"
+    "• Walk या light exercise\n"
+    "• Creative activity (drawing, music)\n"
+    "• Talking to someone safe\n\n"
+    "कौन सा approach तुम्हें suit करता है?",
+]
+
+PROGRESS_ACKNOWLEDGE_REPLIES = [
+    "Progress recognize करना important है — अक्सर हम ignore कर देते हैं।\n\n"
+    "जो भी small improvement है, वो valid है। Healing linear नहीं होती — "
+    "पर forward movement होती है।\n\n"
+    "अभी कौन सा area में तुम्हें change feel हो रहा है?",
+]
+
+CLARITY_QUESTION_REPLIES = [
+    "अच्छा सवाल — clarity seek करना healthy है।\n\n"
+    "Psychology mechanisms देती हैं, perfect answers नहीं। "
+    "पर mechanism समझने से confusion कम होती है।\n\n"
+    "बताओ — सबसे confuse क्या लग रहा है अभी?",
+]
+
 
 def _small_talk_variant(message: str) -> str:
     lower = message.lower()
@@ -100,6 +165,32 @@ def compose_conversational(
 ) -> str:
     intent = intent_result.intent
 
+    # Crisis responses (highest priority)
+    if intent == ConversationIntent.SUICIDAL:
+        return _pick(CRISIS_SUICIDAL_REPLIES)
+
+    if intent == ConversationIntent.EMERGENCY:
+        return _pick(CRISIS_EMERGENCY_REPLIES)
+
+    if intent == ConversationIntent.ANXIETY_ATTACK:
+        return _pick(ANXIETY_SUPPORT_REPLIES)
+
+    if intent == ConversationIntent.DEPRESSION_CHECK:
+        return _pick(DEPRESSION_SUPPORT_REPLIES)
+
+    if intent == ConversationIntent.TRIGGER_IDENTIFICATION:
+        return _pick(TRIGGER_SUPPORT_REPLIES)
+
+    if intent == ConversationIntent.COPING_STRATEGY:
+        return _pick(COPING_STRATEGY_REPLIES)
+
+    if intent == ConversationIntent.PROGRESS_UPDATE:
+        return _pick(PROGRESS_ACKNOWLEDGE_REPLIES)
+
+    if intent == ConversationIntent.CLARITY_SEEKING:
+        return _pick(CLARITY_QUESTION_REPLIES)
+
+    # Original intents
     if intent == ConversationIntent.GREETING:
         return _pick(GREETING_REPLIES)
 

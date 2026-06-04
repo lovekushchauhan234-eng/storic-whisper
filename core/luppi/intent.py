@@ -20,6 +20,17 @@ class ConversationIntent(str, Enum):
     DEEP_PSYCHOLOGY = 'deep_psychology'
     AI_PHILOSOPHY = 'ai_philosophy'
     CASUAL = 'casual'
+    # Crisis intents (safety priority)
+    SUICIDAL = 'suicidal'
+    SELF_HARM = 'self_harm'
+    EMERGENCY = 'emergency'
+    # Enhanced intents
+    ANXIETY_ATTACK = 'anxiety_attack'
+    DEPRESSION_CHECK = 'depression_check'
+    TRIGGER_IDENTIFICATION = 'trigger_identification'
+    COPING_STRATEGY = 'coping_strategy'
+    PROGRESS_UPDATE = 'progress_update'
+    CLARITY_SEEKING = 'clarity_seeking'
 
 
 class ResponseDepth(str, Enum):
@@ -76,6 +87,31 @@ _AI_TERMS = (
     'digital mind', 'robot',
 )
 
+_CRISIS_TERMS = (
+    'suicide', 'kill myself', 'want to die', 'end it all', 'suicidal',
+    'आत्महत्या', 'मरना', 'जीवन खत्म', 'end my life',
+)
+
+_SELF_HARM_TERMS = (
+    'cut', 'hurt myself', 'self harm', 'self-harm', 'injure',
+    'खुद को चोट', 'आत्महत्या करना',
+)
+
+_EMERGENCY_TERMS = (
+    'emergency', 'help now', 'urgent', '911', 'police',
+    'immediate danger', 'आपातकाल',
+)
+
+_ANXIETY_TERMS = (
+    'panic attack', 'anxiety attack', 'cant breathe', 'heart racing',
+    'hyperventilating', 'panic', 'घबराहट',
+)
+
+_DEPRESSION_TERMS = (
+    'depressed', 'depression', 'hopeless', 'worthless', 'nothing matters',
+    'उदास', 'निराश', 'बेकार',
+)
+
 
 def _word_count(text: str) -> int:
     return len(text.split())
@@ -107,14 +143,35 @@ def detect_intent(message: str, memory: SessionMemory | None = None) -> IntentRe
     if not text:
         return IntentResult(ConversationIntent.CASUAL, ResponseDepth.NONE, 0.0, 'empty')
 
-    # ── 1. Greetings & small talk (highest priority) ──
+    # ── 0. CRISIS DETECTION (highest priority - safety first) ──
+    crisis_hits = _count_hits(lower, _CRISIS_TERMS)
+    self_harm_hits = _count_hits(lower, _SELF_HARM_TERMS)
+    emergency_hits = _count_hits(lower, _EMERGENCY_TERMS)
+
+    if crisis_hits >= 1 or self_harm_hits >= 1:
+        return IntentResult(ConversationIntent.SUICIDAL, ResponseDepth.NONE, 1.0, 'crisis_detected')
+
+    if emergency_hits >= 1:
+        return IntentResult(ConversationIntent.EMERGENCY, ResponseDepth.NONE, 1.0, 'emergency_detected')
+
+    # ── 1. Greetings & small talk ──
     if _is_greeting(lower):
         return IntentResult(ConversationIntent.GREETING, ResponseDepth.NONE, 1.0, 'greeting_pattern')
 
     if _is_small_talk(lower) and wc <= 12:
         return IntentResult(ConversationIntent.SMALL_TALK, ResponseDepth.NONE, 0.95, 'small_talk')
 
-    # ── 2. Literal topic intents ──
+    # ── 2. Anxiety & depression detection ──
+    anxiety_hits = _count_hits(lower, _ANXIETY_TERMS)
+    depression_hits = _count_hits(lower, _DEPRESSION_TERMS)
+
+    if anxiety_hits >= 1:
+        return IntentResult(ConversationIntent.ANXIETY_ATTACK, ResponseDepth.LIGHT, 0.9, 'anxiety_detected')
+
+    if depression_hits >= 2:
+        return IntentResult(ConversationIntent.DEPRESSION_CHECK, ResponseDepth.LIGHT, 0.85, 'depression_detected')
+
+    # ── 3. Literal topic intents ──
     rel_hits = _count_hits(lower, _RELATIONSHIP_TERMS)
     study_hits = _count_hits(lower, _STUDY_TERMS)
     lonely_hits = _count_hits(lower, _LONELINESS_TERMS)
@@ -139,7 +196,20 @@ def detect_intent(message: str, memory: SessionMemory | None = None) -> IntentRe
     if deep_hits >= 2 or (deep_hits >= 1 and wc > 15):
         return IntentResult(ConversationIntent.DEEP_PSYCHOLOGY, ResponseDepth.FULL, 0.9, 'explicit_psych')
 
-    # ── 3. Vague emotional (support, not lecture) ──
+    # ── 4. Enhanced intent detection ──
+    if '?' in text and wc >= 5:
+        return IntentResult(ConversationIntent.CLARITY_SEEKING, ResponseDepth.LIGHT, 0.75, 'question_asked')
+
+    if any(t in lower for t in ('trigger', 'remind', 'flashback', 'memory')):
+        return IntentResult(ConversationIntent.TRIGGER_IDENTIFICATION, ResponseDepth.LIGHT, 0.8, 'trigger_mentioned')
+
+    if any(t in lower for t in ('cope', 'handle', 'deal', 'manage')):
+        return IntentResult(ConversationIntent.COPING_STRATEGY, ResponseDepth.LIGHT, 0.75, 'coping_requested')
+
+    if any(t in lower for t in ('better', 'improve', 'progress', 'healing')):
+        return IntentResult(ConversationIntent.PROGRESS_UPDATE, ResponseDepth.LIGHT, 0.7, 'progress_mentioned')
+
+    # ── 5. Vague emotional (support, not lecture) ──
     emotional_vague = (
         term_in_text('feel', lower) or term_in_text('feeling', lower) or
         term_in_text('sad', lower) or term_in_text('उदास', lower) or
@@ -149,17 +219,17 @@ def detect_intent(message: str, memory: SessionMemory | None = None) -> IntentRe
     if emotional_vague and wc < 25 and deep_hits == 0:
         return IntentResult(ConversationIntent.EMOTIONAL_CHECKIN, ResponseDepth.NONE, 0.75, 'vague_emotion')
 
-    # ── 4. Short casual messages ──
+    # ── 6. Short casual messages ──
     if wc <= 4 and deep_hits == 0 and rel_hits == 0:
         return IntentResult(ConversationIntent.CASUAL, ResponseDepth.NONE, 0.7, 'short_casual')
 
-    # ── 5. Continuation: user answering LUPPI's question ──
+    # ── 7. Continuation: user answering LUPPI's question ──
     if memory and memory.turns and wc <= 20:
         last = memory.turns[-1]
         if last.role == 'assistant' and '?' in last.content:
             return IntentResult(ConversationIntent.EMOTIONAL_CHECKIN, ResponseDepth.LIGHT, 0.65, 'follow_up')
 
-    # ── 6. Default: light psychology only if message is substantial ──
+    # ── 8. Default: light psychology only if message is substantial ──
     if wc >= 12:
         return IntentResult(ConversationIntent.DEEP_PSYCHOLOGY, ResponseDepth.LIGHT, 0.5, 'default_light')
 

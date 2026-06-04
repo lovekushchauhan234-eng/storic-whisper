@@ -37,6 +37,35 @@ STOIC_KNOWLEDGE = DomainKnowledge(
             ('discipline', 'routine', 'habit', 'सुबह', 'focus'),
             'Discipline motivation का wait नहीं करती — यह identity का vote है।\n\n'
             'एक छोटा non-negotiable act रोज़ — body को signal: मैं अपनी ज़िंदगी का author हूँ।',
+            weight=1.1,
+        ),
+        # Additional insights for expanded knowledge base
+        Insight(
+            'stoic_memento_mori_01', Domain.STOIC,
+            ('death', 'mortality', 'life', 'time', 'limited'),
+            'Memento mori: death की reminder से life precious हो जाती है।\n\n'
+            'जब तुम realize करते हो कि time finite है, '
+            'trivial matters lose power। '
+            'Focus shifts to what actually matters।',
+            weight=1.05,
+        ),
+        Insight(
+            'stoic_journaling_01', Domain.STOIC,
+            ('journal', 'write', 'reflect', 'evening review', 'लिख'),
+            'Evening review: दिन का reflection — क्या गलत हुआ, क्या सीखा।\n\n'
+            'Stoics daily review करते थे। '
+            'Pattern recognition से improvement होता है। '
+            'Write without judgment, observe with clarity।',
+            weight=1.0,
+        ),
+        Insight(
+            'stoic_negative_visualization_01', Domain.STOIC,
+            ('imagine', 'worst case', 'lose', 'prepare', 'premeditatio'),
+            'Premeditatio malorum: worst case imagine करना से fear कम होता है।\n\n'
+            'जब तुम worst scenario mentally prepare कर लेते हो, '
+            'reality अक्सर less scary होती है। '
+            'This is not pessimism — preparation।',
+            weight=1.1,
         ),
     ),
 )

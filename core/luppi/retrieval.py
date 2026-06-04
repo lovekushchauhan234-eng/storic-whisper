@@ -12,6 +12,9 @@ from .text_utils import term_in_text
 # Minimum score = at least one strong trigger match (not random domain default)
 MIN_RELEVANCE_SCORE = 1.45
 
+# Increased exclusion for more variety with expanded knowledge base
+DEFAULT_EXCLUDE_COUNT = 16
+
 
 @dataclass
 class RetrievalResult:
