@@ -178,15 +178,21 @@ GEMINI_CACHE_TIMEOUT    = 600  # Cache responses for 10 minutes (increased for p
 # ── Production Security Settings ────────────────────────────────
 if not DEBUG:
     # CSRF Trusted Origins for production - must include scheme (http:// or https://)
-    csrf_origins = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://*.onrender.com')
-    # Split and ensure each origin has a scheme
+    # Note: Django does NOT support wildcards in CSRF_TRUSTED_ORIGINS
+    # Use exact domain names only
+    csrf_origins_env = os.environ.get('CSRF_TRUSTED_ORIGINS', '')
     CSRF_TRUSTED_ORIGINS = []
-    for origin in csrf_origins.split(','):
-        origin = origin.strip()
-        if origin and not origin.startswith(('http://', 'https://')):
-            origin = f'https://{origin}'
-        if origin:
-            CSRF_TRUSTED_ORIGINS.append(origin)
+    
+    if csrf_origins_env and csrf_origins_env.strip():
+        for origin in csrf_origins_env.split(','):
+            origin = origin.strip()
+            if origin:
+                # Ensure scheme is present
+                if not origin.startswith(('http://', 'https://')):
+                    origin = f'https://{origin}'
+                # Only add if not empty after processing
+                if origin:
+                    CSRF_TRUSTED_ORIGINS.append(origin)
     
     # Session Security
     SESSION_COOKIE_SECURE = True
