@@ -62,27 +62,27 @@ SMALL_TALK_REPLIES = {
 
 CASUAL_REPLIES = [
     "सुन रहा हूँ — बताओ थोड़ा और 😊",
-    "I'm listening. What's really on your mind?",
+    "I'm listening. What's on your mind?",
     "यहाँ हूँ। एक line में बताओ — क्या चल रहा है?",
     "Batao, kya baat hai?\nMain yahin hoon sunne ke liye.",
-    "Hmm, interesting 😊\nAur batao.",
+    "Hmm, achha 😊\nAur batao.",
 ]
 
 # Dating/Relationship casual conversation
 DATING_CASUAL_REPLIES = [
-    "Dating mein thoda patience chahiye hota hai 😊\nKisi specific ke baare mein baat kar rahe ho?",
-    "Relationships complex hote hain — har case alag hota hai.\nTumhara situation kya hai?",
-    "Yeh ek interesting topic hai 😊\nKya tum kisi ke saath involved ho ya planning kar rahe ho?",
+    "Dating mein thoda time lagta hai 😊\nKisi specific ke baare mein baat kar rahe ho?",
+    "Relationships alag hote hain — har case different.\nTumhara situation kya hai?",
+    "Yeh topic hai 😊\nKya tum kisi ke saath involved ho ya planning kar rahe ho?",
     "Sabse pehle khud ko samajhna important hai 😊\nTum kis type ki partner dhundh rahe ho?",
-    "Patana ya impress karna — dono alag cheezein hain 😊\nTum kya chahte ho exactly?",
+    "Approach karna ya impress karna — dono alag hain 😊\nTum kya chahte ho exactly?",
 ]
 
 # Personal questions
 PERSONAL_QUESTION_REPLIES = [
-    "Interesting question 😊\nKyun puchna chahte ho?",
-    "Yeh baat thodi personal hai, par I'm open 😊\nContext batao thoda.",
-    "Hmm, good question!\nPehle batao — tum khud kya sochte ho is baare mein?",
-    "Yeh deep topic hai 😊\nTum is baare mein kyun soch rahe ho aaj?",
+    "Achha sawal hai 😊\nKyun soch rahe ho is baare mein?",
+    "Yeh baat thodi personal hai, par theek hai 😊\nBatao kya chahte ho jan-na?",
+    "Hmm, good one!\nPehle tum batao — khud kya feel karte ho is baare mein?",
+    "Yeh interesting hai 😊\nAaj suddenly is baare mein kyun socha?",
 ]
 
 EMOTIONAL_CHECKIN_REPLIES = [
