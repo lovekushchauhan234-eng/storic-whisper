@@ -53,6 +53,12 @@ _GREETING_RE = re.compile(
     re.I,
 )
 
+# Simple affirmations (I'm fine, okay, etc.)
+_SIMPLE_AFFIRMATION_RE = re.compile(
+    r'^(main|mein|i\'?m|i am)\s+(theek|thik|fine|okay|ok|good|accha)\b',
+    re.I,
+)
+
 _SMALL_TALK_RE = re.compile(
     r"(how are you|how r u|kaise ho|kya haal|what'?s up|wyd|"
     r"thanks|thank you|shukriya|bye|goodbye|see you|ok+|okay|cool|nice|hmm+|"
@@ -68,6 +74,8 @@ _RELATIONSHIP_TERMS = (
     # Dating/casual terms
     'ladki', 'girl', 'pataye', 'impress', 'approach', 'date', 'crush',
     'पटाने', 'इम्प्रेस', 'लड़की', 'प्रपोज़',
+    # Getting someone back terms
+    'vapas', 'वापस', 'wapas', 'laye', 'laaye', 'le', 'wapis', 'वापिस',
 )
 
 _STUDY_TERMS = (
@@ -162,7 +170,11 @@ def detect_intent(message: str, memory: SessionMemory | None = None) -> IntentRe
     if _is_greeting(lower):
         return IntentResult(ConversationIntent.GREETING, ResponseDepth.NONE, 1.0, 'greeting_pattern')
 
-    if _is_small_talk(lower) and wc <= 12:
+    # Simple affirmations (I'm fine, etc.) - treat as casual, not deep topic
+    if _SIMPLE_AFFIRMATION_RE.match(lower):
+        return IntentResult(ConversationIntent.CASUAL, ResponseDepth.NONE, 0.95, 'simple_affirmation')
+
+    if _is_small_talk(lower) and wc <= 15:
         return IntentResult(ConversationIntent.SMALL_TALK, ResponseDepth.NONE, 0.95, 'small_talk')
 
     # ── 2. Anxiety & depression detection ──
@@ -220,6 +232,18 @@ def detect_intent(message: str, memory: SessionMemory | None = None) -> IntentRe
         term_in_text('stress', lower) or term_in_text('tension', lower) or
         term_in_text('anxious', lower) or term_in_text('overthink', lower)
     )
+    
+    # Hindi emotional pain indicators
+    emotional_pain_hindi = (
+        term_in_text('tut', lower) or term_in_text('टूट', lower) or
+        term_in_text('dard', lower) or term_in_text('दर्द', lower) or
+        term_in_text('rona', lower) or term_in_text('रोना', lower) or
+        term_in_text('bilkul', lower) or term_in_text('बिल्कुल', lower)
+    )
+    
+    if emotional_pain_hindi and wc < 20 and deep_hits == 0:
+        return IntentResult(ConversationIntent.EMOTIONAL_CHECKIN, ResponseDepth.NONE, 0.85, 'emotional_pain_hindi')
+    
     if emotional_vague and wc < 25 and deep_hits == 0:
         return IntentResult(ConversationIntent.EMOTIONAL_CHECKIN, ResponseDepth.NONE, 0.75, 'vague_emotion')
 
@@ -231,9 +255,23 @@ def detect_intent(message: str, memory: SessionMemory | None = None) -> IntentRe
     if memory and memory.turns and wc <= 20:
         last = memory.turns[-1]
         if last.role == 'assistant' and '?' in last.content:
-            return IntentResult(ConversationIntent.EMOTIONAL_CHECKIN, ResponseDepth.LIGHT, 0.65, 'follow_up')
+            # Check if it's a simple affirmation (not emotional)
+            if not _SIMPLE_AFFIRMATION_RE.match(lower):
+                return IntentResult(ConversationIntent.EMOTIONAL_CHECKIN, ResponseDepth.LIGHT, 0.65, 'follow_up')
+            else:
+                return IntentResult(ConversationIntent.CASUAL, ResponseDepth.NONE, 0.7, 'follow_up_casual')
 
     # ── 8. Default: light psychology only if message is substantial ──
+    # But NOT if it's a simple question about getting someone back (relationship)
+    relationship_question = (
+        term_in_text('vapas', lower) or term_in_text('वापस', lower) or
+        term_in_text('wapas', lower) or term_in_text('kaise', lower) and 
+        (term_in_text('laye', lower) or term_in_text('laaye', lower) or term_in_text('le', lower))
+    )
+    
+    if relationship_question and rel_hits >= 1:
+        return IntentResult(ConversationIntent.RELATIONSHIP, ResponseDepth.LIGHT, 0.8, 'relationship_question')
+    
     if wc >= 12:
         return IntentResult(ConversationIntent.DEEP_PSYCHOLOGY, ResponseDepth.LIGHT, 0.5, 'default_light')
 
