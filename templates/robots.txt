@@ -7,4 +7,4 @@ Disallow: /ai-saathi/chat/
 Disallow: /subscribe/
 
 # Sitemap location
-Sitemap: https://storic-whisper.onrender.com/sitemap.xml
+Sitemap: https://storicwhisper.com/sitemap.xml

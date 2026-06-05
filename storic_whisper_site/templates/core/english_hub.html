@@ -1,133 +1,266 @@
 {% extends "core/base.html" %}
+
 {% load static %}
 
+
+
 {% block title %}Storic Whisper | English Psychology — Deep Psychology & Human Behavior{% endblock %}
+
 {% block meta_desc %}Premium English psychology insights: attachment, validation, dark psychology awareness, stoicism, dopamine, and the modern mind.{% endblock %}
-{% block canonical %}https://storic-whisper.onrender.com/en/{% endblock %}
+
+{% block canonical %}https://storicwhisper.com/en/{% endblock %}
+
 {% block body_class %}en-hub-page{% endblock %}
+
 {% block nav_english %}active{% endblock %}
 
+
+
 {% block extra_head %}
+
 <style>
+
 .en-hub-page .sw-page{padding-top:0}
+
 .en-banner{min-height:52vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse 90% 70% at 50% 100%,#12122a 0%,#080810 45%,#050508 100%);border-bottom:1px solid rgba(184,151,61,.12)}
+
 .en-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,8,.3),rgba(5,5,8,.85) 85%)}
+
 .en-banner-inner{position:relative;z-index:1;max-width:920px;padding:120px 32px 80px}
+
 .en-banner-eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+
 .en-banner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5.5vw,64px);font-weight:400;color:var(--cream);line-height:1.1;margin-bottom:16px}
+
 .en-banner h1 em{font-style:italic;color:var(--gold)}
+
 .en-banner p{font-size:16px;color:var(--muted);line-height:1.85;max-width:640px;margin:0 auto}
+
 .en-topics{padding:80px 0 100px}
+
 .en-topic{margin-bottom:72px;padding-bottom:72px;border-bottom:1px solid rgba(184,151,61,.1)}
+
 .en-topic:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+
 .en-topic-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:32px}
+
 .en-topic-num{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.7}
+
 .en-topic-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,40px);font-weight:400;color:var(--cream);line-height:1.15}
+
 .en-topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+
 .en-card{background:var(--surface);border:1px solid rgba(184,151,61,.12);text-decoration:none;color:inherit;display:flex;flex-direction:column;overflow:hidden;transition:border-color .3s,transform .3s}
+
 .en-card:hover{border-color:rgba(184,151,61,.35);transform:translateY(-3px)}
+
 .en-card-thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#0c0c18,#181830);overflow:hidden}
+
 .en-card-thumb img{width:100%;height:100%;object-fit:cover}
+
 .en-card-thumb-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:48px;color:rgba(184,151,61,.22)}
+
 .en-card-body{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column}
+
 .en-card-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);line-height:1.3;margin-bottom:10px}
+
 .en-read-btn{
+
   align-self:flex-start;
+
   margin-top:16px;
+
   padding:11px 16px;
+
   border:1px solid rgba(184,151,61,.35);
+
   border-radius:999px;
+
   background:rgba(184,151,61,.06);
+
   font-size:10.5px;
+
   letter-spacing:2px;
+
   text-transform:uppercase;
+
   color:var(--gold);
+
 }
+
 .en-card:hover .en-read-btn{
+
   background:rgba(184,151,61,.14);
+
   border-color:rgba(184,151,61,.55);
+
 }
+
 .en-card-meta{font-size:11px;color:var(--muted);margin-top:auto;padding-top:14px}
+
 .en-placeholder{display:flex;align-items:center;justify-content:center;min-height:140px;padding:32px;border:1px dashed rgba(184,151,61,.22);background:rgba(184,151,61,.04)}
+
 .en-placeholder a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;text-align:center;line-height:1.7;transition:color .25s}
+
 .en-placeholder a:hover{color:var(--cream)}
+
 .en-empty-btn{
+
   margin-top:10px;
+
   padding:12px 16px;
+
   border:1px solid rgba(184,151,61,.35);
+
   border-radius:999px;
+
   display:inline-flex;
+
   align-items:center;
+
   justify-content:center;
+
   background:rgba(184,151,61,.06);
+
   text-transform:none !important;
+
   letter-spacing:0.2px !important;
+
 }
+
 .en-empty-btn:hover{
+
   background:rgba(184,151,61,.14);
+
   border-color:rgba(184,151,61,.55);
+
 }
+
 @media(max-width:768px){
+
   .en-banner-inner{padding-top:100px}
+
   .en-topic-grid{grid-template-columns:1fr}
+
 }
+
 </style>
+
 {% endblock %}
+
+
 
 {% block content %}
+
 <section class="en-banner" aria-label="English Psychology">
+
   <div class="en-banner-inner">
+
     <p class="en-banner-eyebrow">Storic Whisper · English Psychology</p>
+
     <h1>Deep Psychology &amp; <em>Human Behavior</em> Insights</h1>
+
     <p>Premium English analysis for a global audience — attachment, validation, modern mind, and conscious self-transformation.</p>
+
   </div>
+
 </section>
+
+
 
 <section class="en-topics sw-container">
+
   {% for section in topic_sections %}
+
   <article class="en-topic" id="topic-{{ section.key }}">
+
     <header class="en-topic-head">
+
       <div>
+
         <p class="en-topic-num">{{ forloop.counter|stringformat:"02d" }} — Topic</p>
+
         <h2 class="en-topic-title">{{ section.label }}</h2>
+
       </div>
+
     </header>
 
+
+
     {% if section.articles %}
+
     <div class="en-topic-grid">
+
       {% for article in section.articles %}
+
       <a href="{% url 'article_detail' article.slug %}" class="en-card">
+
         <div class="en-card-thumb">
+
           {% if article.thumbnail %}
+
             <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" loading="lazy">
+
           {% else %}
+
             <div class="en-card-thumb-fallback">✦</div>
+
           {% endif %}
+
         </div>
+
         <div class="en-card-body">
+
           <h3 class="en-card-title">{{ article.title }}</h3>
+
           <p class="sw-body sw-text-muted" style="font-size:13px;line-height:1.7;margin:0">
+
             {{ article.meta_description|default:"Read the full analysis."|truncatechars:120 }}
+
           </p>
+
           <span class="en-read-btn">Read Article</span>
+
           <p class="en-card-meta">⏱ {{ article.reading_time }} min · {{ article.created_at|date:"M d, Y" }}</p>
+
         </div>
+
       </a>
+
       {% endfor %}
+
     </div>
+
     {% else %}
+
     <div class="en-placeholder">
+
       <div style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;">
+
         <p style="margin:0;font-size:14px;color:var(--fog);line-height:1.6;">
+
           No articles published yet.
+
         </p>
+
         <a href="{% url 'english_hub' %}" class="en-empty-btn">Explore English Psychology</a>
+
       </div>
+
     </div>
+
     {% endif %}
+
   </article>
+
   {% endfor %}
+
 </section>
+
 {% endblock %}
 
+
+
 {% block newsletter %}{% endblock %}
+
