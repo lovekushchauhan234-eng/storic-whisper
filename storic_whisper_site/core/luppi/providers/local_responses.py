@@ -103,9 +103,9 @@ class ResponseTemplates:
         
         "समझा। जो बताया — उसके साथ तुम्हारा body और mind दोनों react कर रहे होंगे। अगर चाहो, थोड़ा और खोल सकते हो — मैं यहीं हूँ।",
         
-        "यह एक बहुत ही important topic है। इसके कई layers हैं - surface level पर एक बात, deeper level पर कुछ और। तुम किस level पर discuss करना चाहते हो?",
+        "Yeh topic hai 😊\nBatao thoda detail mein - kya soch rahe ho is baare mein?",
         
-        "Interesting point. Yeh complex issue hai - multiple factors contribute karte hain. Tum kis aspect pe focus karna chahte ho? Psychological, behavioral, ya practical dimension?",
+        "Achha point hai 😊\nKya specific aspect pe discuss karna chahte ho?",
     ]
     
     # COPING STRATEGY responses
