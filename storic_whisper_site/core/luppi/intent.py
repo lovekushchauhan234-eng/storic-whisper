@@ -70,7 +70,7 @@ _RELATIONSHIP_TERMS = (
     'relationship', 'partner', 'girlfriend', 'boyfriend', 'wife', 'husband',
     'पत्नी', 'पति', 'प्रेमी', 'प्रेमिका', 'रिश्त', 'बातचीत', 'dating',
     'marriage', 'शादी', 'cheat', 'धोख', 'toxic', 'hurt me', 'दुख', 'झगड',
-    'breakup', 'ex', 'छोड', 'love', 'pyaar', 'मोहब्बत',
+    'breakup', 'ex', 'छोड', 'love', 'pyaar', 'मोहब्बत', 'dhoka', 'धोखा',
     # Dating/casual terms
     'ladki', 'girl', 'pataye', 'impress', 'approach', 'date', 'crush',
     'पटाने', 'इम्प्रेस', 'लड़की', 'प्रपोज़',
@@ -174,6 +174,35 @@ def detect_intent(message: str, memory: SessionMemory | None = None) -> IntentRe
     if _SIMPLE_AFFIRMATION_RE.match(lower):
         return IntentResult(ConversationIntent.CASUAL, ResponseDepth.NONE, 0.95, 'simple_affirmation')
 
+    # ── 1.5. Psychological concept questions (PRIORITY over small talk) ──
+    # Expanded psychological terms list
+    psych_terms_broad = (
+        'stoicism', 'manipulation', 'gaslighting', 'narcissist', 'narcissistic', 'toxic',
+        'anxiety', 'depression', 'trauma', 'trigger', 'boundary', 'boundaries',
+        'attachment', 'coping', 'mindfulness', 'cbt', 'therapy',
+        'emotional', 'intelligence', 'self esteem', 'confidence',
+        'personality', 'awareness', 'mechanisms', 'being present',
+        'eq', 'strategies', 'signs', 'symptoms', 'theory',
+        'styles', 'dating', 'tips', 'pataye', 'ladki',
+        'codependency', 'meditation', 'setting', 'what are'
+    )
+    
+    # Check for psychological terms in short messages (<= 15 words to be safe)
+    # Remove word count restriction to catch all psych terms regardless of length
+    if any(t in lower for t in psych_terms_broad):
+        return IntentResult(ConversationIntent.DEEP_PSYCHOLOGY, ResponseDepth.LIGHT, 0.8, 'short_psych_term')
+    
+    # Direct psychological term mentions (without question words) - expanded
+    direct_psych_terms = (
+        'gaslighting', 'narcissist', 'narcissistic personality', 'stoicism', 'manipulation',
+        'attachment theory', 'secure attachment', 'cognitive behavioral therapy', 'cbt',
+        'emotional intelligence', 'emotional awareness', 'self esteem', 'self worth',
+        'coping mechanisms', 'coping strategies', 'being present', 'mindfulness',
+        'toxic relationship', 'toxic partner', 'toxic behavior'
+    )
+    if any(t in lower for t in direct_psych_terms):
+        return IntentResult(ConversationIntent.DEEP_PSYCHOLOGY, ResponseDepth.LIGHT, 0.8, 'direct_psych_term')
+
     if _is_small_talk(lower) and wc <= 15:
         return IntentResult(ConversationIntent.SMALL_TALK, ResponseDepth.NONE, 0.95, 'small_talk')
 
@@ -212,7 +241,6 @@ def detect_intent(message: str, memory: SessionMemory | None = None) -> IntentRe
     if deep_hits >= 2 or (deep_hits >= 1 and wc > 15):
         return IntentResult(ConversationIntent.DEEP_PSYCHOLOGY, ResponseDepth.FULL, 0.9, 'explicit_psych')
 
-    # ── 4. Enhanced intent detection ──
     if '?' in text and wc >= 5:
         return IntentResult(ConversationIntent.CLARITY_SEEKING, ResponseDepth.LIGHT, 0.75, 'question_asked')
 
