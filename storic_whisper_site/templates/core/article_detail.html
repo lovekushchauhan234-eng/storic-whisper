@@ -38,6 +38,27 @@
     {{ article.content|safe }}
   </div>
 
+  <!-- CATEGORY BACKLINK -->
+  <div class="sw-article-category-back">
+    {% if article.category == 'stoic' %}
+      <a href="{% url 'stoicism' %}" class="sw-category-back-link">
+        ← More in {{ article.get_category_display }}
+      </a>
+    {% elif article.category == 'human' %}
+      <a href="{% url 'human_behavior' %}" class="sw-category-back-link">
+        ← More in {{ article.get_category_display }}
+      </a>
+    {% elif article.category == 'transform' %}
+      <a href="{% url 'self_transform' %}" class="sw-category-back-link">
+        ← More in {{ article.get_category_display }}
+      </a>
+    {% else %}
+      <a href="{% url article.category %}" class="sw-category-back-link">
+        ← More in {{ article.get_category_display }}
+      </a>
+    {% endif %}
+  </div>
+
   <!-- SHARE -->
   <div class="sw-article-share">
     <span class="sw-share-label">Share</span>
@@ -60,6 +81,63 @@ if (prog) {
     const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     prog.style.width = (h > 0 ? (scrollY / h * 100) : 0) + '%';
   }, { passive: true });
+}
+</script>
+{% endblock %}
+
+{% block breadcrumb_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://storicwhisper.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ article.get_category_display }}",
+      "item": "https://storicwhisper.com/{{ article.category }}/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ article.title }}"
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ article.title }}",
+  "description": "{{ article.meta_description }}",
+  "author": {
+    "@type": "Person",
+    "name": "Lovekush Chauhan"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Storic Whisper",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://storicwhisper.com/static/images/og-default.png"
+    }
+  },
+  "datePublished": "{{ article.created_at|date:'Y-m-d' }}",
+  "dateModified": "{{ article.updated_at|date:'Y-m-d' }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://storicwhisper.com{% url 'article_detail' article.slug %}"
+  }
 }
 </script>
 {% endblock %}

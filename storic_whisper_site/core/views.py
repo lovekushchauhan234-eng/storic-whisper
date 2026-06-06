@@ -32,9 +32,23 @@ def home(request):
         Article.objects.filter(is_published=True, language='EN')
         .order_by('-created_at')[:6]
     )
+    
+    # Cornerstone content for "Start Here" section - get most recent from each category
+    cornerstone_articles = []
+    categories = ['breakup', 'women', 'dark', 'stoic', 'dopamine', 'human', 'transform', 'aimind']
+    for cat in categories:
+        article = Article.objects.filter(
+            is_published=True,
+            category=cat,
+            language='HI'
+        ).order_by('-created_at').first()
+        if article:
+            cornerstone_articles.append(article)
+    
     return render(request, 'core/home.html', {
         'featured_articles': featured_articles,
         'english_posts': english_posts,
+        'cornerstone_articles': cornerstone_articles,
     })
 
 

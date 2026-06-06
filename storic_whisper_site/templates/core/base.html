@@ -47,7 +47,7 @@
 
   <!-- ── Extra head per-page ─────────────────────────── -->
   {% block extra_head %}{% endblock %}
-
+  
   <!-- ── Schema.org JSON-LD ──────────────────────────── -->
   <script type="application/ld+json">
   {
@@ -68,6 +68,9 @@
   }
   </script>
   {% block schema %}{% endblock %}
+  
+  <!-- ── Breadcrumb Schema ───────────────────────────── -->
+  {% block breadcrumb_schema %}{% endblock %}
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
@@ -94,6 +97,10 @@
       <li><a href="{% url 'women' %}"         class="sw-nav-link {% block nav_women %}{% endblock %}">Women Psych</a></li>
       <li><a href="{% url 'dark' %}"          class="sw-nav-link {% block nav_dark %}{% endblock %}">Dark Psych</a></li>
       <li><a href="{% url 'stoicism' %}"      class="sw-nav-link {% block nav_stoic %}{% endblock %}">Stoicism</a></li>
+      <li><a href="{% url 'dopamine' %}"      class="sw-nav-link {% block nav_dopamine %}{% endblock %}">Dopamine</a></li>
+      <li><a href="{% url 'human_behavior' %}" class="sw-nav-link {% block nav_human %}{% endblock %}">Human Behavior</a></li>
+      <li><a href="{% url 'self_transform' %}" class="sw-nav-link {% block nav_transform %}{% endblock %}">Self-Transform</a></li>
+      <li><a href="{% url 'ai_mind' %}"       class="sw-nav-link {% block nav_aimind %}{% endblock %}">AI + Mind</a></li>
       <li><a href="{% url 'article_list' %}"  class="sw-nav-link {% block nav_blog %}{% endblock %}">Hindi Psychology</a></li>
       <li><a href="{% url 'english_hub' %}"   class="sw-nav-link {% block nav_english %}{% endblock %}">English Psychology</a></li>
       <li><a href="{% url 'about' %}"         class="sw-nav-link {% block nav_about %}{% endblock %}">About</a></li>
@@ -119,6 +126,10 @@
     <a href="{% url 'women' %}">Women Psychology</a>
     <a href="{% url 'dark' %}">Dark Psychology</a>
     <a href="{% url 'stoicism' %}">Stoicism</a>
+    <a href="{% url 'dopamine' %}">Dopamine</a>
+    <a href="{% url 'human_behavior' %}">Human Behavior</a>
+    <a href="{% url 'self_transform' %}">Self-Transform</a>
+    <a href="{% url 'ai_mind' %}">AI + Mind</a>
     <a href="{% url 'article_list' %}">Hindi Psychology</a>
     <a href="{% url 'english_hub' %}">English Psychology</a>
     <a href="{% url 'about' %}">About</a>
