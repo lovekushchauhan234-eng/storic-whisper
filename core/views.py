@@ -32,9 +32,14 @@ def home(request):
         Article.objects.filter(is_published=True, language='EN')
         .order_by('-created_at')[:6]
     )
+    # BUG 1 FIX: Add most_read_articles and cornerstone_articles
+    most_read_articles = hindi_qs.order_by('-created_at')[:3]
+    cornerstone_articles = hindi_qs.filter(is_featured=True)[:3]
     return render(request, 'core/home.html', {
         'featured_articles': featured_articles,
         'english_posts': english_posts,
+        'most_read_articles': most_read_articles,
+        'cornerstone_articles': cornerstone_articles,
     })
 
 
