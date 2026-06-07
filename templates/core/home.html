@@ -138,6 +138,13 @@ a.topic-cta{text-decoration:none}
 .r.on{opacity:1;transform:none}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
 
+/* AUTHORITY LAYER */
+.authority-layer{padding:48px 0;background:var(--void);border-bottom:1px solid var(--border)}
+.authority-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:32px}
+.authority-item{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--fog);transition:color .3s}
+.authority-item:hover{color:var(--cream2)}
+.authority-icon{font-size:16px}
+
 /* MANIFESTO */
 .manifesto{padding:130px 0;background:var(--void);position:relative;overflow:hidden}
 .manifesto::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(transparent,var(--border))}
@@ -253,6 +260,18 @@ a.pillar-card{text-decoration:none;display:block}
 .luppi-inp::placeholder{color:var(--fog)}
 .luppi-send{background:var(--gold);color:var(--void);border:none;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:background .25s;flex-shrink:0}
 .luppi-send:hover{background:var(--gold2)}
+
+/* START HERE SECTION */
+.start-here-sec{padding:100px 0;background:var(--surface);border-top:1px solid var(--border)}
+.start-here-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--border)}
+.start-card{background:var(--surface);padding:36px 32px;transition:background .35s,transform .35s;position:relative;overflow:hidden;display:block;text-decoration:none;color:inherit}
+.start-card:hover{background:var(--lift);transform:translateY(-4px)}
+.start-card-num{font-family:'Playfair Display',serif;font-size:48px;color:rgba(184,151,61,.08);line-height:1;margin-bottom:16px;font-weight:700}
+.start-card-cat{font-size:9.5px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.start-card-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--cream);line-height:1.3;margin-bottom:12px;transition:color .25s}
+.start-card:hover .start-card-title{color:var(--gold)}
+.start-card-excerpt{font-size:13.5px;color:var(--fog);line-height:1.8;margin-bottom:20px}
+.start-card-meta{display:flex;gap:16px;padding-top:16px;border-top:1px solid var(--border);font-size:11.5px;color:var(--fog)}
 
 /* ARTICLES */
 .articles-sec{padding:130px 0;background:var(--surface);border-top:1px solid var(--border)}
@@ -396,6 +415,10 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   <a href="{% url 'stoicism' %}">Stoicism</a>
   <a href="{% url 'article_list' %}">Hindi Psychology</a>
   <a href="{% url 'english_hub' %}">English Psychology</a>
+  <a href="{% url 'dopamine' %}">Dopamine</a>
+  <a href="{% url 'human_behavior' %}">Human Behavior</a>
+  <a href="{% url 'self_transform' %}">Self-Transform</a>
+  <a href="{% url 'ai_mind' %}">AI + Mind</a>
   <a href="{% url 'about' %}">About</a>
   <a href="{% url 'ai_assistant' %}" style="color:var(--gold)">✦ LUPPI AI</a>
 </div>
@@ -412,7 +435,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   <div class="hero-content">
     <p class="hero-eyebrow"><span>—</span>  <span>—</span></p>
     <h1 class="hero-h">The Mind<br><em>Understands Itself</em></h1>
-    <p class="hero-sub">खुद को समझना सबसे बड़ी journey है</p>
+    <p class="hero-sub">Psychology • Human Behavior • Relationships • Dopamine • Trauma • Self-Transformation • Stoicism • AI & Mind</p>
     <div class="hero-vline"></div>
     <div class="hero-btns">
       <a href="{% url 'article_list' %}" class="btn-gold">Explore Psychology</a>
@@ -420,6 +443,34 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
     </div>
   </div>
   <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- AUTHORITY LAYER -->
+<section class="authority-layer">
+  <div class="wrap">
+    <div class="authority-grid">
+      <div class="authority-item">
+        <span class="authority-icon">📚</span>
+        <span class="authority-text">Deep Psychology Library</span>
+      </div>
+      <div class="authority-item">
+        <span class="authority-icon">🔬</span>
+        <span class="authority-text">Human Behavior Research</span>
+      </div>
+      <div class="authority-item">
+        <span class="authority-icon">🤖</span>
+        <span class="authority-text">AI + Mind Analysis</span>
+      </div>
+      <div class="authority-item">
+        <span class="authority-icon">🔄</span>
+        <span class="authority-text">Self-Transformation Frameworks</span>
+      </div>
+      <div class="authority-item">
+        <span class="authority-icon">🔇</span>
+        <span class="authority-text">Psychology Without Noise</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- MANIFESTO -->
@@ -549,10 +600,38 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
 <div class="pillars-strip">
   <div class="wrap">
     <div class="r" style="margin-bottom:56px">
-      <p class="sec-label" style="margin-bottom:16px">And Much More</p>
-      <h2 class="sec-h sec-h--lg">A Complete <em>Psychological Universe</em></h2>
+      <p class="sec-label" style="margin-bottom:16px">All Categories</p>
+      <h2 class="sec-h sec-h--lg">Complete <em>Psychological Universe</em></h2>
     </div>
     <div class="pillars-strip-inner">
+      <a href="{% url 'breakup' %}" class="pillar-card r d1">
+        <div class="pc-num">01</div>
+        <div class="pc-title">Breakup Recovery</div>
+        <div class="pc-desc">Attachment psychology, no-contact science, trauma bonding और emotional healing की deep understanding।</div>
+        <div class="pc-topics"><span class="pc-topic">Attachment Styles</span><span class="pc-topic">No Contact</span><span class="pc-topic">Trauma Bonding</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
+      <a href="{% url 'women' %}" class="pillar-card r d2">
+        <div class="pc-num">02</div>
+        <div class="pc-title">Women Psychology</div>
+        <div class="pc-desc">Female emotions, attraction triggers और relationship dynamics को myths के बिना समझना।</div>
+        <div class="pc-topics"><span class="pc-topic">Mixed Signals</span><span class="pc-topic">Attraction</span><span class="pc-topic">Communication</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
+      <a href="{% url 'dark' %}" class="pillar-card r d3">
+        <div class="pc-num">03</div>
+        <div class="pc-title">Dark Psychology</div>
+        <div class="pc-desc">Gaslighting, narcissism, manipulation awareness और self-defense psychology की सही समझ।</div>
+        <div class="pc-topics"><span class="pc-topic">Gaslighting</span><span class="pc-topic">Narcissism</span><span class="pc-topic">Self-Defense</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
+      <a href="{% url 'stoicism' %}" class="pillar-card r d4">
+        <div class="pc-num">04</div>
+        <div class="pc-title">Stoicism</div>
+        <div class="pc-desc">2000 साल पुरानी philosophy — emotional control, silence और inner discipline की science।</div>
+        <div class="pc-topics"><span class="pc-topic">Control</span><span class="pc-topic">Silence</span><span class="pc-topic">Mental Armor</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
       <a href="{% url 'dopamine' %}" class="pillar-card r d1">
         <div class="pc-num">05</div>
         <div class="pc-title">Dopamine & Modern Mind</div>
@@ -584,6 +663,35 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
     </div>
   </div>
 </div>
+
+<!-- START HERE - CORNERSTONE CONTENT -->
+<section class="start-here-sec">
+  <div class="wrap">
+    <div class="r" style="margin-bottom:48px">
+      <p class="sec-label" style="margin-bottom:16px">Start Here</p>
+      <h2 class="sec-h sec-h--lg">Most Read <em>Insights</em></h2>
+      <p class="sec-body" style="max-width:640px">Begin with these cornerstone articles — the foundation for understanding psychology, relationships, and self-transformation.</p>
+    </div>
+    <div class="start-here-grid">
+      {% for article in cornerstone_articles %}
+      <a href="{% url 'article_detail' article.slug %}" class="start-card r d{{ forloop.counter }}">
+        <div class="start-card-num">{{ forloop.counter|stringformat:"02d" }}</div>
+        <div class="start-card-cat">{{ article.get_category_display }}</div>
+        <h3 class="start-card-title">{{ article.title }}</h3>
+        <p class="start-card-excerpt">{{ article.meta_description|truncatechars:120 }}</p>
+        <div class="start-card-meta">
+          <span>⏱ {{ article.reading_time }} min</span>
+          <span>📅 {{ article.created_at|date:"M d, Y" }}</span>
+        </div>
+      </a>
+      {% empty %}
+      <p class="sw-body sw-text-center" style="grid-column:1/-1;padding:32px 0;color:var(--fog)">
+        Cornerstone articles will appear here.
+      </p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
 <!-- QUOTE -->
 <section class="quote-break">
