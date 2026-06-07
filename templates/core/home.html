@@ -75,14 +75,14 @@ nav.scrolled{background:rgba(5,5,8,.94);border-bottom:1px solid var(--border);ba
 .logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none}
 .logo em{color:var(--cream);font-style:normal;font-weight:400}
 .navl{display:flex;align-items:center;gap:36px;list-style:none}
-.navl a{font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--fog);text-decoration:none;transition:all .3s;cursor:pointer;position:relative;padding:8px 0;font-weight:500}
-.navl a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
-.navl a:hover{color:var(--gold);text-shadow:0 0 20px rgba(184,151,61,.4)}
+.navl a{font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fog);text-decoration:none;transition:all .3s ease;cursor:pointer;position:relative;padding:6px 0;font-weight:400}
+.navl a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s ease}
+.navl a:hover{color:var(--gold)}
 .navl a:hover::after{width:100%}
 .navl a.active{color:var(--gold)}
 .navl a.active::after{width:100%}
-.nav-luppi{background:rgba(184,151,61,.08);border:1px solid rgba(184,151,61,.45);color:var(--gold);padding:10px 24px;font-size:10px;letter-spacing:2.2px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;font-weight:500;transition:all .3s;text-decoration:none;display:inline-block;box-shadow:0 0 20px rgba(184,151,61,.15)}
-.nav-luppi:hover{background:var(--gold);color:var(--void);box-shadow:0 0 30px rgba(184,151,61,.4);transform:translateY(-1px)}
+.nav-luppi{background:rgba(184,151,61,.06);border:1px solid rgba(184,151,61,.3);color:var(--gold);padding:8px 20px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;font-weight:400;transition:all .3s ease;text-decoration:none;display:inline-block}
+.nav-luppi:hover{background:var(--gold);color:var(--void);border-color:var(--gold)}
 a.btn-gold,a.btn-ghost{display:inline-block;text-decoration:none;text-align:center}
 a.topic-cta{text-decoration:none}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
@@ -217,18 +217,16 @@ a.pillar{text-decoration:none;display:block}
 /* PILLARS STRIP */
 .pillars-strip{background:var(--lift);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 0}
 .pillars-strip-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border)}
-.pillar-card{background:var(--lift);padding:48px 44px;transition:all .35s cubic-bezier(.16,1,.3,1);cursor:pointer;position:relative;overflow:hidden;color:inherit;border:1px solid transparent;border-radius:12px}
-.pillar-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--golda),transparent);opacity:0;transition:opacity .35s;border-radius:12px}
-.pillar-card:hover{background:var(--panel);border-color:rgba(184,151,61,.2);transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,.25)}
-.pillar-card:hover::before{opacity:1}
-.pc-num{font-family:'Playfair Display',serif;font-size:48px;color:rgba(184,151,61,.08);line-height:1;margin-bottom:16px;font-weight:700}
-.pc-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--cream);margin-bottom:10px;font-weight:400;transition:color .3s}
+.pillar-card{background:var(--lift);padding:40px 36px;transition:all .3s ease;cursor:pointer;position:relative;overflow:hidden;color:inherit;border:1px solid var(--border);border-radius:8px}
+.pillar-card:hover{background:var(--panel);border-color:rgba(184,151,61,.2);transform:translateY(-4px)}
+.pc-num{font-family:'Playfair Display',serif;font-size:42px;color:rgba(184,151,61,.06);line-height:1;margin-bottom:12px;font-weight:700}
+.pc-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--cream);margin-bottom:8px;font-weight:400;transition:color .3s}
 .pillar-card:hover .pc-title{color:var(--gold)}
-.pc-desc{font-size:13.5px;color:var(--fog);line-height:1.8}
-.pc-topics{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
-.pc-topic{font-size:10px;letter-spacing:1.5px;color:var(--fog);padding:4px 10px;border:1px solid rgba(184,151,61,.1);transition:all .3s;border-radius:4px}
-.pillar-card:hover .pc-topic{border-color:rgba(184,151,61,.25);color:var(--cream2)}
-.pc-arrow{position:absolute;bottom:28px;right:28px;color:var(--gold);opacity:0;transform:translateX(-8px);transition:all .3s;font-size:18px}
+.pc-desc{font-size:13px;color:var(--fog);line-height:1.7;margin-bottom:16px}
+.pc-topics{display:flex;flex-wrap:wrap;gap:6px}
+.pc-topic{font-size:9.5px;letter-spacing:1.5px;color:var(--fog);padding:4px 10px;border:1px solid rgba(184,151,61,.08);transition:all .3s;border-radius:4px}
+.pillar-card:hover .pc-topic{border-color:rgba(184,151,61,.2);color:var(--cream2)}
+.pc-arrow{position:absolute;bottom:24px;right:24px;color:var(--gold);opacity:0;transform:translateX(-6px);transition:all .3s;font-size:16px}
 .pillar-card:hover .pc-arrow{opacity:1;transform:translateX(0)}
 a.pillar-card{text-decoration:none;display:block}
 
@@ -416,15 +414,10 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   <a class="logo" href="{% url 'home' %}">Storic<em> Whisper</em></a>
   <ul class="navl">
     <li><a href="{% url 'home' %}" class="active">Home</a></li>
-    <li><a href="#start-here">Start Here</a></li>
     <li><a href="{% url 'breakup' %}">Breakup</a></li>
     <li><a href="{% url 'women' %}">Women Psych</a></li>
     <li><a href="{% url 'dark' %}">Dark Psych</a></li>
     <li><a href="{% url 'stoicism' %}">Stoicism</a></li>
-    <li><a href="{% url 'human_behavior' %}">Human Behavior</a></li>
-    <li><a href="{% url 'dopamine' %}">Dopamine</a></li>
-    <li><a href="{% url 'self_transform' %}">Self Transform</a></li>
-    <li><a href="{% url 'ai_mind' %}">AI + Mind</a></li>
     <li><a href="{% url 'article_list' %}">Hindi Psychology</a></li>
     <li><a href="{% url 'english_hub' %}">English Psychology</a></li>
     <li><a href="{% url 'about' %}">About</a></li>
@@ -436,15 +429,10 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
 </nav>
 <div class="mob-menu" id="mob">
   <a href="{% url 'home' %}" class="active">Home</a>
-  <a href="#start-here">Start Here</a>
   <a href="{% url 'breakup' %}">Breakup</a>
   <a href="{% url 'women' %}">Women Psychology</a>
   <a href="{% url 'dark' %}">Dark Psychology</a>
   <a href="{% url 'stoicism' %}">Stoicism</a>
-  <a href="{% url 'human_behavior' %}">Human Behavior</a>
-  <a href="{% url 'dopamine' %}">Dopamine</a>
-  <a href="{% url 'self_transform' %}">Self Transformation</a>
-  <a href="{% url 'ai_mind' %}">AI + Mind</a>
   <a href="{% url 'article_list' %}">Hindi Psychology</a>
   <a href="{% url 'english_hub' %}">English Psychology</a>
   <a href="{% url 'about' %}">About</a>
@@ -501,130 +489,82 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   </div>
 </section>
 
-<!-- MANIFESTO -->
-<section class="manifesto r">
-  <div class="manifesto-inner">
-    <p class="manifesto-pre">Our Philosophy</p>
-    <h2 class="manifesto-h">Psychology without <em>noise</em>,<br>clarity without <em>judgment</em></h2>
-    <p class="manifesto-body">Internet पर psychology के नाम पर shortcuts, mind games और fake motivation बेचा जाता है।<br>हम उस <strong>noise के खिलाफ हैं।</strong><br><br>यहाँ कोई tricks नहीं — सिर्फ <strong>honest clarity</strong> है।</p>
-    <div class="pillars-row">
-      <a href="{% url 'breakup' %}" class="pillar"><div class="pillar-icon">💔</div><div class="pillar-name">Breakup</div></a>
-      <a href="{% url 'women' %}" class="pillar"><div class="pillar-icon">🧠</div><div class="pillar-name">Women Psych</div></a>
-      <a href="{% url 'dark' %}" class="pillar"><div class="pillar-icon">🌑</div><div class="pillar-name">Dark Psych</div></a>
-      <a href="{% url 'stoicism' %}" class="pillar"><div class="pillar-icon">⚡</div><div class="pillar-name">Stoicism</div></a>
-      <a href="{% url 'dopamine' %}" class="pillar"><div class="pillar-icon">🔬</div><div class="pillar-name">Dopamine</div></a>
-      <a href="{% url 'human_behavior' %}" class="pillar"><div class="pillar-icon">🌐</div><div class="pillar-name">Human Behavior</div></a>
-      <a href="{% url 'self_transform' %}" class="pillar"><div class="pillar-icon">🔄</div><div class="pillar-name">Self-Transform</div></a>
-      <a href="{% url 'ai_mind' %}" class="pillar"><div class="pillar-icon">🤖</div><div class="pillar-name">AI + Mind</div></a>
+<!-- START HERE -->
+<section class="start-here-sec" id="start-here">
+  <div class="wrap">
+    <div class="r" style="margin-bottom:48px">
+      <p class="sec-label" style="margin-bottom:16px">Start Here</p>
+      <h2 class="sec-h sec-h--lg">Begin Your <em>Journey</em></h2>
+      <p class="sec-body" style="max-width:640px">Start with these cornerstone articles — the foundation for understanding psychology, relationships, and self-transformation.</p>
+    </div>
+    <div class="start-here-grid">
+      {% for article in cornerstone_articles %}
+      <a href="{% url 'article_detail' article.slug %}" class="start-card r d{{ forloop.counter }}">
+        <div class="start-card-num">{{ forloop.counter|stringformat:"02d" }}</div>
+        <div class="start-card-cat">{{ article.get_category_display }}</div>
+        <h3 class="start-card-title">{{ article.title }}</h3>
+        <p class="start-card-excerpt">{{ article.meta_description|truncatechars:120 }}</p>
+        <div class="start-card-meta">
+          <span>⏱ {{ article.reading_time }} min</span>
+          <span>📅 {{ article.created_at|date:"M d, Y" }}</span>
+        </div>
+      </a>
+      {% empty %}
+      <p class="sw-body sw-text-center" style="grid-column:1/-1;padding:32px 0;color:var(--fog)">
+        Cornerstone articles will appear here.
+      </p>
+      {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- BREAKUP -->
-<section class="breakup-sec">
-  <div class="breakup-inner">
-    <div class="breakup-visual r">
-      <div class="breakup-glow"></div>
-      <div class="breakup-icon-wrap"><div class="big-icon">💔</div></div>
-      <div class="breakup-num">01</div>
+<!-- MOST READ ARTICLES -->
+<section class="most-read-sec">
+  <div class="wrap">
+    <div class="r" style="margin-bottom:48px">
+      <p class="sec-label" style="margin-bottom:16px">Most Read</p>
+      <h2 class="sec-h sec-h--lg">Popular <em>Articles</em></h2>
+      <p class="sec-body" style="max-width:640px">The most-read insights on psychology, relationships, and self-transformation.</p>
     </div>
-    <div class="topic-content r d2">
-      <div class="topic-tag">01 — Breakup & Attachment System</div>
-      <h2 class="topic-h">दर्द एक signal है —<br><em>weakness नहीं</em></h2>
-      <p class="topic-body">Breakup सिर्फ किसी को खोना नहीं होता। यह तुम्हारी <strong style="color:var(--cream)">identity, routine और emotional safety</strong> का टूटना होता है।</p>
-      <ul class="topic-items">
-        <li>Attachment Styles — तुम्हारा कौन सा है?</li>
-        <li>No Contact Psychology — Science of Healing</li>
-        <li>Trauma Bonding — Why You Can't Let Go</li>
-        <li>Emotional Dependency vs Genuine Love</li>
-        <li>Silent Detachment — The Art of Moving On</li>
-        <li>Masculine Emotional Collapse Explained</li>
-      </ul>
-      <a href="{% url 'breakup' %}" class="topic-cta">Breakup Recovery Explore करो <span class="topic-cta-arrow">→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- WOMEN -->
-<section class="women-sec">
-  <div class="women-inner">
-    <div class="topic-content r">
-      <div class="topic-tag">02 — Women Psychology</div>
-      <h2 class="topic-h">वो जो कहती नहीं —<br><em>वो समझो</em></h2>
-      <p class="topic-body">Female emotions, attraction triggers और relationship dynamics को myths के बिना समझना। Manipulation के लिए नहीं — <strong style="color:var(--cream)">genuine connection</strong> के लिए।</p>
-      <ul class="topic-items">
-        <li>Why Mixed Signals Happen — The Real Reason</li>
-        <li>Emotional Testing — What She's Actually Checking</li>
-        <li>Attraction vs Attachment — Critical Difference</li>
-        <li>Female Communication Patterns Decoded</li>
-        <li>Hypergamy Psychology — The Honest Truth</li>
-        <li>Silent Signals — Reading Between the Lines</li>
-      </ul>
-      <a href="{% url 'women' %}" class="topic-cta">Women Psychology Explore करो <span class="topic-cta-arrow">→</span></a>
-    </div>
-    <div class="women-visual r d2">
-      <div class="women-glow"></div>
-      <div class="breakup-icon-wrap"><div class="big-icon">🧠</div></div>
-      <div class="women-num">02</div>
+    <div class="most-read-grid">
+      {% for article in most_read_articles %}
+      <a href="{% url 'article_detail' article.slug %}" class="mr-card r d{{ forloop.counter }}">
+        <div class="mr-thumb">
+          {% if article.thumbnail %}
+            <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}">
+          {% else %}
+            <div class="mr-thumb-icon">{% if article.category == 'breakup' %}💔{% elif article.category == 'women' %}🧠{% elif article.category == 'dark' %}🌑{% elif article.category == 'stoicism' %}⚡{% elif article.category == 'dopamine' %}🔬{% elif article.category == 'human_behavior' %}🌐{% elif article.category == 'self_transform' %}�{% elif article.category == 'ai_mind' %}🤖{% else %}⚡{% endif %}</div>
+          {% endif %}
+        </div>
+        <div class="mr-body">
+          <div class="mr-cat">{{ article.get_category_display }}</div>
+          <h3 class="mr-title">{{ article.title }}</h3>
+          <p class="mr-excerpt">{{ article.meta_description|truncatechars:100 }}</p>
+          <div class="mr-meta">
+            <span>⏱ {{ article.reading_time }} min</span>
+            <span>📅 {{ article.created_at|date:"M d, Y" }}</span>
+          </div>
+        </div>
+      </a>
+      {% empty %}
+      <a href="{% url 'article_list' %}" class="mr-card r d1">
+        <div class="mr-thumb"><div class="mr-thumb-icon">💔</div></div>
+        <div class="mr-body"><div class="mr-cat">Breakup Recovery</div><h3 class="mr-title">No Contact — सिर्फ punishment नहीं, यह healing का science है</h3><p class="mr-excerpt">जब तुम no contact करते हो, तुम्हारा nervous system reset होता है।</p><div class="mr-meta"><span>⏱ 6 min</span><span>📅 May 20, 2025</span></div></div>
+      </a>
+      <a href="{% url 'article_list' %}" class="mr-card r d2">
+        <div class="mr-thumb"><div class="mr-thumb-icon">🧠</div></div>
+        <div class="mr-body"><div class="mr-cat">Women Psychology</div><h3 class="mr-title">Attachment Styles — तुम्हारा कौन सा है?</h3><p class="mr-excerpt">Anxious, Avoidant, Secure — इन तीनों को समझना relationships को बदल सकता है।</p><div class="mr-meta"><span>⏱ 8 min</span><span>📅 May 15, 2025</span></div></div>
+      </a>
+      <a href="{% url 'article_list' %}" class="mr-card r d3">
+        <div class="mr-thumb"><div class="mr-thumb-icon">🌑</div></div>
+        <div class="mr-body"><div class="mr-cat">Dark Psychology</div><h3 class="mr-title">Gaslighting — जब कोई तुम्हारी reality को twist करता है</h3><p class="mr-excerpt">अगर तुम consistently confused और guilty feel करते हो — यह love नहीं है।</p><div class="mr-meta"><span>⏱ 7 min</span><span>📅 May 10, 2025</span></div></div>
+      </a>
+      {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- DARK -->
-<section class="dark-sec">
-  <div class="dark-inner">
-    <div class="dark-visual r">
-      <div class="dark-glow"></div>
-      <div class="breakup-icon-wrap"><div class="big-icon">🌑</div></div>
-      <div class="dark-num">03</div>
-    </div>
-    <div class="topic-content r d2">
-      <div class="danger-bar">⚠ Handle with Awareness</div>
-      <div class="topic-tag">03 — Dark Psychology</div>
-      <h2 class="topic-h">पहचानो — <em>before it's too late</em></h2>
-      <p class="topic-body">Dark psychology को जानना weakness नहीं — <strong style="color:var(--cream)">protection है।</strong> जो manipulation को नहीं पहचानता, वो उसका शिकार बनता है।</p>
-      <ul class="topic-items">
-        <li>Gaslighting — When Reality Gets Twisted</li>
-        <li>Narcissism & The Dark Triad Explained</li>
-        <li>Love Bombing → Devaluation Cycle</li>
-        <li>Psychological Control Mechanisms</li>
-        <li>Gray Rock Method — Your Defense</li>
-        <li>Social Engineering in Everyday Life</li>
-      </ul>
-      <a href="{% url 'dark' %}" class="topic-cta">Dark Psychology Explore करो <span class="topic-cta-arrow">→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- STOICISM -->
-<section class="stoic-sec">
-  <div class="stoic-inner">
-    <div class="topic-content r">
-      <div class="topic-tag">04 — Stoicism & Mental Strength</div>
-      <h2 class="topic-h">Control only<br><em>what you can</em></h2>
-      <p class="topic-body">2000 साल पुरानी philosophy जो आज भी काम करती है। Marcus Aurelius से लेकर modern life तक — emotional control, silence और <strong style="color:var(--cream)">inner discipline</strong> की science।</p>
-      <ul class="topic-items">
-        <li>Dichotomy of Control — The Foundation</li>
-        <li>Marcus Aurelius Meditations — Applied Today</li>
-        <li>Amor Fati — Love Your Fate</li>
-        <li>Emotional Detachment without Numbness</li>
-        <li>Silence Psychology — The Ultimate Power</li>
-        <li>Pain Tolerance — Building Mental Armor</li>
-      </ul>
-      <a href="{% url 'stoicism' %}" class="topic-cta">Stoicism Explore करो <span class="topic-cta-arrow">→</span></a>
-    </div>
-    <div class="stoic-visual r d2">
-      <div class="stoic-glow"></div>
-      <div class="stoic-quote">
-        <p class="stoic-qtext">"You have power over your mind — not outside events. Realize this, and you will find strength."</p>
-        <p class="stoic-qby">— Marcus Aurelius</p>
-      </div>
-      <div class="stoic-num">04</div>
-    </div>
-  </div>
-</section>
-
-<!-- MORE PILLARS -->
+<!-- PSYCHOLOGY PILLARS -->
 <div class="pillars-strip">
   <div class="wrap">
     <div class="r" style="margin-bottom:56px">
@@ -691,81 +631,6 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
     </div>
   </div>
 </div>
-
-<!-- START HERE - CORNERSTONE CONTENT -->
-<section class="start-here-sec" id="start-here">
-  <div class="wrap">
-    <div class="r" style="margin-bottom:48px">
-      <p class="sec-label" style="margin-bottom:16px">Start Here</p>
-      <h2 class="sec-h sec-h--lg">Most Read <em>Insights</em></h2>
-      <p class="sec-body" style="max-width:640px">Begin with these cornerstone articles — the foundation for understanding psychology, relationships, and self-transformation.</p>
-    </div>
-    <div class="start-here-grid">
-      {% for article in cornerstone_articles %}
-      <a href="{% url 'article_detail' article.slug %}" class="start-card r d{{ forloop.counter }}">
-        <div class="start-card-num">{{ forloop.counter|stringformat:"02d" }}</div>
-        <div class="start-card-cat">{{ article.get_category_display }}</div>
-        <h3 class="start-card-title">{{ article.title }}</h3>
-        <p class="start-card-excerpt">{{ article.meta_description|truncatechars:120 }}</p>
-        <div class="start-card-meta">
-          <span>⏱ {{ article.reading_time }} min</span>
-          <span>📅 {{ article.created_at|date:"M d, Y" }}</span>
-        </div>
-      </a>
-      {% empty %}
-      <p class="sw-body sw-text-center" style="grid-column:1/-1;padding:32px 0;color:var(--fog)">
-        Cornerstone articles will appear here.
-      </p>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- MOST READ ARTICLES -->
-<section class="most-read-sec">
-  <div class="wrap">
-    <div class="r" style="margin-bottom:48px">
-      <p class="sec-label" style="margin-bottom:16px">Most Read</p>
-      <h2 class="sec-h sec-h--lg">Popular <em>Articles</em></h2>
-      <p class="sec-body" style="max-width:640px">The most-read insights on psychology, relationships, and self-transformation.</p>
-    </div>
-    <div class="most-read-grid">
-      {% for article in most_read_articles %}
-      <a href="{% url 'article_detail' article.slug %}" class="mr-card r d{{ forloop.counter }}">
-        <div class="mr-thumb">
-          {% if article.thumbnail %}
-            <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}">
-          {% else %}
-            <div class="mr-thumb-icon">{% if article.category == 'breakup' %}💔{% elif article.category == 'women' %}🧠{% elif article.category == 'dark' %}🌑{% elif article.category == 'stoicism' %}⚡{% elif article.category == 'dopamine' %}🔬{% elif article.category == 'human_behavior' %}🌐{% elif article.category == 'self_transform' %}🔄{% elif article.category == 'ai_mind' %}🤖{% else %}⚡{% endif %}</div>
-          {% endif %}
-        </div>
-        <div class="mr-body">
-          <div class="mr-cat">{{ article.get_category_display }}</div>
-          <h3 class="mr-title">{{ article.title }}</h3>
-          <p class="mr-excerpt">{{ article.meta_description|truncatechars:100 }}</p>
-          <div class="mr-meta">
-            <span>⏱ {{ article.reading_time }} min</span>
-            <span>📅 {{ article.created_at|date:"M d, Y" }}</span>
-          </div>
-        </div>
-      </a>
-      {% empty %}
-      <a href="{% url 'article_list' %}" class="mr-card r d1">
-        <div class="mr-thumb"><div class="mr-thumb-icon">💔</div></div>
-        <div class="mr-body"><div class="mr-cat">Breakup Recovery</div><h3 class="mr-title">No Contact — सिर्फ punishment नहीं, यह healing का science है</h3><p class="mr-excerpt">जब तुम no contact करते हो, तुम्हारा nervous system reset होता है।</p><div class="mr-meta"><span>⏱ 6 min</span><span>📅 May 20, 2025</span></div></div>
-      </a>
-      <a href="{% url 'article_list' %}" class="mr-card r d2">
-        <div class="mr-thumb"><div class="mr-thumb-icon">🧠</div></div>
-        <div class="mr-body"><div class="mr-cat">Women Psychology</div><h3 class="mr-title">Attachment Styles — तुम्हारा कौन सा है?</h3><p class="mr-excerpt">Anxious, Avoidant, Secure — इन तीनों को समझना relationships को बदल सकता है।</p><div class="mr-meta"><span>⏱ 8 min</span><span>📅 May 15, 2025</span></div></div>
-      </a>
-      <a href="{% url 'article_list' %}" class="mr-card r d3">
-        <div class="mr-thumb"><div class="mr-thumb-icon">🌑</div></div>
-        <div class="mr-body"><div class="mr-cat">Dark Psychology</div><h3 class="mr-title">Gaslighting — जब कोई तुम्हारी reality को twist करता है</h3><p class="mr-excerpt">अगर तुम consistently confused और guilty feel करते हो — यह love नहीं है।</p><div class="mr-meta"><span>⏱ 7 min</span><span>📅 May 10, 2025</span></div></div>
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
 
 <!-- QUOTE -->
 <section class="quote-break">
