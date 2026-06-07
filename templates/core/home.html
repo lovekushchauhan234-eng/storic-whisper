@@ -146,7 +146,7 @@ a.topic-cta{text-decoration:none}
 /* AUTHORITY LAYER */
 .authority-layer{padding:56px 0;background:var(--void);border-bottom:1px solid var(--border)}
 .authority-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:40px 32px}
-.authority-item{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--fog);transition:all .3s;padding:12px 20px;border:1px solid rgba(184,151,61,.1);border-radius:8px;background:rgba(184,151,61,.02)}
+.authority-item{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--fog);transition:all .3s;padding:12px 20px;border:1px solid rgba(184,151,61,.1);border-radius:8px;background:rgba(184,151,61,.02);text-decoration:none;cursor:pointer}
 .authority-item:hover{color:var(--gold);border-color:rgba(184,151,61,.25);background:rgba(184,151,61,.08);transform:translateY(-2px)}
 .authority-icon{font-size:18px}
 
@@ -465,26 +465,26 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
 <section class="authority-layer">
   <div class="wrap">
     <div class="authority-grid">
-      <div class="authority-item">
+      <a href="{% url 'article_list' %}" class="authority-item">
         <span class="authority-icon">📚</span>
         <span class="authority-text">Deep Psychology Library</span>
-      </div>
-      <div class="authority-item">
+      </a>
+      <a href="{% url 'human_behavior' %}" class="authority-item">
         <span class="authority-icon">🔬</span>
         <span class="authority-text">Human Behavior Research</span>
-      </div>
-      <div class="authority-item">
+      </a>
+      <a href="{% url 'ai_mind' %}" class="authority-item">
         <span class="authority-icon">🤖</span>
         <span class="authority-text">AI + Mind Analysis</span>
-      </div>
-      <div class="authority-item">
+      </a>
+      <a href="{% url 'self_transform' %}" class="authority-item">
         <span class="authority-icon">🔄</span>
         <span class="authority-text">Self-Transformation Frameworks</span>
-      </div>
-      <div class="authority-item">
+      </a>
+      <a href="{% url 'article_list' %}" class="authority-item">
         <span class="authority-icon">🔇</span>
         <span class="authority-text">Psychology Without Noise</span>
-      </div>
+      </a>
     </div>
   </div>
 </section>
