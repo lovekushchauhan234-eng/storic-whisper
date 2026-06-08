@@ -218,7 +218,7 @@ def get_previous_next_articles(article):
     ).order_by('created_at').first()
     
     # Fallback to same language only if no results
-    if not previous or not next:
+    if not previous and not next:
         previous = Article.objects.filter(
             is_published=True,
             language=article.language,
