@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from ckeditor.fields import RichTextField
 from cloudinary_storage.storage import MediaCloudinaryStorage
 
@@ -99,3 +100,54 @@ class Subscriber(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class ArticleLink(models.Model):
+    LINK_TYPE_CHOICES = [
+        ('auto_category', 'Auto: Same Category'),
+        ('auto_keyword',  'Auto: Keyword Match'),
+        ('manual',        'Manual: Editor Placed'),
+        ('pillar',        'Pillar: Category Page Link'),
+    ]
+    source_article = models.ForeignKey(
+        Article, on_delete=models.CASCADE,
+        related_name='outbound_links'
+    )
+    target_article = models.ForeignKey(
+        Article, on_delete=models.CASCADE,
+        related_name='inbound_links'
+    )
+    anchor_text    = models.CharField(max_length=200, blank=True)
+    link_type      = models.CharField(max_length=20, choices=LINK_TYPE_CHOICES)
+    is_active      = models.BooleanField(default=True)
+    created_at     = models.DateTimeField(auto_now_add=True)
+    created_by_run = models.CharField(max_length=100, blank=True)
+
+    class Meta:
+        unique_together = ('source_article', 'target_article')
+        indexes = [
+            models.Index(fields=['source_article', 'is_active']),
+            models.Index(fields=['target_article', 'is_active']),
+        ]
+
+    def clean(self):
+        if self.source_article_id == self.target_article_id:
+            raise ValidationError('Article cannot link to itself.')
+        if self.source_article.language != self.target_article.language:
+            raise ValidationError(
+                f'Cross-language links are prohibited. '
+                f'source={self.source_article.language}, '
+                f'target={self.target_article.language}'
+            )
+
+
+class ArticleContentBackup(models.Model):
+    article       = models.ForeignKey(Article, on_delete=models.CASCADE,
+                                       related_name='content_backups')
+    content_before = models.TextField()
+    run_id         = models.CharField(max_length=100)
+    created_at     = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [models.Index(fields=['article', 'run_id'])]
