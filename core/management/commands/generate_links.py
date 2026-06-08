@@ -2,6 +2,8 @@ from django.core.management.base import BaseCommand
 from core.models import Article, ArticleLink
 from core.linking.engine import generate_links_for_article, generate_run_id, rollback_run
 from django.conf import settings
+import os
+import dj_database_url
 
 
 class Command(BaseCommand):
@@ -25,25 +27,51 @@ class Command(BaseCommand):
                             help='Show link health report without modifying anything')
         parser.add_argument('--orphans', action='store_true',
                             help='Show articles with zero inbound links')
+        parser.add_argument('--database-url', type=str,
+                            help='Temporary override DATABASE_URL for this run (e.g., production database)')
 
     def handle(self, *args, **options):
+        # Handle database URL override
+        original_database_url = os.environ.get('DATABASE_URL', '')
+        if options['database_url']:
+            os.environ['DATABASE_URL'] = options['database_url']
+            # Reconfigure database connection
+            settings.DATABASES['default'] = dj_database_url.parse(
+                options['database_url'],
+                conn_max_age=600,
+                conn_health_checks=True,
+            )
+        
         # Handle rollback
         if options['rollback']:
             self.handle_rollback(options['rollback'])
+            # Restore original DATABASE_URL
+            if original_database_url:
+                os.environ['DATABASE_URL'] = original_database_url
             return
         
         # Handle audit
         if options['audit']:
             self.handle_audit()
+            # Restore original DATABASE_URL
+            if original_database_url:
+                os.environ['DATABASE_URL'] = original_database_url
             return
         
         # Handle orphans
         if options['orphans']:
             self.handle_orphans()
+            # Restore original DATABASE_URL
+            if original_database_url:
+                os.environ['DATABASE_URL'] = original_database_url
             return
         
         # Handle link generation
         self.handle_generation(options)
+        
+        # Restore original DATABASE_URL
+        if original_database_url:
+            os.environ['DATABASE_URL'] = original_database_url
 
     def handle_rollback(self, run_id):
         """Rollback all changes from a specific run ID."""
