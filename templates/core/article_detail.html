@@ -74,6 +74,87 @@
     font-size: 16px;
   }
 }
+
+.sw-explore-topics {
+  margin-top: 64px;
+}
+
+.sw-explore-topics__head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sw-explore-topics__label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold, #b8973d);
+  margin-bottom: 12px;
+}
+
+.sw-explore-topics__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--cream, #e4ddd3);
+  margin: 0;
+}
+
+.sw-explore-topics__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.sw-explore-topic-card {
+  display: block;
+  padding: 24px 16px;
+  background: var(--surface, #0d0d18);
+  border: 1px solid var(--border, rgba(184,151,61,0.12));
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.sw-explore-topic-card:hover {
+  border-color: var(--borderl, rgba(184,151,61,0.22));
+  transform: translateY(-2px);
+}
+
+.sw-explore-topic-card__emoji {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.sw-explore-topic-card__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--cream, #e4ddd3);
+  line-height: 1.3;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .sw-explore-topics__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .sw-explore-topic-card {
+    padding: 20px 12px;
+  }
+  
+  .sw-explore-topic-card__emoji {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  
+  .sw-explore-topic-card__title {
+    font-size: 12px;
+  }
+}
 </style>
 {% endblock %}
 
@@ -183,6 +264,48 @@
     </div>
   </nav>
   {% endif %}
+
+  <!-- EXPLORE MORE TOPICS -->
+  <section class="sw-explore-topics">
+    <div class="sw-explore-topics__head">
+      <p class="sw-explore-topics__label">Discover More</p>
+      <h2 class="sw-explore-topics__title">Explore More <em>Psychology Topics</em></h2>
+    </div>
+    <div class="sw-explore-topics__grid">
+      <a href="{% url 'breakup' %}" class="sw-explore-topic-card">
+        <div class="sw-explore-topic-card__emoji">💔</div>
+        <h3 class="sw-explore-topic-card__title">Breakup Psychology</h3>
+      </a>
+      <a href="{% url 'women' %}" class="sw-explore-topic-card">
+        <div class="sw-explore-topic-card__emoji">🧠</div>
+        <h3 class="sw-explore-topic-card__title">Women Psychology</h3>
+      </a>
+      <a href="{% url 'dark' %}" class="sw-explore-topic-card">
+        <div class="sw-explore-topic-card__emoji">🌑</div>
+        <h3 class="sw-explore-topic-card__title">Dark Psychology</h3>
+      </a>
+      <a href="{% url 'stoicism' %}" class="sw-explore-topic-card">
+        <div class="sw-explore-topic-card__emoji">⚡</div>
+        <h3 class="sw-explore-topic-card__title">Stoicism</h3>
+      </a>
+      <a href="{% url 'human_behavior' %}" class="sw-explore-topic-card">
+        <div class="sw-explore-topic-card__emoji">🧬</div>
+        <h3 class="sw-explore-topic-card__title">Human Behavior</h3>
+      </a>
+      <a href="{% url 'dopamine' %}" class="sw-explore-topic-card">
+        <div class="sw-explore-topic-card__emoji">🧠</div>
+        <h3 class="sw-explore-topic-card__title">Dopamine & Modern Mind</h3>
+      </a>
+      <a href="{% url 'self_transform' %}" class="sw-explore-topic-card">
+        <div class="sw-explore-topic-card__emoji">🚀</div>
+        <h3 class="sw-explore-topic-card__title">Self Transformation</h3>
+      </a>
+      <a href="{% url 'ai_mind' %}" class="sw-explore-topic-card">
+        <div class="sw-explore-topic-card__emoji">🤖</div>
+        <h3 class="sw-explore-topic-card__title">AI + Mind</h3>
+      </a>
+    </div>
+  </section>
 
 </article>
 {% endblock %}
