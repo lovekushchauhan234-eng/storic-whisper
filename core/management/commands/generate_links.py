@@ -134,8 +134,19 @@ class Command(BaseCommand):
         self.stdout.write(f'Run ID: {run_id}')
         self.stdout.write(f'Database: {settings.DATABASES["default"]["NAME"]}')
         
+        # Diagnostic output
+        self.stdout.write(self.style.WARNING('=== DIAGNOSTICS ==='))
+        self.stdout.write(f'Model imported: {Article.__module__}.{Article.__name__}')
+        self.stdout.write(f'Model table name: {Article._meta.db_table}')
+        self.stdout.write(f'Total articles in database: {Article.objects.count()}')
+        self.stdout.write(f'Published articles: {Article.objects.filter(is_published=True).count()}')
+        
         # Load candidate articles
         articles = Article.objects.filter(is_published=True)
+        
+        self.stdout.write(f'Queryset after is_published filter: {articles.count()} articles')
+        self.stdout.write(f'First 20 article slugs: {list(articles.values_list("slug", flat=True)[:20])}')
+        self.stdout.write('')
         
         if options['article']:
             articles = articles.filter(slug=options['article'])
