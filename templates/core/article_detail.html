@@ -12,6 +12,71 @@
 <div class="sw-reading-progress" id="sw-progress" aria-hidden="true"></div>
 {% endblock %}
 
+{% block extra_head %}
+<style>
+.sw-prev-next {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.sw-prev-next-card {
+  display: block;
+  padding: 24px;
+  background: var(--surface, #0d0d18);
+  border: 1px solid var(--border, rgba(184,151,61,0.12));
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.sw-prev-next-card:hover {
+  border-color: var(--borderl, rgba(184,151,61,0.22));
+  transform: translateY(-2px);
+}
+
+.sw-prev-next-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold, #b8973d);
+  margin-bottom: 12px;
+}
+
+.sw-prev-next-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--cream, #e4ddd3);
+  line-height: 1.3;
+  margin: 0 0 8px 0;
+}
+
+.sw-prev-next-meta {
+  font-size: 12px;
+  color: var(--fog, #6e6860);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .sw-prev-next {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .sw-prev-next-card {
+    padding: 20px;
+  }
+  
+  .sw-prev-next-title {
+    font-size: 16px;
+  }
+}
+</style>
+{% endblock %}
+
 {% block content %}
 <article class="sw-article">
 
@@ -48,6 +113,76 @@
        target="_blank" rel="noopener"
        class="sw-share-btn sw-share-tw">Twitter / X</a>
   </div>
+
+  <!-- RELATED ARTICLES -->
+  {% if related_articles %}
+  <section class="sw-section sw-pillar-related">
+    <div class="sw-pillar-related__head">
+      <p class="sw-eyebrow">Continue exploring</p>
+      <h2 class="sw-display sw-display--sm">Deeper <em>reads</em> await</h2>
+      <p class="sw-body sw-mt-16" style="max-width:520px">
+        यह सिर्फ surface है। Articles में mechanisms, patterns और real psychology unfold होती है —
+        बिना noise के।
+      </p>
+    </div>
+
+    <div class="sw-articles-grid sw-mt-48">
+      {% for related in related_articles %}
+      <div class="sw-article-card-wrap">
+        <a href="{% url 'article_detail' related.slug %}" class="sw-article-card">
+          <div class="sw-article-card__thumb">
+            {% if related.thumbnail %}
+            <img src="{{ related.thumbnail.url }}"
+                 alt="{{ related.title }}"
+                 loading="lazy"
+                 style="width:100%;height:100%;object-fit:cover;display:block">
+            {% else %}
+            <div class="sw-article-card__thumb-placeholder" aria-hidden="true">
+              {% if related.category == 'breakup' %}💔
+              {% elif related.category == 'women' %}🧠
+              {% elif related.category == 'dark' %}🌑
+              {% elif related.category == 'dopamine' %}🔬
+              {% elif related.category == 'human' %}🌐
+              {% elif related.category == 'transform' %}🔄
+              {% elif related.category == 'aimind' %}🤖
+              {% else %}⚡
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+          <div class="sw-article-card__body">
+            <div class="sw-article-card__cat">{{ related.get_category_display }}</div>
+            <h3 class="sw-article-card__title">{{ related.title }}</h3>
+            <p class="sw-article-card__excerpt">{{ related.meta_description }}</p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- PREVIOUS / NEXT NAVIGATION -->
+  {% if previous_article or next_article %}
+  <nav class="sw-section" style="padding-top:0">
+    <div class="sw-prev-next">
+      {% if previous_article %}
+      <a href="{% url 'article_detail' previous_article.slug %}" class="sw-prev-next-card sw-prev-next-card--prev">
+        <span class="sw-prev-next-label">← Previous</span>
+        <h3 class="sw-prev-next-title">{{ previous_article.title }}</h3>
+        <p class="sw-prev-next-meta">{{ previous_article.get_category_display }} · {{ previous_article.created_at|date:"d M Y" }}</p>
+      </a>
+      {% endif %}
+      {% if next_article %}
+      <a href="{% url 'article_detail' next_article.slug %}" class="sw-prev-next-card sw-prev-next-card--next">
+        <span class="sw-prev-next-label">Next →</span>
+        <h3 class="sw-prev-next-title">{{ next_article.title }}</h3>
+        <p class="sw-prev-next-meta">{{ next_article.get_category_display }} · {{ next_article.created_at|date:"d M Y" }}</p>
+      </a>
+      {% endif %}
+    </div>
+  </nav>
+  {% endif %}
 
 </article>
 {% endblock %}

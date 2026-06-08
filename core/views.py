@@ -171,9 +171,78 @@ def article_list(request):
     })
 
 
+def get_article_related_articles(article, limit=3):
+    """Get related articles based on language and category/topic_section."""
+    if article.language == 'EN':
+        # English: Use topic_section first, fallback to category
+        if article.topic_section:
+            related = Article.objects.filter(
+                is_published=True,
+                language='EN',
+                topic_section=article.topic_section
+            ).exclude(slug=article.slug).order_by('-created_at')[:limit]
+            if len(related) >= limit:
+                return list(related)
+        # Fallback to category
+        related = Article.objects.filter(
+            is_published=True,
+            language='EN',
+            category=article.category
+        ).exclude(slug=article.slug).order_by('-created_at')[:limit]
+        return list(related)
+    else:
+        # Hindi: Use category
+        related = Article.objects.filter(
+            is_published=True,
+            language='HI',
+            category=article.category
+        ).exclude(slug=article.slug).order_by('-created_at')[:limit]
+        return list(related)
+
+
+def get_previous_next_articles(article):
+    """Get previous and next articles based on language, category, and created_at."""
+    # Try same language + category first
+    previous = Article.objects.filter(
+        is_published=True,
+        language=article.language,
+        category=article.category,
+        created_at__lt=article.created_at
+    ).order_by('-created_at').first()
+    
+    next = Article.objects.filter(
+        is_published=True,
+        language=article.language,
+        category=article.category,
+        created_at__gt=article.created_at
+    ).order_by('created_at').first()
+    
+    # Fallback to same language only if no results
+    if not previous or not next:
+        previous = Article.objects.filter(
+            is_published=True,
+            language=article.language,
+            created_at__lt=article.created_at
+        ).order_by('-created_at').first()
+        
+        next = Article.objects.filter(
+            is_published=True,
+            language=article.language,
+            created_at__gt=article.created_at
+        ).order_by('created_at').first()
+    
+    return previous, next
+
+
 def article_detail(request, slug):
     article = get_object_or_404(Article, slug=slug, is_published=True)
+    
+    related_articles = get_article_related_articles(article, limit=3)
+    previous_article, next_article = get_previous_next_articles(article)
 
     return render(request, 'core/article_detail.html', {
-        'article': article
+        'article': article,
+        'related_articles': related_articles,
+        'previous_article': previous_article,
+        'next_article': next_article,
     })
