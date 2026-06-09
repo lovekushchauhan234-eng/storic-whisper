@@ -1,5 +1,6 @@
 from core.models import Article
-from datetime import datetime, timedelta
+from datetime import timedelta
+from django.utils import timezone
 
 
 def calculate_link_score(source_article, target_article):
@@ -38,7 +39,7 @@ def calculate_link_score(source_article, target_article):
         score += 0.2
     
     # Recency bonus (published within 30 days)
-    thirty_days_ago = datetime.now() - timedelta(days=30)
+    thirty_days_ago = timezone.now() - timedelta(days=30)
     if target_article.created_at >= thirty_days_ago:
         score += 0.1
     
