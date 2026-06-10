@@ -67,10 +67,12 @@ def english_hub(request):
         })
 
     latest_articles = base_qs[:3]
+    total_articles = base_qs.count()
 
     return render(request, 'core/english_hub.html', {
         'topic_sections': topic_sections,
         'latest_articles': latest_articles,
+        'total_articles': total_articles,
     })
 
 

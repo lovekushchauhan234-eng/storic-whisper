@@ -108,6 +108,23 @@
 .sw-newsletter-form input:focus{border-color:rgba(184,151,61,.6)}
 .sw-newsletter-form button{padding:12px 24px;border-radius:999px;font-size:13px;letter-spacing:1px;text-transform:uppercase}
 
+/* Trust Bar */
+.en-trust-bar{display:flex;justify-content:center;gap:48px;padding:32px 0;border-bottom:1px solid rgba(184,151,61,.12);flex-wrap:wrap}
+.en-trust-item{text-align:center}
+.en-trust-number{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold);font-weight:400;line-height:1}
+.en-trust-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* Featured Pillar */
+.en-featured-pillar{background:var(--surface);border:1px solid rgba(184,151,61,.12);padding:40px;margin-top:48px}
+.en-featured-pillar-header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.en-featured-pillar-tag{padding:6px 12px;background:rgba(184,151,61,.1);border:1px solid rgba(184,151,61,.3);border-radius:999px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold)}
+.en-featured-pillar h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--cream);margin:0}
+
+/* Related Hubs */
+.en-related-hubs{display:flex;gap:24px;justify-content:center;padding:32px 0;border-top:1px solid rgba(184,151,61,.12);margin-top:48px}
+.en-related-hub-link{padding:12px 24px;background:rgba(184,151,61,.06);border:1px solid rgba(184,151,61,.3);border-radius:999px;text-decoration:none;color:var(--gold);font-size:12px;letter-spacing:1px;text-transform:uppercase;transition:all .3s}
+.en-related-hub-link:hover{background:rgba(184,151,61,.14);border-color:rgba(184,151,61,.55);color:var(--cream)}
+
 @media(max-width:768px){
   .en-banner-inner{padding-top:100px}
   .en-topic-grid{grid-template-columns:1fr}
@@ -142,7 +159,38 @@
   </div>
 </section>
 
-<!-- SECTION 2: PSYCHOLOGY KNOWLEDGE MAP -->
+<!-- SECTION 2: TRUST BAR -->
+<section class="sw-container">
+  <div class="en-trust-bar">
+    <div class="en-trust-item">
+      <div class="en-trust-number">{{ total_articles }}</div>
+      <div class="en-trust-label">Articles</div>
+    </div>
+    <div class="en-trust-item">
+      <div class="en-trust-number">9</div>
+      <div class="en-trust-label">Topic Clusters</div>
+    </div>
+    <div class="en-trust-item">
+      <div class="en-trust-number">2026</div>
+      <div class="en-trust-label">Research</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: WHAT THIS HUB COVERS -->
+<section class="sw-section sw-container">
+  <div class="sw-section-head sw-reveal">
+    <p class="sw-eyebrow">What This Hub Covers</p>
+    <h2 class="sw-display sw-display--sm">Deep Psychology <em>for Emotional Experience</em></h2>
+  </div>
+  <div class="sw-content-block sw-mt-32">
+    <p class="sw-body">
+      This hub explores the psychology of being human — in pain, in love, in growth. Not clinical psychology. Not academic psychology. The psychology of emotional experience, attachment patterns, validation seeking, dark psychology awareness, stoic mental strength, dopamine-driven behavior, self-transformation, AI's impact on the human mind, and relationship dynamics. Each topic cluster contains deep-dive articles that move from broad understanding to specific practical application.
+    </p>
+  </div>
+</section>
+
+<!-- SECTION 4: TOPIC NAVIGATION GRID -->
 <section class="sw-section sw-container">
   <div class="sw-section-head sw-reveal">
     <p class="sw-eyebrow">Psychology Knowledge Map</p>
@@ -210,7 +258,56 @@
   </div>
 </section>
 
-<!-- SECTION 4: LEARNING PATHS -->
+<!-- SECTION 5: FEATURED PILLAR SECTION -->
+<section class="sw-section sw-container">
+  <div class="en-featured-pillar">
+    <div class="en-featured-pillar-header">
+      <span class="en-featured-pillar-tag">Featured This Quarter</span>
+      <h3>Dark Psychology: Recognizing Manipulation</h3>
+    </div>
+    <p class="sw-body">Dark psychology explores the manipulative tactics used by some people to control others. Understanding gaslighting, narcissistic patterns, and emotional manipulation helps protect yourself and recognize toxic dynamics before they cause harm.</p>
+    <div style="margin-top:24px">
+      <a href="#topic-dark" class="en-read-btn">Explore Dark Psychology</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: LATEST ARTICLES -->
+<section class="sw-section sw-container">
+  <div class="sw-section-head sw-reveal">
+    <p class="sw-eyebrow">Latest Articles</p>
+    <h2 class="sw-display sw-display--sm">Recently Published <em>Articles</em></h2>
+  </div>
+  <div class="en-latest-grid sw-mt-48">
+    {% for article in latest_articles %}
+    <a href="{% url 'article_detail' article.slug %}" class="en-card">
+      <div class="en-card-thumb">
+        {% if article.thumbnail %}
+          <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" loading="lazy">
+        {% else %}
+          <div class="en-card-thumb-fallback">✦</div>
+        {% endif %}
+      </div>
+      <div class="en-card-body">
+        <h3 class="en-card-title">{{ article.title }}</h3>
+        <p class="sw-body sw-text-muted" style="font-size:13px;line-height:1.7;margin:0">
+          {{ article.meta_description|default:"Read the full analysis."|truncatechars:120 }}
+        </p>
+        <span class="en-read-btn">Read Article</span>
+        <p class="en-card-meta">⏱ {{ article.reading_time }} min · {{ article.created_at|date:"M d, Y" }}</p>
+      </div>
+    </a>
+    {% empty %}
+    <div class="en-placeholder">
+      <p style="margin:0;font-size:14px;color:var(--fog);line-height:1.6;">
+        More articles coming soon.
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- SECTION 7: LEARNING PATHS -->
 <section class="sw-section sw-container">
   <div class="sw-section-head sw-reveal">
     <p class="sw-eyebrow">Learning Paths</p>
@@ -235,7 +332,7 @@
   </div>
 </section>
 
-<!-- SECTION 5: FEATURED TOPIC CLUSTERS -->
+<!-- SECTION 8-16: 9 PSYCHOLOGY CLUSTERS -->
 <section class="sw-section sw-container">
   <div class="sw-section-head sw-reveal">
     <p class="sw-eyebrow">Featured Topic Clusters</p>
@@ -346,7 +443,7 @@
   </div>
 </section>
 
-<!-- SECTION 8: FAQ -->
+<!-- SECTION 18: FAQ -->
 <section class="sw-section sw-container">
   <div class="sw-section-head sw-reveal">
     <p class="sw-eyebrow">FAQ</p>
@@ -369,6 +466,22 @@
       <summary>How does dopamine affect behavior?</summary>
       <p>Dopamine is a neurotransmitter that drives reward-seeking behavior. Modern life creates constant dopamine loops through social media, notifications, and instant gratification, affecting motivation and focus.</p>
     </details>
+    <details class="en-faq-item">
+      <summary>What is stoicism?</summary>
+      <p>Stoicism is a philosophy that teaches mental strength through focusing on what you can control and accepting what you cannot. It provides practical tools for emotional resilience in difficult situations.</p>
+    </details>
+    <details class="en-faq-item">
+      <summary>How can I change my attachment style?</summary>
+      <p>While attachment styles are formed early, they can evolve through conscious effort, therapy, and secure relationship experiences. The process involves self-awareness, boundary work, and gradually building trust in healthy relationships.</p>
+    </details>
+    <details class="en-faq-item">
+      <summary>What are signs of gaslighting?</summary>
+      <p>Gaslighting signs include: someone denying your reality, saying you're "crazy" or "too sensitive," shifting blame when confronted, and making you question your own memory and perception. It's a form of emotional manipulation.</p>
+    </details>
+    <details class="en-faq-item">
+      <summary>How does AI affect human psychology?</summary>
+      <p>AI affects psychology through cognitive offloading (relying on AI for thinking), emotional attachment to AI companions, and changes in how we process information. Understanding these effects helps maintain healthy boundaries with technology.</p>
+    </details>
   </div>
 </section>
 
@@ -385,7 +498,7 @@
   </div>
 </section>
 
-<!-- SECTION 10: NEWSLETTER SECTION -->
+<!-- SECTION 19: NEWSLETTER SECTION -->
 <section class="sw-section sw-container">
   <div class="sw-newsletter sw-reveal">
     <h2 class="sw-display sw-display--sm">Stay Connected</h2>
@@ -394,6 +507,27 @@
       <input type="email" name="email" placeholder="Your email address" required>
       <button type="submit" class="sw-btn sw-btn--primary">Subscribe</button>
     </form>
+  </div>
+</section>
+
+<!-- SECTION 20: AUTHORITY SECTION -->
+<section class="sw-section sw-container">
+  <div class="sw-section-head sw-reveal">
+    <p class="sw-eyebrow">About This Hub</p>
+    <h2 class="sw-display sw-display--sm">Evidence-Based <em>Psychology Insights</em></h2>
+  </div>
+  <div class="sw-content-block sw-mt-32">
+    <p class="sw-body">
+      This English Psychology Hub is part of Storic Whisper, a platform dedicated to psychology without noise. Our articles draw from research in attachment theory, social psychology, neuroscience, and practical philosophy. We focus on emotional clarity, self-understanding, and mental strength — not clinical diagnosis or academic theory.
+    </p>
+  </div>
+</section>
+
+<!-- SECTION 21: RELATED HUB LINKS -->
+<section class="sw-container">
+  <div class="en-related-hubs">
+    <a href="/" class="en-related-hub-link">← Back to Home</a>
+    <a href="/hi/" class="en-related-hub-link">Hindi Psychology Hub →</a>
   </div>
 </section>
 
