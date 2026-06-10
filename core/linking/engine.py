@@ -34,6 +34,61 @@ def get_link_candidates(source_article, min_score=0.5):
     return candidates
 
 
+def generate_anchor_candidates(target_article):
+    """
+    Generate anchor text candidates for a target article.
+    Fallback hierarchy: keyword → topic → category → title fragments
+    Returns list of anchor candidates in priority order.
+    """
+    candidates = []
+    
+    # 1. Keywords (if available)
+    # Note: This would require a keywords field on the Article model
+    # For now, skip as the model doesn't have this field
+    
+    # 2. Topic section (English) or Category (Hindi)
+    if target_article.language == 'EN' and target_article.topic_section:
+        # Get topic display name
+        topic_display = dict(Article.TOPIC_SECTION_CHOICES).get(target_article.topic_section)
+        if topic_display:
+            candidates.append(topic_display)
+    elif target_article.language == 'HI' and target_article.category:
+        # Get category display name
+        category_display = dict(Article.CATEGORY_CHOICES).get(target_article.category)
+        if category_display:
+            candidates.append(category_display)
+    
+    # 3. Category (English) or Topic (Hindi) as fallback
+    if target_article.language == 'EN' and target_article.category:
+        category_display = dict(Article.CATEGORY_CHOICES).get(target_article.category)
+        if category_display:
+            candidates.append(category_display)
+    elif target_article.language == 'HI' and target_article.topic_section:
+        topic_display = dict(Article.TOPIC_SECTION_CHOICES).get(target_article.topic_section)
+        if topic_display:
+            candidates.append(topic_display)
+    
+    # 4. Title fragments (first 3-4 words)
+    title_words = target_article.title.split()
+    if len(title_words) >= 3:
+        candidates.append(' '.join(title_words[:3]))
+    if len(title_words) >= 4:
+        candidates.append(' '.join(title_words[:4]))
+    
+    # 5. Full title as last resort
+    candidates.append(target_article.title)
+    
+    # Remove duplicates while preserving order
+    seen = set()
+    unique_candidates = []
+    for candidate in candidates:
+        if candidate and candidate.lower() not in seen:
+            seen.add(candidate.lower())
+            unique_candidates.append(candidate)
+    
+    return unique_candidates
+
+
 def generate_links_for_article(article, max_links=3, min_score=0.5, dry_run=True, run_id=None):
     """
     Generate internal links for a single article.
@@ -89,17 +144,18 @@ def generate_links_for_article(article, max_links=3, min_score=0.5, dry_run=True
                 run_id=run_id
             )
             
+            # Generate anchor candidates using fallback hierarchy
+            anchor_candidates = generate_anchor_candidates(target)
+            
             # Inject link into content
-            # Use target title as anchor text for Phase 1
-            anchor_text = target.title
-            modified_content = inject_link(article.content, anchor_text, target)
+            modified_content = inject_link(article.content, anchor_candidates, target)
             
             if modified_content == article.content:
                 # Injection failed
                 results['skipped_injection_failed'].append({
                     'target': target,
                     'score': score,
-                    'reason': 'Anchor text not found in content'
+                    'reason': 'No anchor candidate found in content'
                 })
                 continue
             
@@ -107,11 +163,11 @@ def generate_links_for_article(article, max_links=3, min_score=0.5, dry_run=True
             article.content = modified_content
             article.save()
             
-            # Create ArticleLink record
+            # Create ArticleLink record with the actual anchor used
             ArticleLink.objects.create(
                 source_article=article,
                 target_article=target,
-                anchor_text=anchor_text,
+                anchor_text=anchor_candidates[0],  # First successful candidate
                 link_type='auto_category',
                 is_active=True,
                 created_by_run=run_id
@@ -120,7 +176,7 @@ def generate_links_for_article(article, max_links=3, min_score=0.5, dry_run=True
         results['proposed_links'].append({
             'target': target,
             'score': score,
-            'anchor_text': target.title
+            'anchor_candidates': generate_anchor_candidates(target)
         })
     
     return results
