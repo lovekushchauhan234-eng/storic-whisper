@@ -278,21 +278,6 @@
     <p class="sw-eyebrow">Latest Articles</p>
     <h2 class="sw-display sw-display--sm">Recently Published <em>Articles</em></h2>
   </div>
-
-  <!-- DEBUG: latest_articles contents -->
-  <div style="background:rgba(184,151,61,0.1);border:1px solid rgba(184,151,61,0.3);padding:16px;margin:16px 0;font-family:monospace;font-size:12px;color:var(--gold);">
-    <p><strong>DEBUG: latest_articles length = {{ latest_articles|length }}</strong></p>
-    {% for article in latest_articles %}
-    <p style="margin:8px 0;">
-      ID: {{ article.id }} | 
-      Title: {{ article.title }} | 
-      Language: {{ article.language }} | 
-      Topic: {{ article.topic_section }} |
-      Published: {{ article.is_published }}
-    </p>
-    {% endfor %}
-  </div>
-
   <div class="en-latest-grid sw-mt-48">
     {% for article in latest_articles %}
     <a href="{% url 'article_detail' article.slug %}" class="en-card">
