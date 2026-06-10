@@ -53,22 +53,29 @@ def home(request):
 
 
 def english_hub(request):
-    base_qs = Article.objects.filter(
+    # Latest articles - completely independent queryset
+    latest_articles = list(Article.objects.filter(
         is_published=True,
-        language='EN',
-    ).order_by('-created_at')
+        language='EN'
+    ).order_by('-created_at')[:3])
 
-    # Get latest articles BEFORE topic_sections loop to avoid queryset issues
-    latest_articles = list(base_qs[:3])
-    total_articles = base_qs.count()
-
+    # Topic sections - separate queryset
     topic_sections = []
     for key, label in ENGLISH_HUB_TOPICS:
         topic_sections.append({
             'key': key,
             'label': label,
-            'articles': list(base_qs.filter(topic_section=key)),
+            'articles': list(Article.objects.filter(
+                is_published=True,
+                language='EN',
+                topic_section=key
+            ).order_by('-created_at')),
         })
+
+    total_articles = Article.objects.filter(
+        is_published=True,
+        language='EN'
+    ).count()
 
     return render(request, 'core/english_hub.html', {
         'topic_sections': topic_sections,
