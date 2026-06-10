@@ -58,6 +58,10 @@ def english_hub(request):
         language='EN',
     ).order_by('-created_at')
 
+    # Get latest articles BEFORE topic_sections loop to avoid queryset issues
+    latest_articles = list(base_qs[:3])
+    total_articles = base_qs.count()
+
     topic_sections = []
     for key, label in ENGLISH_HUB_TOPICS:
         topic_sections.append({
@@ -65,9 +69,6 @@ def english_hub(request):
             'label': label,
             'articles': list(base_qs.filter(topic_section=key)),
         })
-
-    latest_articles = base_qs[:3]
-    total_articles = base_qs.count()
 
     return render(request, 'core/english_hub.html', {
         'topic_sections': topic_sections,
