@@ -23,7 +23,11 @@
     <div class="sw-article-card-wrap sw-reveal">
       <a href="{% url 'article_detail' article.slug %}" class="sw-article-card">
         <div class="sw-article-card__thumb">
-          <div class="sw-article-card__thumb-placeholder" aria-hidden="true">◈</div>
+          {% if article.thumbnail %}
+            <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+          {% else %}
+            <div class="sw-article-card__thumb-placeholder" aria-hidden="true">◈</div>
+          {% endif %}
         </div>
         <div class="sw-article-card__body">
           <div class="sw-article-card__cat">{{ article.get_category_display }}</div>
