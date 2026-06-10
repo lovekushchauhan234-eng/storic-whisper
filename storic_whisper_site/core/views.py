@@ -66,8 +66,11 @@ def english_hub(request):
             'articles': list(base_qs.filter(topic_section=key)),
         })
 
+    latest_articles = base_qs[:3]
+
     return render(request, 'core/english_hub.html', {
         'topic_sections': topic_sections,
+        'latest_articles': latest_articles,
     })
 
 
