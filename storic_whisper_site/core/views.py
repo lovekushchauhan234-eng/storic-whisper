@@ -53,13 +53,13 @@ def home(request):
 
 
 def english_hub(request):
-    # Latest articles - completely independent queryset
+    # Latest articles - completely independent queryset (case-insensitive language)
     latest_articles = list(Article.objects.filter(
         is_published=True,
-        language='EN'
+        language__iexact='EN'
     ).order_by('-created_at')[:3])
 
-    # Topic sections - separate queryset
+    # Topic sections - separate queryset (case-insensitive language)
     topic_sections = []
     for key, label in ENGLISH_HUB_TOPICS:
         topic_sections.append({
@@ -67,14 +67,14 @@ def english_hub(request):
             'label': label,
             'articles': list(Article.objects.filter(
                 is_published=True,
-                language='EN',
+                language__iexact='EN',
                 topic_section=key
             ).order_by('-created_at')),
         })
 
     total_articles = Article.objects.filter(
         is_published=True,
-        language='EN'
+        language__iexact='EN'
     ).count()
 
     return render(request, 'core/english_hub.html', {
