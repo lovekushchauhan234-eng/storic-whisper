@@ -2,13 +2,35 @@
 
 {% block title %}{{ article.title }} | Storic Whisper{% endblock %}
 {% block meta_desc %}{{ article.meta_description }}{% endblock %}
+
+{% block canonical %}
+[https://storicwhisper.com{%](https://storicwhisper.com{%) url 'article_detail' article.slug %}
+{% endblock %}
+
 {% block og_type %}article{% endblock %}
 {% block og_title %}{{ article.title }}{% endblock %}
 {% block og_desc %}{{ article.meta_description }}{% endblock %}
-{% block og_image %}{% if article.thumbnail %}{{ request.scheme }}://{{ request.get_host }}{{ article.thumbnail.url }}{% endif %}{% endblock %}
+
+{% block og_url %}
+[https://storicwhisper.com{%](https://storicwhisper.com{%) url 'article_detail' article.slug %}
+{% endblock %}
+
+{% block og_image %}
+{% if article.thumbnail %}
+{{ article.thumbnail.url }}
+{% endif %}
+{% endblock %}
+
+{% block tw_image %}
+{% if article.thumbnail %}
+{{ article.thumbnail.url }}
+{% endif %}
+{% endblock %}
+
 {% block nav_blog %}active{% endblock %}
 
 {% block progress_bar %}
+
 <div class="sw-reading-progress" id="sw-progress" aria-hidden="true"></div>
 {% endblock %}
 
