@@ -6,16 +6,8 @@
 {% block og_title %}{{ article.title }}{% endblock %}
 {% block og_desc %}{{ article.meta_description }}{% endblock %}
 {% block og_image %}{% if article.thumbnail %}{{ request.scheme }}://{{ request.get_host }}{{ article.thumbnail.url }}{% endif %}{% endblock %}
-
-{% block canonical %}
-{{ request.scheme }}://{{ request.get_host }}{% url 'article_detail' article.slug %}
-{% endblock %}
-
-{% block og_url %}
-{{ request.scheme }}://{{ request.get_host }}{% url 'article_detail' article.slug %}
-{% endblock %}
-
 {% block nav_blog %}active{% endblock %}
+
 <div class="sw-reading-progress" id="sw-progress" aria-hidden="true"></div>
 {% endblock %}
 
