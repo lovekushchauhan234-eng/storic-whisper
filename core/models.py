@@ -65,8 +65,7 @@ class Article(models.Model):
     thumbnail = models.ImageField(
         upload_to='thumbs/',
         blank=True,
-        null=True,
-        storage=MediaCloudinaryStorage()
+        null=True
     )
 
     content = RichTextField()
