@@ -8,6 +8,7 @@
 {% block og_image %}{% if article.thumbnail %}{{ request.scheme }}://{{ request.get_host }}{{ article.thumbnail.url }}{% endif %}{% endblock %}
 {% block nav_blog %}active{% endblock %}
 
+{% block progress_bar %}
 <div class="sw-reading-progress" id="sw-progress" aria-hidden="true"></div>
 {% endblock %}
 
