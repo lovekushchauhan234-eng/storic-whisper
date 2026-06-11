@@ -6,6 +6,10 @@
 {% block og_title %}{{ article.title }}{% endblock %}
 {% block og_desc %}{{ article.meta_description }}{% endblock %}
 {% block og_image %}{% if article.thumbnail %}{{ request.scheme }}://{{ request.get_host }}{{ article.thumbnail.url }}{% endif %}{% endblock %}
+
+{% block canonical %}https://storicwhisper.com/articles/{{ article.slug }}/{% endblock %}
+{% block og_url %}https://storicwhisper.com/articles/{{ article.slug }}/{% endblock %}
+
 {% block nav_blog %}active{% endblock %}
 
 {% block progress_bar %}
