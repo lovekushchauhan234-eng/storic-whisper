@@ -126,6 +126,10 @@ def disclaimer(request):
     return render(request, 'core/disclaimer.html')
 
 
+def contact(request):
+    return render(request, 'core/contact.html')
+
+
 # ---------- AI SAATHI ----------
 
 def ai_assistant(request):
