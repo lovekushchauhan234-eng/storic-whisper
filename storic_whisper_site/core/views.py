@@ -144,6 +144,10 @@ def terms(request):
     return render(request, 'core/terms.html')
 
 
+def disclaimer(request):
+    return render(request, 'core/disclaimer.html')
+
+
 # ---------- AI SAATHI ----------
 
 def ai_assistant(request):
