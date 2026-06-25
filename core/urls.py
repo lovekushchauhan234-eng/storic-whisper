@@ -29,6 +29,7 @@ urlpatterns = [
     # LEGAL PAGES
     path('privacy-policy/', views.privacy, name='privacy'),
     path('terms-and-conditions/', views.terms, name='terms'),
+    path('disclaimer/', views.disclaimer, name='disclaimer'),
 
     # ENGLISH GLOBAL HUB
     path('en/', views.english_hub, name='english_hub'),
