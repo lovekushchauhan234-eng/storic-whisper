@@ -256,7 +256,7 @@
 
   <!-- ── Cookie Consent Script ───────────────────────────────── -->
   <script>
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
       var CONSENT_KEY = 'cookieConsent';
       var banner = document.getElementById('sw-cookie-banner');
       var acceptBtn = document.getElementById('sw-cookie-accept');
@@ -265,40 +265,45 @@
       // Check if user has already made a choice
       var consent = localStorage.getItem(CONSENT_KEY);
 
-      if (!consent) {
+      if (!consent && banner) {
         // Show banner if no consent stored
         banner.classList.remove('hidden');
       }
 
       // Handle Accept
-      acceptBtn.addEventListener('click', function() {
-        localStorage.setItem(CONSENT_KEY, 'accepted');
-        banner.classList.add('hidden');
-      });
+      if (acceptBtn) {
+        acceptBtn.addEventListener('click', function() {
+          localStorage.setItem(CONSENT_KEY, 'accepted');
+          if (banner) banner.classList.add('hidden');
+        });
+
+        // Keyboard accessibility
+        acceptBtn.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            localStorage.setItem(CONSENT_KEY, 'accepted');
+            if (banner) banner.classList.add('hidden');
+          }
+        });
+      }
 
       // Handle Decline
-      declineBtn.addEventListener('click', function() {
-        localStorage.setItem(CONSENT_KEY, 'declined');
-        banner.classList.add('hidden');
-      });
-
-      // Keyboard accessibility
-      acceptBtn.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          localStorage.setItem(CONSENT_KEY, 'accepted');
-          banner.classList.add('hidden');
-        }
-      });
-
-      declineBtn.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
+      if (declineBtn) {
+        declineBtn.addEventListener('click', function() {
           localStorage.setItem(CONSENT_KEY, 'declined');
-          banner.classList.add('hidden');
-        }
-      });
-    })();
+          if (banner) banner.classList.add('hidden');
+        });
+
+        // Keyboard accessibility
+        declineBtn.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            localStorage.setItem(CONSENT_KEY, 'declined');
+            if (banner) banner.classList.add('hidden');
+          }
+        });
+      }
+    });
   </script>
 
   <!-- ── Main JS ───────────────────────────────────────── -->
