@@ -1,1 +1,0 @@
-web: gunicorn storic_whisper_site.wsgi:application
