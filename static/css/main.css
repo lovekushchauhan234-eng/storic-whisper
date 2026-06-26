@@ -1827,6 +1827,7 @@ body:has(button:hover) #sw-cursor-ring {
   align-items: flex-start;
   gap: 32px;
   animation: sw-cookie-slide-up 0.5s var(--ease-out);
+  pointer-events: auto;
 }
 
 @keyframes sw-cookie-slide-up {
@@ -1923,6 +1924,7 @@ body:has(button:hover) #sw-cursor-ring {
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: opacity 0.25s;
+  cursor: pointer;
 }
 
 .sw-cookie-link:hover {
