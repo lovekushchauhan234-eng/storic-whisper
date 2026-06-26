@@ -1,534 +1,975 @@
-{% load static %}
+{# Standalone cinematic homepage — Django URL integration only #}
 <!DOCTYPE html>
-<html lang="{% block html_lang %}hi{% endblock %}" prefix="og: http://ogp.me/ns#">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<!-- ── Google Search Console ──────────────────────── -->
+<!-- ✅ Google Search Console Verification -->
 <meta name="google-site-verification" content="hSWT_csKa-dFwomKqk95uilDtbPfTrFhgf03DZHntpc">
+<!-- ── Google Analytics 4 ───────────────────────────────── -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5XZ5WM78R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-<!-- ── Primary SEO ─────────────────────────────────── -->
-<title>{% block title %}Storic Whisper — Psychology Without Noise{% endblock %}</title>
-<meta name="description" content="{% block meta_desc %}Storic Whisper — Breakup Recovery, Women Psychology, Dark Psychology, Stoicism. बिना noise के psychology की clarity।{% endblock %}">
-<meta name="keywords" content="{% block meta_keywords %}breakup recovery hindi, women psychology, dark psychology hindi, stoicism hindi, psychology blog{% endblock %}">
-<meta name="author" content="Lovekush Chauhan">
-<meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
-<link rel="canonical" href="{% block canonical %}https://storicwhisper.com{% endblock %}">
+    gtag('config', 'G-N5XZ5WM78R');
+  </script>
 
-<!-- ── Open Graph ───────────────────────────────────── -->
-<meta property="og:type"        content="{% block og_type %}website{% endblock %}">
-<meta property="og:title"       content="{% block og_title %}Storic Whisper — Psychology Without Noise{% endblock %}">
-<meta property="og:description" content="{% block og_desc %}Breakup Recovery, Women Psychology, Dark Psychology — बिना noise के।{% endblock %}">
-<meta property="og:image"       content="{% block og_image %}{% static 'images/og-default.png' %}{% endblock %}">
-<meta property="og:url"         content="{% block og_url %}https://storicwhisper.com{% endblock %}">
-<meta property="og:site_name"   content="Storic Whisper">
-<meta property="og:locale"      content="{% block og_locale %}hi_IN{% endblock %}">
+  <!-- ── Microsoft Clarity ──────────────────────────────────── -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xcu00k7rgv");
+  </script>
 
-<!-- ── Twitter Card ─────────────────────────────────── -->
-<meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:title"       content="{% block tw_title %}Storic Whisper{% endblock %}">
-<meta name="twitter:description" content="{% block tw_desc %}Psychology Without Noise{% endblock %}">
-<meta name="twitter:image"       content="{% block tw_image %}{% static 'images/og-default.png' %}{% endblock %}">
+<!-- Google AdSense -->
+<script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4363902996205378"
+    crossorigin="anonymous"></script>
 
-<!-- ── Favicon ──────────────────────────────────────── -->
-<link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
-<link rel="apple-touch-icon"          href="{% static 'images/apple-touch-icon.png' %}">
+<title>Storic Whisper — Psychology Without Noise</title>
+<meta name="description" content="Breakup Recovery, Women Psychology, Dark Psychology, Stoicism — बिना noise के psychology की clarity। हिंदी में।">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://storicwhisper.com">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Storic Whisper — Psychology Without Noise">
+<meta property="og:description" content="Breakup Recovery, Women Psychology, Dark Psychology — बिना noise के।">
+<meta property="og:url" content="https://storicwhisper.com">
+<meta property="og:site_name" content="Storic Whisper">
 
-<!-- ── Fonts ────────────────────────────────────────── -->
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Storic Whisper">
+<meta name="twitter:description" content="Psychology Without Noise">
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 
-<!-- ── Design Tokens ────────────────────────────────── -->
 <style>
 :root{
-  /* Core palette */
   --void:#050508;
   --deep:#09090f;
   --surface:#0d0d18;
   --lift:#12121f;
   --panel:#181826;
-
-  /* Gold system */
   --gold:#b8973d;
   --gold2:#d4b05a;
   --gold3:#e8cc7a;
-  --golda:rgba(184,151,61,.10);
+  --golda:rgba(184,151,61,.1);
   --goldb:rgba(184,151,61,.15);
-
-  /* Rose */
   --rose:#7a4f5e;
   --rose2:#9b6675;
   --rosea:rgba(122,79,94,.12);
-
-  /* Neutrals */
   --cream:#e4ddd3;
   --cream2:#b0a99f;
   --fog:#6e6860;
-
-  /* Borders */
   --border:rgba(184,151,61,.12);
   --borderl:rgba(184,151,61,.22);
-
-  /* Typography */
-  --font-serif:'Playfair Display',Georgia,serif;
-  --font-sans:'Jost',system-ui,sans-serif;
-
-  /* Spacing scale */
-  --sp-xs:8px;
-  --sp-sm:16px;
-  --sp-md:32px;
-  --sp-lg:56px;
-  --sp-xl:100px;
-
-  /* Animation */
-  --ease-out:cubic-bezier(.16,1,.3,1);
-  --dur-fast:.2s;
-  --dur-base:.35s;
-  --dur-slow:.85s;
-
-  /* Nav */
-  --nav-h:70px;
 }
-</style>
-
-<!-- ── Main CSS ──────────────────────────────────────── -->
-<link rel="stylesheet" href="{% static 'css/main.css' %}">
-
-<!-- ── Base reset + global styles ───────────────────── -->
-<style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--void);color:var(--cream);font-family:var(--font-sans);font-weight:300;overflow-x:hidden;cursor:none}
+body{background:var(--void);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
 
-/* Film grain overlay */
+/* grain */
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;opacity:.5;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='.038'/%3E%3C/svg%3E")}
 
-/* Custom cursor */
-#sw-cursor{position:fixed;width:5px;height:5px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width var(--dur-fast),height var(--dur-fast),opacity var(--dur-fast)}
-#sw-cursor-ring{position:fixed;width:28px;height:28px;border:1px solid rgba(184,151,61,.38);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .32s var(--ease-out),height .32s var(--ease-out)}
+/* cursor */
+#dot{position:fixed;width:5px;height:5px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s}
+#ring{position:fixed;width:28px;height:28px;border:1px solid rgba(184,151,61,.38);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .32s cubic-bezier(.16,1,.3,1),height .32s cubic-bezier(.16,1,.3,1)}
 
-/* Scrollbar */
+/* scrollbar */
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--void)}
 ::-webkit-scrollbar-thumb{background:rgba(184,151,61,.25);border-radius:2px}
 ::selection{background:rgba(184,151,61,.22);color:var(--cream)}
 
-/* Reading progress bar */
-#sw-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--rose2));z-index:600;width:0%;transition:width .1s linear;transform-origin:left}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:70px;padding:0 56px;display:flex;align-items:center;justify-content:space-between;transition:background .5s,border-color .5s}
+nav.scrolled{background:rgba(5,5,8,.94);border-bottom:1px solid var(--border);backdrop-filter:blur(24px)}
+.logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none}
+.logo em{color:var(--cream);font-style:normal;font-weight:400}
+.navl{display:flex;align-items:center;gap:36px;list-style:none}
+.navl a{font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fog);text-decoration:none;transition:all .3s ease;cursor:pointer;position:relative;padding:6px 0;font-weight:400}
+.navl a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s ease}
+.navl a:hover{color:var(--gold)}
+.navl a:hover::after{width:100%}
+.navl a.active{color:var(--gold)}
+.navl a.active::after{width:100%}
+.nav-luppi{background:rgba(184,151,61,.06);border:1px solid rgba(184,151,61,.3);color:var(--gold);padding:8px 20px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;font-weight:400;transition:all .3s ease;text-decoration:none;display:inline-block}
+.nav-luppi:hover{background:var(--gold);color:var(--void);border-color:var(--gold)}
+a.btn-gold,a.btn-ghost{display:inline-block;text-decoration:none;text-align:center}
+a.topic-cta{text-decoration:none}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.burger span{display:block;width:22px;height:1px;background:var(--gold);transition:all .3s}
+.mob-menu{display:none;position:fixed;inset:0;z-index:499;background:rgba(5,5,8,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;padding:120px 32px 80px;gap:24px;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.mob-menu::-webkit-scrollbar{display:none}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:'Playfair Display',serif;font-size:28px;font-weight:400;color:var(--cream);text-decoration:none;transition:all .3s;cursor:pointer;padding:16px 24px;min-height:60px;min-width:280px;text-align:center;border-radius:8px;position:relative}
+.mob-menu a:hover{color:var(--gold);background:rgba(184,151,61,.08)}
+.mob-menu a.active{color:var(--gold);background:rgba(184,151,61,.12)}
+.mob-menu a.active::after{content:'';position:absolute;left:24px;top:50%;transform:translateY(-50%);width:3px;height:24px;background:var(--gold);border-radius:2px}
 
-/* Scroll-reveal base */
-.r{opacity:0;transform:translateY(30px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
-.r.on{opacity:1;transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+/* HERO */
+.hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.ocean{position:absolute;inset:0;overflow:hidden}
+.ocean-bg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 50% 110%,#0a1a2e 0%,#060a12 40%,var(--void) 70%)}
+.wave{position:absolute;bottom:0;left:-200%;width:600%;border-radius:40%;animation:wave linear infinite}
+.w1{height:180px;background:rgba(8,18,40,.55);animation-duration:22s;bottom:-40px}
+.w2{height:150px;background:rgba(6,14,32,.45);animation-duration:17s;animation-delay:-6s;bottom:-20px}
+.w3{height:110px;background:rgba(4,10,24,.35);animation-duration:13s;animation-delay:-3s;bottom:10px}
+.w4{height:80px;background:rgba(10,20,50,.25);animation-duration:9s;animation-delay:-1s;bottom:30px}
+@keyframes wave{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.rays{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.ray{position:absolute;top:0;width:1px;transform-origin:top center;opacity:.03;animation:ray-pulse 8s ease-in-out infinite}
+.ray:nth-child(1){left:25%;height:70%;background:linear-gradient(var(--gold),transparent);animation-delay:0s}
+.ray:nth-child(2){left:50%;height:90%;background:linear-gradient(rgba(184,151,61,.6),transparent);animation-delay:2s;opacity:.05}
+.ray:nth-child(3){left:75%;height:60%;background:linear-gradient(var(--gold),transparent);animation-delay:4s}
+@keyframes ray-pulse{0%,100%{opacity:.02;transform:scaleX(1)}50%{opacity:.06;transform:scaleX(2)}}
+#hero-canvas{position:absolute;inset:0;z-index:2;pointer-events:none}
+.hero-overlay{position:absolute;inset:0;z-index:3;background:linear-gradient(to bottom,rgba(5,5,8,.5) 0%,rgba(5,5,8,.2) 35%,rgba(5,5,8,.5) 75%,rgba(5,5,8,1) 100%)}
+.hero-content{position:relative;z-index:4;text-align:center;max-width:940px;padding:0 32px}
+.hero-eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:40px;opacity:0;animation:fadeup .8s .1s both}
+.hero-eyebrow span{margin:0 14px;opacity:.35}
+.hero-h{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,96px);font-weight:400;line-height:1.05;color:var(--cream);margin-bottom:24px;opacity:0;animation:fadeup .9s .3s both;letter-spacing:-1px}
+.hero-h em{font-style:italic;color:var(--gold)}
+.hero-sub{font-family:'Playfair Display',serif;font-size:clamp(16px,2vw,22px);font-style:italic;font-weight:400;color:var(--fog);margin-bottom:48px;opacity:0;animation:fadeup .8s .5s both;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.6}
+.hero-vline{width:1px;height:48px;background:linear-gradient(var(--gold),transparent);margin:0 auto 40px;opacity:0;animation:fadeup .7s .55s both}
+.hero-btns{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeup .8s .7s both}
+.btn-gold{background:var(--gold);color:var(--void);padding:16px 40px;border:none;font-size:11px;letter-spacing:2.2px;text-transform:uppercase;font-weight:500;cursor:pointer;font-family:'Jost',sans-serif;transition:all .3s;box-shadow:0 0 25px rgba(184,151,61,.2)}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 0 35px rgba(184,151,61,.35)}
+.btn-ghost{background:transparent;color:var(--cream);padding:16px 40px;border:1px solid rgba(228,221,211,.25);font-size:11px;letter-spacing:2.2px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;transition:all .3s}
+.btn-ghost:hover{border-color:rgba(184,151,61,.4);color:var(--gold);transform:translateY(-2px)}
+.scroll-cue{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:10px;animation:float 3s ease-in-out infinite}
+.scroll-cue span{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--fog)}
+.scroll-line{width:1px;height:48px;background:linear-gradient(var(--gold),transparent)}
 
-/* ── NAV ── */
-.sw-nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);padding:0 var(--sp-lg);display:flex;align-items:center;justify-content:space-between;transition:background var(--dur-slow),border-color var(--dur-slow)}
-.sw-nav.scrolled{background:rgba(5,5,8,.94);border-bottom:1px solid var(--border);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
-
-.sw-logo{font-family:var(--font-serif);font-size:18px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;text-decoration:none;cursor:pointer}
-.sw-logo span{color:var(--cream);font-weight:400}
-
-.sw-nav-links{display:flex;align-items:center;gap:36px;list-style:none}
-.sw-nav-link{font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fog);text-decoration:none;transition:color var(--dur-base);cursor:pointer;position:relative;padding:6px 0;font-weight:400}
-.sw-nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s}
-.sw-nav-link:hover,.sw-nav-link.active{color:var(--gold)}
-.sw-nav-link:hover::after,.sw-nav-link.active::after{width:100%}
-
-.sw-nav-cta{background:rgba(184,151,61,.06);border:1px solid rgba(184,151,61,.3);color:var(--gold);padding:8px 20px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;font-family:var(--font-sans);font-weight:400;transition:all var(--dur-base);text-decoration:none;display:inline-block}
-.sw-nav-cta:hover{background:var(--gold);color:var(--void);border-color:var(--gold)}
-
-/* Hamburger */
-.sw-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.sw-hamburger span{display:block;width:22px;height:1px;background:var(--gold);transition:all var(--dur-base)}
-
-/* Mobile menu */
-.sw-mobile-menu{display:none;position:fixed;inset:0;z-index:499;background:rgba(5,5,8,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);flex-direction:column;align-items:center;padding:120px 32px 80px;gap:24px;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.sw-mobile-menu::-webkit-scrollbar{display:none}
-.sw-mobile-menu.open{display:flex}
-.sw-mobile-menu a{font-family:var(--font-serif);font-size:28px;font-weight:400;color:var(--cream);text-decoration:none;transition:all var(--dur-base);padding:16px 24px;min-height:60px;min-width:280px;text-align:center;border-radius:8px;position:relative}
-.sw-mobile-menu a:hover{color:var(--gold);background:rgba(184,151,61,.08)}
-.sw-mobile-menu a.active{color:var(--gold);background:rgba(184,151,61,.12)}
-.sw-mobile-menu a.active::before{content:'';position:absolute;left:24px;top:50%;transform:translateY(-50%);width:3px;height:24px;background:var(--gold);border-radius:2px}
-
-/* ── SHARED UTILITY CLASSES ── */
-.wrap{max-width:1160px;margin:0 auto;padding:0 var(--sp-lg)}
+/* SHARED */
+.wrap{max-width:1160px;margin:0 auto;padding:0 56px}
 .sec-label{font-size:10px;letter-spacing:4.5px;text-transform:uppercase;color:var(--gold);font-weight:400}
-.sec-h{font-family:var(--font-serif);font-weight:400;line-height:1.05;color:var(--cream)}
+.sec-h{font-family:'Playfair Display',serif;font-weight:400;line-height:1.05;color:var(--cream)}
 .sec-h em{color:var(--gold);font-style:italic}
 .sec-h--xl{font-size:clamp(42px,5.5vw,68px)}
 .sec-h--lg{font-size:clamp(34px,4vw,52px)}
 .sec-h--md{font-size:clamp(26px,3vw,38px)}
 .sec-body{font-size:16px;color:var(--cream2);line-height:1.95}
 .gold-line{width:44px;height:1px;background:var(--gold)}
+.r{opacity:0;transform:translateY(30px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.r.on{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
 
-/* Buttons */
-.btn-gold{background:var(--gold);color:var(--void);padding:16px 40px;border:none;font-size:11px;letter-spacing:2.2px;text-transform:uppercase;font-weight:500;cursor:pointer;font-family:var(--font-sans);transition:all var(--dur-base);box-shadow:0 0 25px rgba(184,151,61,.2);display:inline-block;text-decoration:none;text-align:center}
-.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 0 35px rgba(184,151,61,.35)}
-.btn-ghost{background:transparent;color:var(--cream);padding:16px 40px;border:1px solid rgba(228,221,211,.25);font-size:11px;letter-spacing:2.2px;text-transform:uppercase;cursor:pointer;font-family:var(--font-sans);transition:all var(--dur-base);display:inline-block;text-decoration:none;text-align:center}
-.btn-ghost:hover{border-color:rgba(184,151,61,.4);color:var(--gold);transform:translateY(-2px)}
+/* AUTHORITY LAYER */
+.authority-layer{padding:56px 0;background:var(--void);border-bottom:1px solid var(--border)}
+.authority-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:40px 32px}
+.authority-item{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--fog);transition:all .3s;padding:12px 20px;border:1px solid rgba(184,151,61,.1);border-radius:8px;background:rgba(184,151,61,.02);text-decoration:none;cursor:pointer}
+.authority-item:hover{color:var(--gold);border-color:rgba(184,151,61,.25);background:rgba(184,151,61,.08);transform:translateY(-2px)}
+.authority-icon{font-size:18px}
 
-/* ── NEWSLETTER ── */
-.sw-newsletter{padding:120px 0;background:var(--surface);border-top:1px solid var(--border);text-align:center}
-.sw-newsletter-inner{max-width:580px;margin:0 auto;padding:0 24px}
-.sw-newsletter-h{font-family:var(--font-serif);font-size:clamp(30px,4vw,48px);font-weight:400;color:var(--cream);margin:20px 0 10px;line-height:1.1}
-.sw-newsletter-h em{font-style:italic;color:var(--gold)}
-.sw-newsletter-sub{font-size:16px;color:var(--cream2);margin-top:12px;line-height:1.8}
-.sw-newsletter-form{display:flex;max-width:440px;margin:40px auto 0}
-.sw-newsletter-input{flex:1;background:var(--lift);border:1px solid var(--border);border-right:none;color:var(--cream);padding:14px 20px;font-size:14px;outline:none;font-family:var(--font-sans);transition:border-color var(--dur-base)}
-.sw-newsletter-input:focus{border-color:rgba(184,151,61,.35)}
-.sw-newsletter-input::placeholder{color:var(--fog)}
-.sw-newsletter-btn{background:var(--gold);color:var(--void);border:none;padding:14px 28px;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:500;font-family:var(--font-sans);transition:background .25s;white-space:nowrap}
-.sw-newsletter-btn:hover{background:var(--gold2)}
-.sw-newsletter-note{font-size:12px;color:var(--fog);margin-top:16px}
+/* MANIFESTO */
+.manifesto{padding:130px 0;background:var(--void);position:relative;overflow:hidden}
+.manifesto::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(transparent,var(--border))}
+.manifesto-inner{max-width:820px;margin:0 auto;text-align:center;padding:0 56px}
+.manifesto-pre{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:28px}
+.manifesto-h{font-family:'Playfair Display',serif;font-size:clamp(32px,4.5vw,58px);font-weight:400;line-height:1.15;color:var(--cream);margin-bottom:32px}
+.manifesto-h em{font-style:italic;color:var(--gold)}
+.manifesto-body{font-size:17px;color:var(--cream2);line-height:2;margin-bottom:48px}
+.manifesto-body strong{color:var(--cream);font-weight:400}
+.pillars-row{display:flex;justify-content:center;gap:0;margin-top:64px;flex-wrap:wrap;border:1px solid var(--border)}
+.pillar{padding:28px 36px;flex:1;min-width:140px;border-right:1px solid var(--border);text-align:center;transition:background .3s;cursor:default;color:inherit}
+.pillar:last-child{border-right:none}
+.pillar:hover{background:var(--golda)}
+.pillar-icon{font-size:22px;margin-bottom:10px}
+.pillar-name{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--fog);transition:color .3s}
+.pillar:hover .pillar-name{color:var(--gold)}
+a.pillar{text-decoration:none;display:block}
 
-/* ── FOOTER ── */
-.sw-footer{background:var(--void);border-top:1px solid var(--border);padding:80px var(--sp-lg) 52px}
-.sw-footer__grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;padding-bottom:56px;border-bottom:1px solid var(--border)}
-.sw-footer__brand{font-family:var(--font-serif);font-size:20px;color:var(--gold);letter-spacing:2.5px;margin-bottom:14px}
-.sw-footer__tagline{font-size:14px;color:var(--fog);line-height:1.85;max-width:260px;margin-bottom:28px}
-.sw-footer__col-title{font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
-.sw-footer__links{list-style:none;display:flex;flex-direction:column;gap:9px}
-.sw-footer__links a{font-size:13.5px;color:var(--fog);text-decoration:none;transition:color .25s}
-.sw-footer__links a:hover{color:var(--cream)}
-.sw-footer__bottom{max-width:1160px;margin:0 auto;padding-top:36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.sw-footer__copy{font-size:12.5px;color:var(--fog)}
-.sw-social-link{width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--fog);text-decoration:none;font-size:13px;transition:all var(--dur-base)}
-.sw-social-link:hover{border-color:var(--gold);color:var(--gold)}
+/* TOPIC SECTIONS */
+.breakup-sec{padding:0;background:var(--void);position:relative;overflow:hidden}
+.breakup-inner{display:grid;grid-template-columns:1fr 1fr;min-height:620px}
+.breakup-visual{background:linear-gradient(135deg,#0a0510 0%,#160820 50%,#0d0510 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.breakup-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,rgba(122,79,94,.18) 0%,transparent 70%)}
+.breakup-num{font-family:'Playfair Display',serif;font-size:200px;font-weight:700;color:rgba(184,151,61,.04);position:absolute;bottom:-40px;right:-20px;line-height:1;user-select:none}
+.breakup-icon-wrap{position:relative;z-index:1;text-align:center}
+.breakup-icon-wrap .big-icon{font-size:72px;filter:grayscale(.3)}
+.breakup-glow{width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(122,79,94,.2),transparent 70%);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:glow-pulse 4s ease-in-out infinite}
+@keyframes glow-pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.3);opacity:1}}
+.topic-content{padding:72px 64px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border)}
+.topic-tag{font-size:9.5px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.topic-h{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,46px);font-weight:400;color:var(--cream);line-height:1.1;margin-bottom:20px}
+.topic-h em{font-style:italic;color:var(--gold)}
+.topic-body{font-size:15px;color:var(--cream2);line-height:1.9;margin-bottom:28px}
+.topic-items{list-style:none;margin-bottom:36px}
+.topic-items li{font-size:13.5px;color:var(--fog);padding:8px 0 8px 20px;border-bottom:1px solid rgba(184,151,61,.06);position:relative;transition:color .25s;cursor:default}
+.topic-items li::before{content:'—';color:var(--gold);position:absolute;left:0;opacity:.6}
+.topic-items li:hover{color:var(--cream2)}
+.topic-items li:last-child{border-bottom:none}
+.topic-cta{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;cursor:pointer;transition:gap .3s;border:none;background:none;font-family:'Jost',sans-serif}
+.topic-cta:hover{gap:16px}
+.topic-cta-arrow{font-size:16px}
+.women-sec{padding:0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.women-inner{display:grid;grid-template-columns:1fr 1fr;min-height:620px}
+.women-visual{background:linear-gradient(135deg,#080c18 0%,#0e1220 50%,#06080f 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;order:2}
+.women-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 40% 50%,rgba(100,130,180,.12) 0%,transparent 70%)}
+.women-num{font-family:'Playfair Display',serif;font-size:200px;font-weight:700;color:rgba(184,151,61,.04);position:absolute;bottom:-40px;left:-20px;line-height:1;user-select:none}
+.women-glow{width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(100,130,200,.12),transparent 70%);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:glow-pulse 5s ease-in-out infinite}
+.dark-sec{padding:0;background:var(--void);position:relative}
+.dark-inner{display:grid;grid-template-columns:1fr 1fr;min-height:620px}
+.dark-visual{background:linear-gradient(135deg,#0a0505 0%,#150808 50%,#0a0505 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.dark-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(155,40,40,.1) 0%,transparent 65%)}
+.dark-num{font-family:'Playfair Display',serif;font-size:200px;font-weight:700;color:rgba(184,151,61,.04);position:absolute;bottom:-40px;right:-20px;line-height:1;user-select:none}
+.dark-glow{width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(155,40,40,.15),transparent 70%);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:glow-pulse 4.5s ease-in-out infinite}
+.danger-bar{display:inline-flex;align-items:center;gap:8px;background:rgba(155,40,40,.12);border:1px solid rgba(155,40,40,.2);padding:6px 16px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#c45;margin-bottom:20px}
+.stoic-sec{padding:0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stoic-inner{display:grid;grid-template-columns:1fr 1fr;min-height:620px}
+.stoic-visual{background:linear-gradient(135deg,#080808 0%,#0f0f0e 50%,#080808 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;order:2}
+.stoic-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(184,151,61,.08) 0%,transparent 65%)}
+.stoic-num{font-family:'Playfair Display',serif;font-size:200px;font-weight:700;color:rgba(184,151,61,.04);position:absolute;bottom:-40px;left:-20px;line-height:1;user-select:none}
+.stoic-glow{width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(184,151,61,.1),transparent 70%);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:glow-pulse 6s ease-in-out infinite}
+.stoic-quote{max-width:360px;text-align:center;position:relative;z-index:1}
+.stoic-qtext{font-family:'Playfair Display',serif;font-size:clamp(16px,2vw,20px);font-style:italic;color:var(--cream2);line-height:1.7;margin-bottom:16px}
+.stoic-qby{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
 
-/* Flash messages */
-.sw-messages{position:fixed;top:calc(var(--nav-h) + 16px);right:24px;z-index:700;display:flex;flex-direction:column;gap:10px;pointer-events:none}
-.sw-msg{pointer-events:all;padding:12px 20px;font-size:13px;letter-spacing:.5px;border-left:2px solid var(--gold);background:rgba(5,5,8,.95);color:var(--cream);backdrop-filter:blur(12px);animation:sw-msg-in .35s var(--ease-out) both}
-.sw-msg.success{border-color:#2d6a4f;color:#6fcf97}
-.sw-msg.error{border-color:#c45;color:#f09}
-@keyframes sw-msg-in{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+/* PILLARS STRIP */
+.pillars-strip{background:var(--lift);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 0}
+.pillars-strip-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border)}
+.pillar-card{background:var(--lift);padding:40px 36px;transition:all .3s ease;cursor:pointer;position:relative;overflow:hidden;color:inherit;border:1px solid var(--border);border-radius:8px}
+.pillar-card:hover{background:var(--panel);border-color:rgba(184,151,61,.2);transform:translateY(-4px)}
+.pc-num{font-family:'Playfair Display',serif;font-size:42px;color:rgba(184,151,61,.06);line-height:1;margin-bottom:12px;font-weight:700}
+.pc-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--cream);margin-bottom:8px;font-weight:400;transition:color .3s}
+.pillar-card:hover .pc-title{color:var(--gold)}
+.pc-desc{font-size:13px;color:var(--fog);line-height:1.7;margin-bottom:16px}
+.pc-topics{display:flex;flex-wrap:wrap;gap:6px}
+.pc-topic{font-size:9.5px;letter-spacing:1.5px;color:var(--fog);padding:4px 10px;border:1px solid rgba(184,151,61,.08);transition:all .3s;border-radius:4px}
+.pillar-card:hover .pc-topic{border-color:rgba(184,151,61,.2);color:var(--cream2)}
+.pc-arrow{position:absolute;bottom:24px;right:24px;color:var(--gold);opacity:0;transform:translateX(-6px);transition:all .3s;font-size:16px}
+.pillar-card:hover .pc-arrow{opacity:1;transform:translateX(0)}
+a.pillar-card{text-decoration:none;display:block}
 
-/* ── RESPONSIVE ── */
+/* LUPPI */
+.luppi-sec{padding:140px 0;background:var(--void);position:relative;overflow:hidden}
+.luppi-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,#0f0820 0%,transparent 70%)}
+.luppi-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.luppi-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(184,151,61,.12);border:1px solid rgba(184,151,61,.35);padding:8px 20px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;box-shadow:0 0 20px rgba(184,151,61,.15)}
+.luppi-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.luppi-name{font-family:'Playfair Display',serif;font-size:clamp(52px,7vw,88px);font-weight:400;color:var(--cream);line-height:.95;margin-bottom:16px;letter-spacing:-2px}
+.luppi-name em{font-style:italic;color:var(--gold)}
+.luppi-tag{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--fog);margin-bottom:32px}
+.luppi-desc{font-size:16px;color:var(--cream2);line-height:1.95;margin-bottom:40px;max-width:480px}
+.luppi-features{display:flex;flex-direction:column;gap:12px;margin-bottom:44px}
+.luppi-feat{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--cream2)}
+.luppi-feat-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.luppi-interface{background:var(--surface);border:1px solid var(--border);position:relative}
+.luppi-interface::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--rose2),transparent)}
+.luppi-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px}
+.luppi-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#1e0f35,#3a1010);border:1px solid rgba(184,151,61,.3);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.luppi-av-name{font-family:'Playfair Display',serif;font-size:16px;color:var(--cream)}
+.luppi-status{font-size:11px;color:var(--gold);display:flex;align-items:center;gap:5px;margin-top:2px}
+.luppi-msgs{padding:24px;display:flex;flex-direction:column;gap:16px;min-height:240px}
+.lmsg{display:flex;gap:10px;align-items:flex-end}
+.lmsg.u{flex-direction:row-reverse}
+.lmsg-av{width:28px;height:28px;border-radius:50%;background:var(--lift);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.lmsg.u .lmsg-av{background:linear-gradient(135deg,#1e0f35,#3a1010)}
+.lbubble{max-width:72%;padding:12px 16px;font-size:13.5px;line-height:1.75;color:var(--cream)}
+.lmsg-ai .lbubble{background:var(--lift);border:1px solid var(--border);border-radius:0 10px 10px 10px}
+.lmsg.u .lbubble{background:rgba(184,151,61,.08);border:1px solid rgba(184,151,61,.15);border-radius:10px 0 10px 10px;text-align:right}
+.luppi-inp-row{padding:16px 20px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center}
+.luppi-inp{flex:1;background:var(--lift);border:1px solid var(--border);color:var(--cream);padding:11px 16px;font-size:13px;outline:none;font-family:'Jost',sans-serif}
+.luppi-inp::placeholder{color:var(--fog)}
+.luppi-send{background:var(--gold);color:var(--void);border:none;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:all .3s;flex-shrink:0;box-shadow:0 0 15px rgba(184,151,61,.2)}
+.luppi-send:hover{background:var(--gold2);box-shadow:0 0 25px rgba(184,151,61,.35);transform:scale(1.05)}
+
+/* START HERE SECTION */
+.start-here-sec{padding:100px 0;background:var(--surface);border-top:1px solid var(--border)}
+.start-here-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--border)}
+.start-card{background:var(--surface);padding:36px 32px;transition:background .35s,transform .35s;position:relative;overflow:hidden;display:block;text-decoration:none;color:inherit}
+.start-card:hover{background:var(--lift);transform:translateY(-4px)}
+.start-card-num{font-family:'Playfair Display',serif;font-size:48px;color:rgba(184,151,61,.08);line-height:1;margin-bottom:16px;font-weight:700}
+.start-card-cat{font-size:9.5px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.start-card-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--cream);line-height:1.3;margin-bottom:12px;transition:color .25s}
+.start-card:hover .start-card-title{color:var(--gold)}
+.start-card-excerpt{font-size:13.5px;color:var(--fog);line-height:1.8;margin-bottom:20px}
+.start-card-meta{display:flex;gap:16px;padding-top:16px;border-top:1px solid var(--border);font-size:11.5px;color:var(--fog)}
+
+/* MOST READ SECTION */
+.most-read-sec{padding:100px 0;background:var(--void);border-top:1px solid var(--border)}
+.most-read-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:48px}
+.mr-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:all .35s;border-radius:8px}
+.mr-card:hover{border-color:rgba(184,151,61,.3);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.3)}
+.mr-thumb{aspect-ratio:16/10;position:relative;overflow:hidden;background:linear-gradient(135deg,#0a0510,#180828)}
+.mr-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.mr-card:hover .mr-thumb img{transform:scale(1.05)}
+.mr-thumb-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:42px;color:rgba(184,151,61,.4);display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.mr-body{padding:24px;flex:1;display:flex;flex-direction:column}
+.mr-cat{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.mr-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--cream);line-height:1.3;margin-bottom:12px;transition:color .25s}
+.mr-card:hover .mr-title{color:var(--gold)}
+.mr-excerpt{font-size:13px;color:var(--fog);line-height:1.7;margin-bottom:16px;flex:1}
+.mr-meta{display:flex;gap:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--fog)}
+.mr-views{display:flex;align-items:center;gap:4px;color:var(--gold)}
+
+/* ARTICLES */
+.articles-sec{padding:130px 0;background:var(--surface);border-top:1px solid var(--border)}
+.art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:60px}
+.art-card{background:var(--surface);overflow:hidden;transition:background .35s;cursor:pointer;display:block;text-decoration:none;position:relative}
+.art-card:hover{background:var(--lift)}
+.art-thumb{aspect-ratio:16/9;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.art-thumb-icon{font-family:'Playfair Display',serif;font-size:56px;color:rgba(184,151,61,.12);position:relative;z-index:1}
+.art-body{padding:28px 32px 36px}
+.art-cat{font-size:9.5px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.art-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--cream);line-height:1.3;margin-bottom:12px;transition:color .25s}
+.art-card:hover .art-title{color:var(--gold)}
+.art-excerpt{font-size:13.5px;color:var(--fog);line-height:1.8}
+.art-meta{display:flex;gap:16px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:11.5px;color:var(--fog)}
+.art-read-btn{margin-top:auto;padding:12px 16px;border:1px solid rgba(184,151,61,.35);border-radius:999px;background:rgba(184,151,61,.06);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-align:center;transition:all .3s}
+.art-card:hover .art-read-btn{background:rgba(184,151,61,.14);border-color:rgba(184,151,61,.55)}
+
+/* GLOBAL EDITION */
+.nav-global{color:var(--gold2)!important;border:1px solid rgba(184,151,61,.32);padding:8px 14px!important;transition:background .3s,color .3s,border-color .3s}
+.nav-global::after{display:none!important}
+.nav-global:hover{background:rgba(184,151,61,.12);border-color:rgba(184,151,61,.55)!important}
+.global-sec{padding:130px 0;background:var(--void);border-top:1px solid var(--border);position:relative;overflow:hidden}
+.global-sec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4}
+.global-head{text-align:center;max-width:760px;margin:0 auto 64px}
+.global-head .sec-label{margin-bottom:18px}
+.global-head .sec-h{margin-bottom:16px}
+.global-sub{font-size:15px;color:var(--cream2);line-height:1.85}
+.global-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+.global-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:border-color .35s,transform .35s,box-shadow .35s}
+.global-card:hover{border-color:var(--borderl);transform:translateY(-4px);box-shadow:0 24px 48px rgba(0,0,0,.45)}
+.global-thumb{aspect-ratio:16/9;position:relative;overflow:hidden;background:linear-gradient(135deg,#0a0a14,#141428)}
+.global-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.global-card:hover .global-thumb img{transform:scale(1.04)}
+.global-thumb-fallback{display:flex;align-items:center;justify-content:center;height:100%;font-family:'Playfair Display',serif;font-size:42px;color:rgba(184,151,61,.15)}
+.global-body{padding:26px 28px 30px;flex:1;display:flex;flex-direction:column}
+.global-tag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.global-title{font-family:'Playfair Display',serif;font-size:21px;font-weight:400;color:var(--cream);line-height:1.35;margin-bottom:12px;transition:color .25s}
+.global-card:hover .global-title{color:var(--gold2)}
+.global-excerpt{font-size:13px;color:var(--fog);line-height:1.75;flex:1}
+.global-btn{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:400}
+.global-hub-cta{text-align:center;margin-top:48px}
+.global-hub-cta a{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(184,151,61,.35);color:var(--gold);padding:14px 28px;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .3s}
+.global-hub-cta a:hover{background:var(--gold);color:var(--void)}
+
+/* QUOTE */
+.quote-break{padding:120px 0;text-align:center;position:relative;overflow:hidden;background:var(--void)}
+.quote-break::before{content:'"';font-family:'Playfair Display',serif;font-size:360px;color:rgba(184,151,61,.035);position:absolute;top:-100px;left:50%;transform:translateX(-50%);line-height:1;pointer-events:none;user-select:none}
+.qb-text{font-family:'Playfair Display',serif;font-size:clamp(24px,3.8vw,48px);font-weight:400;font-style:italic;color:var(--cream);max-width:820px;margin:0 auto 24px;line-height:1.3;position:relative;z-index:1}
+.qb-by{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
+
+/* NEWSLETTER */
+.nl-sec{padding:120px 0;background:var(--surface);border-top:1px solid var(--border);text-align:center}
+.nl-inner{max-width:580px;margin:0 auto;padding:0 24px}
+.nl-h{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,48px);font-weight:400;color:var(--cream);margin:20px 0 10px;line-height:1.1}
+.nl-h em{font-style:italic;color:var(--gold)}
+.nl-sub{font-size:16px;color:var(--cream2);margin-top:12px;line-height:1.8}
+.nl-form{display:flex;max-width:440px;margin:40px auto 0}
+.nl-input{flex:1;background:var(--lift);border:1px solid var(--border);border-right:none;color:var(--cream);padding:14px 20px;font-size:14px;outline:none;font-family:'Jost',sans-serif;transition:border-color .3s}
+.nl-input:focus{border-color:rgba(184,151,61,.35)}
+.nl-input::placeholder{color:var(--fog)}
+.nl-btn{background:var(--gold);color:var(--void);border:none;padding:14px 28px;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:500;font-family:'Jost',sans-serif;transition:background .25s;white-space:nowrap}
+.nl-btn:hover{background:var(--gold2)}
+.nl-note{font-size:12px;color:var(--fog);margin-top:16px}
+
+/* FOOTER */
+footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56px 52px}
+.foot-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;padding-bottom:56px;border-bottom:1px solid var(--border)}
+.foot-brand{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);letter-spacing:2.5px;margin-bottom:14px}
+.foot-tag{font-size:14px;color:var(--fog);line-height:1.85;max-width:260px;margin-bottom:28px}
+.foot-col-h{font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-links a{font-size:13.5px;color:var(--fog);text-decoration:none;transition:color .25s}
+.foot-links a:hover{color:var(--cream)}
+.foot-bottom{max-width:1160px;margin:0 auto;padding-top:36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.foot-copy{font-size:12.5px;color:var(--fog)}
+.foot-social{width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--fog);text-decoration:none;font-size:13px;transition:all .3s}
+.foot-social:hover{border-color:var(--gold);color:var(--gold)}
+
+/* KEYFRAMES */
+@keyframes fadeup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
+
+/* RESPONSIVE */
 @media(max-width:900px){
-  .sw-nav{padding:0 22px}
-  .sw-nav-links{display:none}
-  .sw-hamburger{display:flex}
+  nav{padding:0 22px}
+  .navl{display:none}
+  .burger{display:flex}
   .wrap{padding:0 22px}
-  .sw-footer__grid{grid-template-columns:1fr 1fr;gap:36px}
-  .sw-footer{padding:60px 22px 40px}
-  .sw-newsletter-form{flex-direction:column}
-  .sw-newsletter-input{border-right:1px solid var(--border);border-bottom:none}
+  .breakup-inner,.women-inner,.dark-inner,.stoic-inner,.luppi-grid{grid-template-columns:1fr}
+  .breakup-visual,.women-visual,.dark-visual,.stoic-visual{min-height:260px;order:0!important}
+  .topic-content{padding:44px 28px;border-left:none;border-top:1px solid var(--border)}
+  .art-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+  footer{padding:60px 22px 40px}
+  .nl-form{flex-direction:column}
+  .nl-input{border-right:1px solid var(--border);border-bottom:none}
+  .manifesto-inner{padding:0 22px}
+  .pillars-row{border:none;gap:1px;background:var(--border)}
+  .pillar{border-right:none;border-bottom:1px solid var(--border)}
+  .luppi-grid{gap:40px}
+  .pillars-strip-inner{grid-template-columns:1fr}
 }
 @media(max-width:600px){
-  .sw-footer__grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-h{font-size:42px}
+  .art-grid{grid-template-columns:1fr}
+  .global-grid{grid-template-columns:1fr}
+  .global-head{margin-bottom:40px}
+  .art-title{font-size:16px;line-height:1.3;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;display:-webkit-box}
+  .art-excerpt{display:none}
+  .art-body{padding:20px 18px 24px;display:flex;flex-direction:column;min-height:180px}
+  .art-thumb{aspect-ratio:16/9;min-height:140px}
+  .art-thumb-icon{font-size:40px}
+  .art-read-btn{margin-top:auto;padding:10px 14px;font-size:9.5px;letter-spacing:1.5px}
+  .global-title{font-size:16px;line-height:1.3;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;display:-webkit-box;margin-bottom:8px}
+  .global-excerpt{display:none}
+  .global-body{padding:16px 16px 20px;display:flex;flex-direction:column;min-height:140px}
+  .global-thumb{aspect-ratio:16/9}
+  .global-btn{margin-top:auto;padding:8px 12px;font-size:9px;letter-spacing:1.5px}
 }
 @media(max-width:414px){
   .wrap{padding:0 16px}
-  .sw-newsletter,.sw-footer{padding-top:60px;padding-bottom:60px}
+  .authority-layer{padding:32px 0}
+  .start-here-sec,.most-read-sec,.articles-sec,.global-sec,.quote-break,.nl-sec{padding:60px 0}
+  .pillar-card{padding:24px 20px}
+  .pc-num{font-size:32px}
+  .pc-title{font-size:16px}
+  .pc-desc{font-size:12px}
+  .global-title{font-size:16px;line-height:1.3;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;display:-webkit-box;margin-bottom:8px}
+  .global-excerpt{display:none}
+  .global-body{padding:16px 16px 20px;display:flex;flex-direction:column;min-height:140px}
+  .global-btn{margin-top:auto;padding:8px 12px;font-size:9px;letter-spacing:1.5px}
+  .mr-title{font-size:15px;line-height:1.3;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;display:-webkit-box}
+  .mr-excerpt{font-size:12px;line-height:1.6;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;display:-webkit-box}
+  .mr-thumb{aspect-ratio:16/10;min-height:140px}
+  .mr-thumb-icon{font-size:32px}
+  .start-card-title{font-size:16px;line-height:1.3;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;display:-webkit-box}
+  .start-card-excerpt{font-size:12px;line-height:1.6;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;display:-webkit-box}
+}
+@media(max-width:375px){
+  .wrap{padding:0 14px}
+  .authority-layer{padding:28px 0}
+  .pillar-card{padding:20px 16px}
+  .global-title{font-size:15px}
+  .mr-title{font-size:14px}
+  .art-title{font-size:15px}
+  .start-card-title{font-size:15px}
+}
+@media(max-width:320px){
+  .wrap{padding:0 12px}
+  .authority-layer{padding:24px 0}
+  .pillar-card{padding:18px 14px}
+  .global-title{font-size:14px}
+  .mr-title{font-size:13px}
+  .art-title{font-size:14px}
+  .start-card-title{font-size:14px}
+}
+@media(max-width:1024px){
+  .global-grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
-
-<!-- ── Schema.org JSON-LD ────────────────────────────── -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Storic Whisper",
-  "url": "https://storicwhisper.com",
-  "description": "Breakup Recovery, Women Psychology, Dark Psychology, Stoicism — बिना noise के psychology की clarity।",
-  "publisher": { "@type": "Person", "name": "Lovekush Chauhan" },
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://storicwhisper.com/articles/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
-{% block schema %}{% endblock %}
-
-<!-- ── Per-page extra head ────────────────────────────── -->
-{% block extra_head %}{% endblock %}
-
-<!-- ── Google Analytics 4 ────────────────────────────── -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-N5XZ5WM78R"></script>
-<script>
-window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());
-gtag('config','G-N5XZ5WM78R');
-</script>
-
-<!-- ── Microsoft Clarity ─────────────────────────────── -->
-<script>
-(function(c,l,a,r,i,t,y){
-  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window,document,"clarity","script","xcu00k7rgv");
-</script>
-
-<!-- ── Google AdSense ────────────────────────────────── -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4363902996205378" crossorigin="anonymous"></script>
 </head>
+<body>
 
-<body class="{% block body_class %}{% endblock %}">
+<div id="dot"></div>
+<div id="ring"></div>
 
-<!-- Custom cursor (hides on touch via JS) -->
-<div id="sw-cursor" aria-hidden="true"></div>
-<div id="sw-cursor-ring" aria-hidden="true"></div>
-
-<!-- Reading progress bar (filled by JS on article pages) -->
-<div id="sw-progress" role="progressbar" aria-hidden="true"></div>
-
-<!-- ── Flash messages ─────────────────────────────────── -->
-{% if messages %}
-<div class="sw-messages" role="status" aria-live="polite">
-  {% for message in messages %}
-  <div class="sw-msg {{ message.tags }}">{{ message }}</div>
-  {% endfor %}
-</div>
-{% endif %}
-
-<!-- ── NAV ───────────────────────────────────────────── -->
-<nav class="sw-nav" id="sw-nav" role="navigation" aria-label="Main navigation">
-
-  <a href="{% url 'home' %}" class="sw-logo" aria-label="Storic Whisper Home">
-    Storic<span> Whisper</span>
-  </a>
-
-  <ul class="sw-nav-links" role="list">
-    <li><a href="{% url 'home' %}"         class="sw-nav-link {% block nav_home %}{% endblock %}">Home</a></li>
-    <li><a href="{% url 'breakup' %}"      class="sw-nav-link {% block nav_breakup %}{% endblock %}">Breakup</a></li>
-    <li><a href="{% url 'women' %}"        class="sw-nav-link {% block nav_women %}{% endblock %}">Women Psych</a></li>
-    <li><a href="{% url 'dark' %}"         class="sw-nav-link {% block nav_dark %}{% endblock %}">Dark Psych</a></li>
-    <li><a href="{% url 'stoicism' %}"     class="sw-nav-link {% block nav_stoic %}{% endblock %}">Stoicism</a></li>
-    <li><a href="{% url 'article_list' %}" class="sw-nav-link {% block nav_blog %}{% endblock %}">Hindi Psychology</a></li>
-    <li><a href="{% url 'english_hub' %}"  class="sw-nav-link {% block nav_english %}{% endblock %}">English Psychology</a></li>
-    <li><a href="{% url 'about' %}"        class="sw-nav-link {% block nav_about %}{% endblock %}">About</a></li>
-    <li>
-      <a href="{% url 'ai_assistant' %}" class="sw-nav-cta {% block nav_luppi %}{% endblock %}" aria-label="LUPPI AI Assistant खोलें">
-        ✦ LUPPI AI
-      </a>
-    </li>
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo" href="{% url 'home' %}">Storic<em> Whisper</em></a>
+  <ul class="navl">
+    <li><a href="{% url 'home' %}" class="active">Home</a></li>
+    <li><a href="{% url 'breakup' %}">Breakup</a></li>
+    <li><a href="{% url 'women' %}">Women Psych</a></li>
+    <li><a href="{% url 'dark' %}">Dark Psych</a></li>
+    <li><a href="{% url 'stoicism' %}">Stoicism</a></li>
+    <li><a href="{% url 'article_list' %}">Hindi Psychology</a></li>
+    <li><a href="{% url 'english_hub' %}">English Psychology</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'ai_assistant' %}" class="nav-luppi">✦ LUPPI AI</a></li>
   </ul>
-
-  <button class="sw-hamburger" id="sw-hamburger"
-          aria-label="Menu खोलें" aria-expanded="false" aria-controls="sw-mobile-menu">
+  <button class="burger" id="burger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-
-<!-- Mobile menu -->
-<div class="sw-mobile-menu" id="sw-mobile-menu"
-     role="dialog" aria-modal="true" aria-label="Navigation menu">
-  <a href="{% url 'home' %}"         class="{% block mob_home %}{% endblock %}">Home</a>
-  <a href="{% url 'breakup' %}"      class="{% block mob_breakup %}{% endblock %}">Breakup Recovery</a>
-  <a href="{% url 'women' %}"        class="{% block mob_women %}{% endblock %}">Women Psychology</a>
-  <a href="{% url 'dark' %}"         class="{% block mob_dark %}{% endblock %}">Dark Psychology</a>
-  <a href="{% url 'stoicism' %}"     class="{% block mob_stoic %}{% endblock %}">Stoicism</a>
-  <a href="{% url 'article_list' %}" class="{% block mob_blog %}{% endblock %}">Hindi Psychology</a>
-  <a href="{% url 'english_hub' %}"  class="{% block mob_english %}{% endblock %}">English Psychology</a>
-  <a href="{% url 'about' %}"        class="{% block mob_about %}{% endblock %}">About</a>
+<div class="mob-menu" id="mob">
+  <a href="{% url 'home' %}" class="active">Home</a>
+  <a href="{% url 'breakup' %}">Breakup</a>
+  <a href="{% url 'women' %}">Women Psychology</a>
+  <a href="{% url 'dark' %}">Dark Psychology</a>
+  <a href="{% url 'stoicism' %}">Stoicism</a>
+  <a href="{% url 'article_list' %}">Hindi Psychology</a>
+  <a href="{% url 'english_hub' %}">English Psychology</a>
+  <a href="{% url 'about' %}">About</a>
   <a href="{% url 'ai_assistant' %}" style="color:var(--gold);border:1px solid rgba(184,151,61,.3)">✦ LUPPI AI</a>
 </div>
 
-<!-- ── MAIN CONTENT ───────────────────────────────────── -->
-<main id="main-content" tabindex="-1">
-  {% block content %}{% endblock %}
-</main>
+<!-- HERO -->
+<section class="hero">
+  <div class="ocean">
+    <div class="ocean-bg"></div>
+    <div class="rays"><div class="ray"></div><div class="ray"></div><div class="ray"></div></div>
+    <div class="wave w1"></div><div class="wave w2"></div><div class="wave w3"></div><div class="wave w4"></div>
+  </div>
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow"><span>—</span>  <span>—</span></p>
+    <h1 class="hero-h">The Mind<br><em>Understands Itself</em></h1>
+    <p class="hero-sub">Psychology • Human Behavior • Relationships • Dopamine • Trauma • Self-Transformation • Stoicism • AI & Mind</p>
+    <div class="hero-vline"></div>
+    <div class="hero-btns">
+      <a href="{% url 'article_list' %}" class="btn-gold">Explore Psychology</a>
+      <a href="{% url 'ai_assistant' %}" class="btn-ghost">✦ LUPPI AI से बात करो</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
 
-<!-- ── NEWSLETTER (override per page via block) ───────── -->
-{% block newsletter %}
-<section class="sw-newsletter" id="newsletter" aria-label="Newsletter signup">
-  <div class="sw-newsletter-inner r">
-    <p class="sec-label">Weekly Insight</p>
-    <h2 class="sw-newsletter-h">Psychology की clarity —<br><em>inbox में</em></h2>
-    <p class="sw-newsletter-sub">
-      हर हफ्ते एक insight जो तुम्हें खुद के बारे में कुछ नया बताए।<br>
-      No spam — सिर्फ real psychology।
-    </p>
-    <form class="sw-newsletter-form" id="sw-nl-form"
-          method="post" action="{% url 'subscribe' %}" novalidate>
-      {% csrf_token %}
-      <input class="sw-newsletter-input" type="email" name="email"
-             id="sw-nl-email" placeholder="तुम्हारा email address"
-             required autocomplete="email">
-      <button class="sw-newsletter-btn" type="submit" id="sw-nl-btn">
-        Subscribe
-      </button>
-    </form>
-    <p class="sw-newsletter-note">Join readers who chose clarity over noise.</p>
+<!-- AUTHORITY LAYER -->
+<section class="authority-layer">
+  <div class="wrap">
+    <div class="authority-grid">
+      <a href="{% url 'article_list' %}" class="authority-item">
+        <span class="authority-icon">📚</span>
+        <span class="authority-text">Deep Psychology Library</span>
+      </a>
+      <a href="{% url 'human_behavior' %}" class="authority-item">
+        <span class="authority-icon">🔬</span>
+        <span class="authority-text">Human Behavior Research</span>
+      </a>
+      <a href="{% url 'ai_mind' %}" class="authority-item">
+        <span class="authority-icon">🤖</span>
+        <span class="authority-text">AI + Mind Analysis</span>
+      </a>
+      <a href="{% url 'self_transform' %}" class="authority-item">
+        <span class="authority-icon">🔄</span>
+        <span class="authority-text">Self-Transformation Frameworks</span>
+      </a>
+      <a href="{% url 'article_list' %}" class="authority-item">
+        <span class="authority-icon">🔇</span>
+        <span class="authority-text">Psychology Without Noise</span>
+      </a>
+    </div>
   </div>
 </section>
-{% endblock newsletter %}
 
-<!-- ── FOOTER (override via block) ───────────────────── -->
-{% block footer %}
-<footer class="sw-footer" role="contentinfo">
-  <div class="sw-footer__grid">
-
-    <div>
-      <div class="sw-footer__brand">Storic Whisper</div>
-      <p class="sw-footer__tagline">
-        A psychological exploration universe.<br>
-        खुद को समझो — दुनिया खुद समझ में आ जाएगी।
-      </p>
-      <a href="https://youtube.com/@StoricWhisper" target="_blank"
-         rel="noopener noreferrer" class="sw-social-link" aria-label="YouTube">▶</a>
+<!-- START HERE -->
+<section class="start-here-sec" id="start-here">
+  <div class="wrap">
+    <div class="r" style="margin-bottom:48px">
+      <p class="sec-label" style="margin-bottom:16px">Start Here</p>
+      <h2 class="sec-h sec-h--lg">Begin Your <em>Journey</em></h2>
+      <p class="sec-body" style="max-width:640px">Start with these cornerstone articles — the foundation for understanding psychology, relationships, and self-transformation.</p>
     </div>
+    <div class="start-here-grid">
+      {% for article in cornerstone_articles %}
+      <a href="{% url 'article_detail' article.slug %}" class="start-card r d{{ forloop.counter }}">
+        <div class="start-card-num">{{ forloop.counter|stringformat:"02d" }}</div>
+        <div class="start-card-cat">{{ article.get_category_display }}</div>
+        <h3 class="start-card-title">{{ article.title }}</h3>
+        <p class="start-card-excerpt">{{ article.meta_description|truncatechars:120 }}</p>
+        <div class="start-card-meta">
+          <span>⏱ {{ article.reading_time }} min</span>
+          <span>📅 {{ article.created_at|date:"M d, Y" }}</span>
+        </div>
+      </a>
+      {% empty %}
+      <p class="sw-body sw-text-center" style="grid-column:1/-1;padding:32px 0;color:var(--fog)">
+        Cornerstone articles will appear here.
+      </p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
+<!-- MOST READ ARTICLES -->
+<section class="most-read-sec">
+  <div class="wrap">
+    <div class="r" style="margin-bottom:48px">
+      <p class="sec-label" style="margin-bottom:16px">Most Read</p>
+      <h2 class="sec-h sec-h--lg">Popular <em>Articles</em></h2>
+      <p class="sec-body" style="max-width:640px">The most-read insights on psychology, relationships, and self-transformation.</p>
+    </div>
+    <div class="most-read-grid">
+      {% for article in most_read_articles %}
+      <a href="{% url 'article_detail' article.slug %}" class="mr-card r d{{ forloop.counter }}">
+        <div class="mr-thumb">
+          {% if article.thumbnail %}
+            <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}">
+          {% else %}
+            <div class="mr-thumb-icon">{% if article.category == 'breakup' %}💔{% elif article.category == 'women' %}🧠{% elif article.category == 'dark' %}🌑{% elif article.category == 'stoicism' %}⚡{% elif article.category == 'dopamine' %}🔬{% elif article.category == 'human_behavior' %}🌐{% elif article.category == 'self_transform' %} {% elif article.category == 'ai_mind' %}🤖{% else %}⚡{% endif %}</div>
+          {% endif %}
+        </div>
+        <div class="mr-body">
+          <div class="mr-cat">{{ article.get_category_display }}</div>
+          <h3 class="mr-title">{{ article.title }}</h3>
+          <p class="mr-excerpt">{{ article.meta_description|truncatechars:100 }}</p>
+          <div class="mr-meta">
+            <span>⏱ {{ article.reading_time }} min</span>
+            <span>📅 {{ article.created_at|date:"M d, Y" }}</span>
+          </div>
+        </div>
+      </a>
+      {% empty %}
+      <a href="{% url 'article_list' %}" class="mr-card r d1">
+        <div class="mr-thumb"><div class="mr-thumb-icon">💔</div></div>
+        <div class="mr-body"><div class="mr-cat">Breakup Recovery</div><h3 class="mr-title">No Contact — सिर्फ punishment नहीं, यह healing का science है</h3><p class="mr-excerpt">जब तुम no contact करते हो, तुम्हारा nervous system reset होता है।</p><div class="mr-meta"><span>⏱ 6 min</span><span>📅 May 20, 2025</span></div></div>
+      </a>
+      <a href="{% url 'article_list' %}" class="mr-card r d2">
+        <div class="mr-thumb"><div class="mr-thumb-icon">🧠</div></div>
+        <div class="mr-body"><div class="mr-cat">Women Psychology</div><h3 class="mr-title">Attachment Styles — तुम्हारा कौन सा है?</h3><p class="mr-excerpt">Anxious, Avoidant, Secure — इन तीनों को समझना relationships को बदल सकता है।</p><div class="mr-meta"><span>⏱ 8 min</span><span>📅 May 15, 2025</span></div></div>
+      </a>
+      <a href="{% url 'article_list' %}" class="mr-card r d3">
+        <div class="mr-thumb"><div class="mr-thumb-icon">🌑</div></div>
+        <div class="mr-body"><div class="mr-cat">Dark Psychology</div><h3 class="mr-title">Gaslighting — जब कोई तुम्हारी reality को twist करता है</h3><p class="mr-excerpt">अगर तुम consistently confused और guilty feel करते हो — यह love नहीं है।</p><div class="mr-meta"><span>⏱ 7 min</span><span>📅 May 10, 2025</span></div></div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- PSYCHOLOGY PILLARS -->
+<div class="pillars-strip">
+  <div class="wrap">
+    <div class="r" style="margin-bottom:56px">
+      <p class="sec-label" style="margin-bottom:16px">All Categories</p>
+      <h2 class="sec-h sec-h--lg">Complete <em>Psychological Universe</em></h2>
+    </div>
+    <div class="pillars-strip-inner">
+      <a href="{% url 'breakup' %}" class="pillar-card r d1">
+        <div class="pc-num">01</div>
+        <div class="pc-title">Breakup Recovery</div>
+        <div class="pc-desc">Attachment psychology, no-contact science, trauma bonding और emotional healing की deep understanding।</div>
+        <div class="pc-topics"><span class="pc-topic">Attachment Styles</span><span class="pc-topic">No Contact</span><span class="pc-topic">Trauma Bonding</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
+      <a href="{% url 'women' %}" class="pillar-card r d2">
+        <div class="pc-num">02</div>
+        <div class="pc-title">Women Psychology</div>
+        <div class="pc-desc">Female emotions, attraction triggers और relationship dynamics को myths के बिना समझना।</div>
+        <div class="pc-topics"><span class="pc-topic">Mixed Signals</span><span class="pc-topic">Attraction</span><span class="pc-topic">Communication</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
+      <a href="{% url 'dark' %}" class="pillar-card r d3">
+        <div class="pc-num">03</div>
+        <div class="pc-title">Dark Psychology</div>
+        <div class="pc-desc">Gaslighting, narcissism, manipulation awareness और self-defense psychology की सही समझ।</div>
+        <div class="pc-topics"><span class="pc-topic">Gaslighting</span><span class="pc-topic">Narcissism</span><span class="pc-topic">Self-Defense</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
+      <a href="{% url 'stoicism' %}" class="pillar-card r d4">
+        <div class="pc-num">04</div>
+        <div class="pc-title">Stoicism</div>
+        <div class="pc-desc">2000 साल पुरानी philosophy — emotional control, silence और inner discipline की science।</div>
+        <div class="pc-topics"><span class="pc-topic">Control</span><span class="pc-topic">Silence</span><span class="pc-topic">Mental Armor</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
+      <a href="{% url 'dopamine' %}" class="pillar-card r d1">
+        <div class="pc-num">05</div>
+        <div class="pc-title">Dopamine & Modern Mind</div>
+        <div class="pc-desc">Social media, porn psychology और instant gratification कैसे तुम्हारे brain को hijack करते हैं।</div>
+        <div class="pc-topics"><span class="pc-topic">Dopamine Addiction</span><span class="pc-topic">Attention Collapse</span><span class="pc-topic">Brain Fog</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
+      <a href="{% url 'human_behavior' %}" class="pillar-card r d2">
+        <div class="pc-num">06</div>
+        <div class="pc-title">Human Behavior & Social Psychology</div>
+        <div class="pc-desc">Why humans lie, group psychology, status dynamics और social conditioning की deep understanding।</div>
+        <div class="pc-topics"><span class="pc-topic">Power Psychology</span><span class="pc-topic">Fear Science</span><span class="pc-topic">Trust Building</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
+      <a href="{% url 'self_transform' %}" class="pillar-card r d3">
+        <div class="pc-num">07</div>
+        <div class="pc-title">Self-Transformation System</div>
+        <div class="pc-desc">Identity rebuilding, habit psychology और masculine discipline — एक conscious life design system।</div>
+        <div class="pc-topics"><span class="pc-topic">Identity Rebuild</span><span class="pc-topic">Habit Science</span><span class="pc-topic">Self-Respect</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
+      <a href="{% url 'ai_mind' %}" class="pillar-card r d4">
+        <div class="pc-num">08</div>
+        <div class="pc-title">AI + Human Mind Future</div>
+        <div class="pc-desc">AI companions, emotional AI और future human behavior — एक unique category।</div>
+        <div class="pc-topics"><span class="pc-topic">AI Relationships</span><span class="pc-topic">Loneliness Future</span><span class="pc-topic">Digital Consciousness</span></div>
+        <div class="pc-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<section class="quote-break">
+  <p class="qb-text r">"Most people don't fail because they lack knowledge — they fail because they lack self-awareness."</p>
+  <p class="qb-by r d1">Storic Whisper</p>
+</section>
+
+<!-- LUPPI AI -->
+<section class="luppi-sec">
+  <div class="wrap">
+    <div class="luppi-grid">
+      <div class="r">
+        <div class="luppi-badge"><span class="luppi-dot"></span>Introducing AI Companion</div>
+        <div class="luppi-name"><em>LUPPI</em><br>AI</div>
+        <p class="luppi-tag">Understand Yourself Better</p>
+        <p class="luppi-desc">रात 2 बजे जब कोई नहीं होता — LUPPI है। एक AI companion जो psychology समझता है, judge नहीं करता।</p>
+        <div class="luppi-features">
+          <div class="luppi-feat"><span class="luppi-feat-dot"></span>Breakup, attachment और emotional pain पर deep conversations</div>
+          <div class="luppi-feat"><span class="luppi-feat-dot"></span>Dark psychology awareness और manipulation defense</div>
+          <div class="luppi-feat"><span class="luppi-feat-dot"></span>Stoic wisdom और self-transformation guidance</div>
+          <div class="luppi-feat"><span class="luppi-feat-dot"></span>Voice input और output — feel करो, type मत करो</div>
+        </div>
+        <a href="{% url 'ai_assistant' %}" class="btn-gold">LUPPI से बात करो →</a>
+      </div>
+      <div class="luppi-interface r d2">
+        <div class="luppi-header">
+          <div class="luppi-av">🌙</div>
+          <div>
+            <div class="luppi-av-name">LUPPI</div>
+            <div class="luppi-status"><span class="luppi-dot"></span>Online — यहाँ हूँ</div>
+          </div>
+        </div>
+        <div class="luppi-msgs">
+          <div class="lmsg lmsg-ai">
+            <div class="lmsg-av">🌙</div>
+            <div class="lbubble">नमस्ते। मैं LUPPI हूँ — Storic Whisper का AI companion।<br><br>तुम जो feel कर रहे हो — दर्द, confusion, या सिर्फ खुद को समझने की ज़रूरत — मैं यहाँ हूँ। बताओ। 💙</div>
+          </div>
+          <div class="lmsg u">
+            <div class="lmsg-av">👤</div>
+            <div class="lbubble">मुझे breakup के बाद attachment क्यों feel होती है?</div>
+          </div>
+          <div class="lmsg lmsg-ai">
+            <div class="lmsg-av">🌙</div>
+            <div class="lbubble">यह neurochemistry है। Brain oxytocin और dopamine को उस person के साथ link कर देता है।<br><br>Breakup के बाद वो chemicals अभी भी trigger होते हैं — यह weakness नहीं, biology है। 🌙</div>
+          </div>
+        </div>
+        <div class="luppi-inp-row">
+          <input class="luppi-inp" type="text" placeholder="यहाँ लिखो या 🎤 से बोलो..." readonly>
+          <button class="luppi-send">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="articles-sec">
+  <div class="wrap">
+    <div class="r" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+      <div>
+        <p class="sec-label" style="margin-bottom:16px">Featured Articles</p>
+        <h2 class="sec-h sec-h--lg">Deep <em>Reads</em></h2>
+      </div>
+      <a href="{% url 'article_list' %}" class="topic-cta" style="margin-bottom:8px">सभी Articles <span class="topic-cta-arrow">→</span></a>
+    </div>
+    <div class="art-grid">
+      {% for article in featured_articles %}
+      <a href="{% url 'article_detail' article.slug %}" class="art-card r d{{ forloop.counter }}">
+        <div class="art-thumb" style="background:linear-gradient(135deg,#0a0510,#180828)">
+          {% if article.thumbnail %}
+            <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" style="width:100%;height:100%;object-fit:cover">
+          {% else %}
+            <div class="art-thumb-icon">{% if article.category == 'breakup' %}💔{% elif article.category == 'women' %}🧠{% elif article.category == 'dark' %}🌑{% else %}⚡{% endif %}</div>
+          {% endif %}
+        </div>
+        <div class="art-body">
+          <div class="art-cat">{{ article.get_category_display }}</div>
+          <div class="art-title">{{ article.title }}</div>
+          <div class="art-excerpt">{{ article.meta_description }}</div>
+          <div class="art-meta"><span>📅 {{ article.created_at|date:"d M Y" }}</span><span>⏱ {{ article.reading_time }} min</span></div>
+          <div class="art-read-btn">Read Article →</div>
+        </div>
+      </a>
+      {% empty %}
+      <a href="{% url 'article_list' %}" class="art-card r d1">
+        <div class="art-thumb" style="background:linear-gradient(135deg,#0a0510,#180828)"><div class="art-thumb-icon">💔</div></div>
+        <div class="art-body"><div class="art-cat">Breakup Recovery</div><div class="art-title">No Contact — सिर्फ punishment नहीं, यह healing का science है</div><div class="art-excerpt">जब तुम no contact करते हो, तुम्हारा nervous system reset होता है।</div><div class="art-meta"><span>📅 20 May 2025</span><span>⏱ 6 min</span></div></div>
+      </a>
+      <a href="{% url 'article_list' %}" class="art-card r d2">
+        <div class="art-thumb" style="background:linear-gradient(135deg,#080c18,#0e1828)"><div class="art-thumb-icon">🧠</div></div>
+        <div class="art-body"><div class="art-cat">Women Psychology</div><div class="art-title">Attachment Styles — तुम्हारा कौन सा है?</div><div class="art-excerpt">Anxious, Avoidant, Secure — इन तीनों को समझना relationships को बदल सकता है।</div><div class="art-meta"><span>📅 15 May 2025</span><span>⏱ 8 min</span></div></div>
+      </a>
+      <a href="{% url 'article_list' %}" class="art-card r d3">
+        <div class="art-thumb" style="background:linear-gradient(135deg,#0a0505,#200808)"><div class="art-thumb-icon">🌑</div></div>
+        <div class="art-body"><div class="art-cat">Dark Psychology</div><div class="art-title">Gaslighting — जब कोई तुम्हारी reality को twist करता है</div><div class="art-excerpt">अगर तुम consistently confused और guilty feel करते हो — यह love नहीं है।</div><div class="art-meta"><span>📅 10 May 2025</span><span>⏱ 7 min</span></div></div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL EDITION -->
+<section class="global-sec" id="global-edition">
+  <div class="wrap">
+    <div class="global-head r">
+      <p class="sec-label">English Psychology | Premium Insights</p>
+      <h2 class="sec-h sec-h--lg">Deep Psychology for a <em>Global Mind</em></h2>
+      <p class="global-sub">English analysis on attachment, behavior, and the modern mind — written for clarity, not clicks.</p>
+    </div>
+    <div class="global-grid">
+      {% for article in english_posts %}
+      <a href="{% url 'article_detail' article.slug %}" class="global-card r d{{ forloop.counter }}">
+        <div class="global-thumb">
+          {% if article.thumbnail %}
+            <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" loading="lazy">
+          {% else %}
+            <div class="global-thumb-fallback">✦</div>
+          {% endif %}
+        </div>
+        <div class="global-body">
+          <div class="global-tag">
+            {% if article.topic_section %}{{ article.get_topic_section_display }}{% else %}{{ article.get_category_display }}{% endif %}
+          </div>
+          <h3 class="global-title">{{ article.title }}</h3>
+          <p class="global-excerpt">{{ article.meta_description|default:"Read the full psychological analysis." }}</p>
+          <span class="global-btn">Read Article <span>→</span></span>
+        </div>
+      </a>
+      {% empty %}
+      <div class="global-card r d1" style="pointer-events:none;opacity:.85">
+        <div class="global-thumb"><div class="global-thumb-fallback">EN</div></div>
+        <div class="global-body">
+          <div class="global-tag">No articles published yet.</div>
+          <h3 class="global-title">Articles will appear here.</h3>
+          <p class="global-excerpt">Explore the English Psychology hub whenever new insights are published.</p>
+          <a href="{% url 'english_hub' %}" class="global-btn" style="text-decoration:none;text-transform:none;letter-spacing:0;gap:0;margin-top:18px;">Explore English Psychology</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="global-hub-cta r">
+      <a href="{% url 'english_hub' %}">Explore English Psychology <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="nl-sec" id="newsletter">
+  <div class="nl-inner r">
+    <p class="sec-label">Weekly Insight</p>
+    <h2 class="nl-h">Psychology की clarity —<br><em>inbox में</em></h2>
+    <p class="nl-sub">हर हफ्ते एक insight जो तुम्हें खुद के बारे में कुछ नया बताए।<br>No spam — सिर्फ real psychology।</p>
+    <form class="nl-form" id="nl-form" method="post" action="{% url 'subscribe' %}" onsubmit="return nlSubmit(event)">
+      {% csrf_token %}
+      <input class="nl-input" type="email" name="email" placeholder="तुम्हारा email address" id="nl-email" required autocomplete="email">
+      <button class="nl-btn" type="submit" id="nl-btn">Subscribe</button>
+    </form>
+    <p class="nl-note">Join readers who chose clarity over noise.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
     <div>
-      <div class="sw-footer__col-title">Psychology</div>
-      <ul class="sw-footer__links">
+      <div class="foot-brand">Storic Whisper</div>
+      <p class="foot-tag">A psychological exploration universe. खुद को समझो — दुनिया खुद समझ में आ जाएगी।</p>
+      <a href="https://youtube.com/@StoricWhisper" target="_blank" rel="noopener" class="foot-social">▶</a>
+    </div>
+    <div>
+      <div class="foot-col-h">Psychology</div>
+      <ul class="foot-links">
         <li><a href="{% url 'breakup' %}">Breakup Recovery</a></li>
         <li><a href="{% url 'women' %}">Women Psychology</a></li>
         <li><a href="{% url 'dark' %}">Dark Psychology</a></li>
         <li><a href="{% url 'stoicism' %}">Stoicism</a></li>
-        <li><a href="{% url 'dopamine' %}">Dopamine &amp; Mind</a></li>
+        <li><a href="{% url 'dopamine' %}">Dopamine & Mind</a></li>
       </ul>
     </div>
-
     <div>
-      <div class="sw-footer__col-title">Explore</div>
-      <ul class="sw-footer__links">
+      <div class="foot-col-h">Explore</div>
+      <ul class="foot-links">
         <li><a href="{% url 'human_behavior' %}">Human Behavior</a></li>
         <li><a href="{% url 'self_transform' %}">Self-Transformation</a></li>
         <li><a href="{% url 'ai_mind' %}">AI + Mind Future</a></li>
         <li><a href="{% url 'article_list' %}">Hindi Psychology</a></li>
-        <li><a href="{% url 'english_hub' %}">English Psychology</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
       </ul>
     </div>
-
     <div>
-      <div class="sw-footer__col-title">Platform</div>
-      <ul class="sw-footer__links">
+      <div class="foot-col-h">Platform</div>
+      <ul class="foot-links">
         <li><a href="{% url 'ai_assistant' %}" style="color:var(--gold)">✦ LUPPI AI</a></li>
-        <li><a href="https://youtube.com/@StoricWhisper" target="_blank" rel="noopener noreferrer">YouTube Channel</a></li>
+        <li><a href="https://youtube.com/@StoricWhisper" target="_blank" rel="noopener">YouTube Channel</a></li>
         <li><a href="#newsletter">Newsletter</a></li>
         <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
-        <li><a href="{% url 'terms' %}">Terms &amp; Conditions</a></li>
-        <li><a href="{% url 'disclaimer' %}">Disclaimer</a></li>
+        <li><a href="{% url 'terms' %}">Terms</a></li>
       </ul>
     </div>
-
   </div>
-  <div class="sw-footer__bottom">
-    <span class="sw-footer__copy">
-      &copy; {% now "Y" %} Storic Whisper — Lovekush Chauhan. सर्वाधिकार सुरक्षित।
-    </span>
-    <span class="sw-footer__copy">Made with ❤ for those who are healing.</span>
+  <div class="foot-bottom">
+    <span class="foot-copy">© 2025 Storic Whisper — Lovekush Chauhan. All rights reserved.</span>
+    <span class="foot-copy">Made for those who seek clarity.</span>
   </div>
 </footer>
-{% endblock footer %}
 
-<!-- ── CORE JS ────────────────────────────────────────── -->
 <script>
+/* CURSOR */
+const dot=document.getElementById('dot'),ring=document.getElementById('ring');
+let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+if(window.matchMedia('(pointer:fine)').matches){
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  (function loop(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+  document.addEventListener('mousedown',()=>dot.style.transform='translate(-50%,-50%) scale(.6)');
+  document.addEventListener('mouseup',()=>dot.style.transform='translate(-50%,-50%) scale(1)');
+}else{dot.style.display=ring.style.display='none'}
+
+/* NAVBAR */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50),{passive:true});
+
+/* MOBILE MENU */
+const burger=document.getElementById('burger'),mob=document.getElementById('mob');
+burger.addEventListener('click',()=>{mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':''});
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');document.body.style.overflow=''}));
+
+/* SCROLL REVEAL */
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}}),{threshold:.07,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+
+/* PARTICLES */
 (function(){
-  'use strict';
-
-  /* ─── Custom cursor ─────────────────────────────── */
-  var dot  = document.getElementById('sw-cursor');
-  var ring = document.getElementById('sw-cursor-ring');
-  if(window.matchMedia('(pointer:fine)').matches){
-    var mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my;
-    document.addEventListener('mousemove',function(e){
-      mx=e.clientX; my=e.clientY;
-      dot.style.left=mx+'px'; dot.style.top=my+'px';
+  const canvas=document.getElementById('hero-canvas');
+  const hero=document.querySelector('.hero');
+  let W=hero.clientWidth,H=hero.clientHeight;
+  const ctx=canvas.getContext('2d');
+  canvas.width=W;canvas.height=H;
+  function P(){this.reset=function(b){this.x=Math.random()*W;this.y=b?H+Math.random()*60:Math.random()*H;this.r=Math.random()*1.4+.2;this.vy=-(Math.random()*.18+.04);this.vx=(Math.random()-.5)*.06;this.life=0;this.maxLife=220+Math.random()*280;this.gold=Math.random()>.55};this.reset(false)}
+  const PS=Array.from({length:110},()=>new P());
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    PS.forEach(p=>{
+      p.x+=p.vx+Math.sin(p.life*.018)*.05;p.y+=p.vy;p.life++;
+      const t=p.life/p.maxLife,fade=t<.15?t/.15:t>.75?1-(t-.75)/.25:1,alpha=fade*(p.gold?.28:.14);
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.gold?`rgba(184,151,61,${alpha})`:`rgba(220,210,190,${alpha})`;ctx.fill();
+      if(p.r>1){const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);g.addColorStop(0,p.gold?`rgba(184,151,61,${alpha*.4})`:`rgba(220,210,190,${alpha*.25})`);g.addColorStop(1,'rgba(0,0,0,0)');ctx.beginPath();ctx.arc(p.x,p.y,p.r*4,0,Math.PI*2);ctx.fillStyle=g;ctx.fill()}
+      if(p.life>=p.maxLife||p.y<-10)p.reset(true);
     });
-    (function loop(){
-      rx+=(mx-rx)*.11; ry+=(my-ry)*.11;
-      ring.style.left=rx+'px'; ring.style.top=ry+'px';
-      requestAnimationFrame(loop);
-    })();
-    document.addEventListener('mousedown',function(){dot.style.transform='translate(-50%,-50%) scale(.6)'});
-    document.addEventListener('mouseup',  function(){dot.style.transform='translate(-50%,-50%) scale(1)'});
-  } else {
-    dot.style.display = ring.style.display = 'none';
+    requestAnimationFrame(draw);
   }
-
-  /* ─── Navbar scroll ─────────────────────────────── */
-  var nav = document.getElementById('sw-nav');
-  window.addEventListener('scroll', function(){
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  }, {passive:true});
-
-  /* ─── Mobile menu ───────────────────────────────── */
-  var burger = document.getElementById('sw-hamburger');
-  var mob    = document.getElementById('sw-mobile-menu');
-  burger.addEventListener('click', function(){
-    var open = mob.classList.toggle('open');
-    document.body.style.overflow = open ? 'hidden' : '';
-    burger.setAttribute('aria-expanded', open);
-  });
-  mob.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      mob.classList.remove('open');
-      document.body.style.overflow = '';
-      burger.setAttribute('aria-expanded','false');
-    });
-  });
-  /* Close on Escape */
-  document.addEventListener('keydown', function(e){
-    if(e.key==='Escape' && mob.classList.contains('open')){
-      mob.classList.remove('open');
-      document.body.style.overflow='';
-      burger.setAttribute('aria-expanded','false');
-      burger.focus();
-    }
-  });
-
-  /* ─── Scroll reveal ─────────────────────────────── */
-  var revealObs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('on'); revealObs.unobserve(e.target); }
-    });
-  },{threshold:.07, rootMargin:'0px 0px -50px 0px'});
-  document.querySelectorAll('.r').forEach(function(el){ revealObs.observe(el); });
-
-  /* ─── Reading progress bar ──────────────────────── */
-  var prog = document.getElementById('sw-progress');
-  if(document.body.classList.contains('page-article')){
-    window.addEventListener('scroll', function(){
-      var s  = window.scrollY;
-      var h  = document.documentElement.scrollHeight - window.innerHeight;
-      var pct = h > 0 ? Math.round(s / h * 100) : 0;
-      prog.style.width = pct + '%';
-      prog.setAttribute('aria-valuenow', pct);
-    }, {passive:true});
-  }
-
-  /* ─── Newsletter form ───────────────────────────── */
-  var nlForm = document.getElementById('sw-nl-form');
-  var nlBtn  = document.getElementById('sw-nl-btn');
-  var nlEmail= document.getElementById('sw-nl-email');
-  if(nlForm){
-    nlForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      if(!nlEmail.value.includes('@')) return;
-      nlBtn.textContent = 'शुक्रिया! ✓';
-      nlBtn.style.background = '#2d6a4f';
-      nlBtn.disabled = true;
-      setTimeout(function(){ nlForm.submit(); }, 1200);
-    });
-  }
-
-  /* ─── Flash message auto-dismiss ───────────────── */
-  document.querySelectorAll('.sw-msg').forEach(function(m){
-    setTimeout(function(){
-      m.style.transition = 'opacity .5s, transform .5s';
-      m.style.opacity = '0';
-      m.style.transform = 'translateX(16px)';
-      setTimeout(function(){ m.remove(); }, 500);
-    }, 4000);
-  });
-
+  draw();
+  window.addEventListener('resize',()=>{W=hero.clientWidth;H=hero.clientHeight;canvas.width=W;canvas.height=H});
 })();
+
+/* NEWSLETTER */
+function nlSubmit(e){
+  e.preventDefault();
+  const btn=document.getElementById('nl-btn');
+  const email=document.getElementById('nl-email').value;
+  if(!email.includes('@')){return false;}
+  btn.textContent='शुक्रिया! ✓';
+  btn.style.background='#2d6a4f';
+  setTimeout(()=>{document.getElementById('nl-form').submit();},1200);
+  return false;
+}
 </script>
-
-<!-- ── External main.js (non-critical) ───────────────── -->
-<script src="{% static 'js/main.js' %}" defer></script>
-
-<!-- ── Per-page extra JS ─────────────────────────────── -->
-{% block extra_js %}{% endblock %}
-
 </body>
 </html>
