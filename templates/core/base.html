@@ -239,6 +239,68 @@
   </footer>
   {% endblock %}
 
+  <!-- ── Cookie Consent Banner ─────────────────────────────── -->
+  <div id="sw-cookie-banner" class="sw-cookie-banner hidden" role="dialog" aria-labelledby="sw-cookie-title" aria-describedby="sw-cookie-text">
+    <div class="sw-cookie-content">
+      <h2 id="sw-cookie-title" class="sw-cookie-title">🍪 Your Privacy Matters</h2>
+      <p id="sw-cookie-text" class="sw-cookie-text">
+        We use cookies and privacy-friendly analytics to improve your browsing experience, understand how visitors use our website, and enhance our educational content.
+        By clicking "Accept", you agree to our use of cookies as described in our <a href="{% url 'privacy' %}" class="sw-cookie-link">Privacy Policy</a>.
+      </p>
+    </div>
+    <div class="sw-cookie-actions">
+      <button id="sw-cookie-accept" class="sw-cookie-btn sw-cookie-btn--accept" aria-label="Accept cookies">Accept</button>
+      <button id="sw-cookie-decline" class="sw-cookie-btn sw-cookie-btn--decline" aria-label="Decline cookies">Decline</button>
+    </div>
+  </div>
+
+  <!-- ── Cookie Consent Script ───────────────────────────────── -->
+  <script>
+    (function() {
+      var CONSENT_KEY = 'cookieConsent';
+      var banner = document.getElementById('sw-cookie-banner');
+      var acceptBtn = document.getElementById('sw-cookie-accept');
+      var declineBtn = document.getElementById('sw-cookie-decline');
+
+      // Check if user has already made a choice
+      var consent = localStorage.getItem(CONSENT_KEY);
+
+      if (!consent) {
+        // Show banner if no consent stored
+        banner.classList.remove('hidden');
+      }
+
+      // Handle Accept
+      acceptBtn.addEventListener('click', function() {
+        localStorage.setItem(CONSENT_KEY, 'accepted');
+        banner.classList.add('hidden');
+      });
+
+      // Handle Decline
+      declineBtn.addEventListener('click', function() {
+        localStorage.setItem(CONSENT_KEY, 'declined');
+        banner.classList.add('hidden');
+      });
+
+      // Keyboard accessibility
+      acceptBtn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          localStorage.setItem(CONSENT_KEY, 'accepted');
+          banner.classList.add('hidden');
+        }
+      });
+
+      declineBtn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          localStorage.setItem(CONSENT_KEY, 'declined');
+          banner.classList.add('hidden');
+        }
+      });
+    })();
+  </script>
+
   <!-- ── Main JS ───────────────────────────────────────── -->
   <script src="{% static 'js/main.js' %}"></script>
 
