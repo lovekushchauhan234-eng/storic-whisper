@@ -4,6 +4,8 @@ from core.linking.engine import generate_links_for_article, generate_run_id, rol
 from django.conf import settings
 import os
 import dj_database_url
+import re
+from urllib.parse import urlparse
 
 
 class Command(BaseCommand):
@@ -27,6 +29,8 @@ class Command(BaseCommand):
                             help='Show link health report without modifying anything')
         parser.add_argument('--orphans', action='store_true',
                             help='Show articles with zero inbound links')
+        parser.add_argument('--sync', action='store_true',
+                            help='Sync ArticleLink records from HTML content (marks as manual)')
         parser.add_argument('--database-url', type=str,
                             help='Temporary override DATABASE_URL for this run (e.g., production database)')
 
@@ -41,7 +45,7 @@ class Command(BaseCommand):
                 conn_max_age=600,
                 conn_health_checks=True,
             )
-        
+
         # Handle rollback
         if options['rollback']:
             self.handle_rollback(options['rollback'])
@@ -49,7 +53,7 @@ class Command(BaseCommand):
             if original_database_url:
                 os.environ['DATABASE_URL'] = original_database_url
             return
-        
+
         # Handle audit
         if options['audit']:
             self.handle_audit()
@@ -57,7 +61,7 @@ class Command(BaseCommand):
             if original_database_url:
                 os.environ['DATABASE_URL'] = original_database_url
             return
-        
+
         # Handle orphans
         if options['orphans']:
             self.handle_orphans()
@@ -65,10 +69,18 @@ class Command(BaseCommand):
             if original_database_url:
                 os.environ['DATABASE_URL'] = original_database_url
             return
-        
+
+        # Handle sync
+        if options['sync']:
+            self.handle_sync()
+            # Restore original DATABASE_URL
+            if original_database_url:
+                os.environ['DATABASE_URL'] = original_database_url
+            return
+
         # Handle link generation
         self.handle_generation(options)
-        
+
         # Restore original DATABASE_URL
         if original_database_url:
             os.environ['DATABASE_URL'] = original_database_url
@@ -89,23 +101,88 @@ class Command(BaseCommand):
     def handle_audit(self):
         """Show link health report."""
         total_articles = Article.objects.filter(is_published=True).count()
-        total_links = ArticleLink.objects.filter(is_active=True).count()
-        
+        total_db_links = ArticleLink.objects.filter(is_active=True).count()
+
+        # Parse HTML content for actual internal links
+        html_links_count = 0
+        html_links_by_article = {}
+        all_articles_by_slug = {a.slug: a for a in Article.objects.filter(is_published=True)}
+
+        for article in Article.objects.filter(is_published=True):
+            # Find all <a> tags with href attributes
+            links = re.findall(r'<a[^>]+href=["\']([^"\']+)["\'][^>]*>', article.content, re.IGNORECASE)
+            article_internal_links = []
+
+            for href in links:
+                # Parse the URL
+                parsed = urlparse(href)
+                path = parsed.path
+
+                # Check if it's an internal link (relative path starting with /)
+                if path.startswith('/') and not path.startswith('//'):
+                    # Extract slug from path (assuming pattern: /category/slug or /slug)
+                    slug = path.rstrip('/').split('/')[-1]
+                    if slug in all_articles_by_slug:
+                        target_article = all_articles_by_slug[slug]
+                        # Only count same-language links
+                        if target_article.language == article.language:
+                            html_links_count += 1
+                            article_internal_links.append((slug, target_article))
+                            html_links_by_article[article.slug] = article_internal_links
+
+        # Calculate database links per article
+        db_links_by_article = {}
+        for link in ArticleLink.objects.filter(is_active=True):
+            source_slug = link.source_article.slug
+            if source_slug not in db_links_by_article:
+                db_links_by_article[source_slug] = []
+            db_links_by_article[source_slug].append(link.target_article.slug)
+
+        # Find missing sync (HTML links not in database)
+        missing_sync_count = 0
+        missing_sync_details = []
+
+        for article_slug, html_links in html_links_by_article.items():
+            db_links = db_links_by_article.get(article_slug, [])
+            html_slugs = set(slug for slug, _ in html_links)
+            db_slugs = set(db_links)
+            missing = html_slugs - db_slugs
+            if missing:
+                missing_sync_count += len(missing)
+                missing_sync_details.append((article_slug, missing))
+
         self.stdout.write(self.style.SUCCESS('=== LINK AUDIT ==='))
         self.stdout.write(f'Total published articles: {total_articles}')
-        self.stdout.write(f'Total active links: {total_links}')
-        self.stdout.write(f'Average links per article: {total_links / total_articles if total_articles > 0 else 0:.2f}')
-        
-        # Check for cross-language links
+        self.stdout.write(f'')
+        self.stdout.write(self.style.WARNING('HTML Internal Links (from content):'))
+        self.stdout.write(f'  Total HTML internal links: {html_links_count}')
+        self.stdout.write(f'  Average HTML links per article: {html_links_count / total_articles if total_articles > 0 else 0:.2f}')
+        self.stdout.write(f'')
+        self.stdout.write(self.style.WARNING('Database ArticleLink Records:'))
+        self.stdout.write(f'  Total database links: {total_db_links}')
+        self.stdout.write(f'  Average database links per article: {total_db_links / total_articles if total_articles > 0 else 0:.2f}')
+        self.stdout.write(f'')
+        self.stdout.write(self.style.WARNING('Sync Status:'))
+        self.stdout.write(f'  HTML links not in database: {missing_sync_count}')
+        if missing_sync_count > 0:
+            self.stdout.write(self.style.ERROR('  Articles with unsynced links:'))
+            for article_slug, missing in missing_sync_details[:10]:  # Show first 10
+                self.stdout.write(f'    - {article_slug}: {len(missing)} missing ({", ".join(list(missing)[:3])}{"..." if len(missing) > 3 else ""})')
+            if len(missing_sync_details) > 10:
+                self.stdout.write(f'    ... and {len(missing_sync_details) - 10} more articles')
+        else:
+            self.stdout.write(self.style.SUCCESS('  All HTML links are synced to database'))
+
+        # Check for cross-language links in database
         cross_language = 0
         for link in ArticleLink.objects.filter(is_active=True):
             if link.source_article.language != link.target_article.language:
                 cross_language += 1
-        
+
         if cross_language > 0:
-            self.stdout.write(self.style.ERROR(f'Cross-language links found: {cross_language} (SHOULD BE 0)'))
+            self.stdout.write(self.style.ERROR(f'Cross-language links in database: {cross_language} (SHOULD BE 0)'))
         else:
-            self.stdout.write(self.style.SUCCESS('Cross-language links: 0 (CORRECT)'))
+            self.stdout.write(self.style.SUCCESS('Cross-language links in database: 0 (CORRECT)'))
 
     def handle_orphans(self):
         """Show articles with zero inbound links."""
@@ -114,12 +191,73 @@ class Command(BaseCommand):
             inbound_count = article.inbound_links.filter(is_active=True).count()
             if inbound_count == 0:
                 orphans.append(article)
-        
+
         self.stdout.write(self.style.SUCCESS('=== ORPHAN ARTICLES ==='))
         self.stdout.write(f'Articles with zero inbound links: {len(orphans)}')
-        
+
         for article in orphans:
             self.stdout.write(f'  - {article.title} ({article.slug}) - {article.language}')
+
+    def handle_sync(self):
+        """Sync ArticleLink records from HTML content."""
+        self.stdout.write(self.style.SUCCESS('=== SYNC HTML LINKS TO DATABASE ==='))
+        self.stdout.write('Parsing HTML content and creating ArticleLink records...')
+
+        all_articles_by_slug = {a.slug: a for a in Article.objects.filter(is_published=True)}
+        created_count = 0
+        skipped_count = 0
+        error_count = 0
+        errors = []
+
+        for article in Article.objects.filter(is_published=True):
+            # Find all <a> tags with href attributes
+            links = re.findall(r'<a[^>]+href=["\']([^"\']+)["\'][^>]*>', article.content, re.IGNORECASE)
+
+            for href in links:
+                # Parse the URL
+                parsed = urlparse(href)
+                path = parsed.path
+
+                # Check if it's an internal link (relative path starting with /)
+                if path.startswith('/') and not path.startswith('//'):
+                    # Extract slug from path (assuming pattern: /category/slug or /slug)
+                    slug = path.rstrip('/').split('/')[-1]
+                    if slug in all_articles_by_slug:
+                        target_article = all_articles_by_slug[slug]
+
+                        # Only sync same-language links
+                        if target_article.language == article.language:
+                            # Check if link already exists
+                            existing = ArticleLink.objects.filter(
+                                source_article=article,
+                                target_article=target_article
+                            ).first()
+
+                            if existing:
+                                skipped_count += 1
+                            else:
+                                try:
+                                    # Create new ArticleLink record marked as manual
+                                    ArticleLink.objects.create(
+                                        source_article=article,
+                                        target_article=target_article,
+                                        link_type='manual',
+                                        is_active=True,
+                                        created_by_run='html_sync'
+                                    )
+                                    created_count += 1
+                                except Exception as e:
+                                    error_count += 1
+                                    errors.append(f'{article.slug} -> {target_article.slug}: {str(e)}')
+
+        self.stdout.write(self.style.SUCCESS(f'Created: {created_count} new ArticleLink records'))
+        self.stdout.write(self.style.WARNING(f'Skipped: {skipped_count} (already exist)'))
+        if error_count > 0:
+            self.stdout.write(self.style.ERROR(f'Errors: {error_count}'))
+            for error in errors[:10]:
+                self.stdout.write(self.style.ERROR(f'  - {error}'))
+            if len(errors) > 10:
+                self.stdout.write(self.style.ERROR(f'  ... and {len(errors) - 10} more errors'))
 
     def handle_generation(self, options):
         """Handle link generation."""
