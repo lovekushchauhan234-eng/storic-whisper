@@ -69,29 +69,36 @@
   </script>
   {% block schema %}{% endblock %}
 
-  <!-- ── Google Analytics 4 ───────────────────────────────── -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5XZ5WM78R"></script>
+  <!-- ── Google Consent Mode v2 (must load before GA4/AdSense/Clarity) ── -->
+  <!-- Default: sab kuch "denied" jab tak user cookie banner me accept na kare.
+       Yeh Google ka officially recommended pattern hai (EEA/UK ke liye zaroori,
+       baaki users ke liye bhi safe/best-practice). -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
 
+  <!-- ── Google Analytics 4 ───────────────────────────────── -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5XZ5WM78R"></script>
+  <script>
+    gtag('js', new Date());
     gtag('config', 'G-N5XZ5WM78R');
   </script>
 
-  <!-- ── Microsoft Clarity ──────────────────────────────────── -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "xcu00k7rgv");
-  </script>
+  <!-- ── Google AdSense (loads for everyone, ad_storage/personalization consent
+       controlled separately via Consent Mode above + cookie banner below) ── -->
+  <script async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4363902996205378"
+      crossorigin="anonymous"></script>
 
-<!-- Google AdSense -->
-<script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4363902996205378"
-    crossorigin="anonymous"></script>
+  <!-- ── Microsoft Clarity — sirf consent milne ke baad load hoga (sw-cookie-consent.js me) ── -->
 
 </head>
 
@@ -242,6 +249,89 @@
 
   <!-- ── Per-page extra JS ─────────────────────────────── -->
   {% block extra_js %}{% endblock %}
+
+  <!-- ── Cookie Consent Banner ─────────────────────────── -->
+  <div id="sw-cookie-banner" class="sw-cookie-banner" style="display:none" role="dialog" aria-live="polite" aria-label="Cookie consent">
+    <p class="sw-cookie-banner__text">
+      हम cookies इस्तेमाल करते हैं ताकि साइट बेहतर काम करे और relevant ads दिखा सकें।
+      <a href="{% url 'privacy' %}">Privacy Policy</a> में पूरी जानकारी है।
+    </p>
+    <div class="sw-cookie-banner__actions">
+      <button type="button" id="sw-cookie-reject" class="sw-cookie-btn sw-cookie-btn--ghost">सिर्फ ज़रूरी</button>
+      <button type="button" id="sw-cookie-accept" class="sw-cookie-btn sw-cookie-btn--solid">Accept All</button>
+    </div>
+  </div>
+  <style>
+    .sw-cookie-banner{
+      position:fixed; left:16px; right:16px; bottom:16px; z-index:9999;
+      max-width:640px; margin:0 auto;
+      background:#141414; color:#f2f2f2; border:1px solid rgba(255,255,255,.12);
+      border-radius:14px; padding:16px 18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      font-size:14px; line-height:1.5;
+    }
+    .sw-cookie-banner__text a{ color:var(--gold,#d4af37); text-decoration:underline; }
+    .sw-cookie-banner__actions{ display:flex; gap:10px; margin-top:12px; justify-content:flex-end; }
+    .sw-cookie-btn{ padding:8px 16px; border-radius:8px; font-size:13px; cursor:pointer; border:1px solid rgba(255,255,255,.2); }
+    .sw-cookie-btn--ghost{ background:transparent; color:#f2f2f2; }
+    .sw-cookie-btn--solid{ background:var(--gold,#d4af37); color:#141414; border-color:transparent; font-weight:600; }
+    @media (max-width:480px){ .sw-cookie-banner__actions{ justify-content:stretch; } .sw-cookie-btn{ flex:1; } }
+  </style>
+  <script>
+    (function () {
+      var STORAGE_KEY = 'sw_cookie_consent'; // 'granted' | 'denied'
+      var banner = document.getElementById('sw-cookie-banner');
+      var acceptBtn = document.getElementById('sw-cookie-accept');
+      var rejectBtn = document.getElementById('sw-cookie-reject');
+
+      function loadClarity() {
+        (function (c, l, a, r, i, t, y) {
+          c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+          t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+          y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "xcu00k7rgv");
+      }
+
+      function applyConsent(state) {
+        if (typeof gtag !== 'function') return;
+        if (state === 'granted') {
+          gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted'
+          });
+          loadClarity();
+        } else {
+          gtag('consent', 'update', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied'
+          });
+        }
+      }
+
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved === 'granted' || saved === 'denied') {
+        applyConsent(saved);
+      } else {
+        banner.style.display = 'block';
+      }
+
+      acceptBtn.addEventListener('click', function () {
+        localStorage.setItem(STORAGE_KEY, 'granted');
+        applyConsent('granted');
+        banner.style.display = 'none';
+      });
+
+      rejectBtn.addEventListener('click', function () {
+        localStorage.setItem(STORAGE_KEY, 'denied');
+        applyConsent('denied');
+        banner.style.display = 'none';
+      });
+    })();
+  </script>
 
 </body>
 </html>

@@ -16,12 +16,20 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-!^m22-l+dh2-ijlta!65_t4=ym(cu35u*eyyt+rqmtizox+f*6'
+# SECRET_KEY अब environment variable से आता है (Render dashboard पर set करो: SECRET_KEY)
+# Local dev के लिए अगर .env में नहीं मिला तो एक fallback dev-only key इस्तेमाल होगी —
+# इसे production में कभी इस्तेमाल मत करना, हमेशा Render env var सेट करो।
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'django-insecure-local-dev-only-CHANGE-ME'
+)
 
 # Render पर DEBUG=False, locally DEBUG=True
 DEBUG = os.environ.get('RENDER') is None
 
-ALLOWED_HOSTS = ['*']
+# Production में सिर्फ अपने असली domains allow करो, wildcard '*' मत रखो
+_default_hosts = 'storicwhisper.com,www.storicwhisper.com,storic-whisper.onrender.com,localhost,127.0.0.1'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', _default_hosts).split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -111,10 +119,13 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ── Media / Cloudinary ──────────────────────────────────────────
+# ज़रूरी: पुराना key/secret git history में commit हो चुका था, इसलिए वो leaked
+# माना जाता है। Cloudinary dashboard से naya API secret generate करके यहाँ
+# environment variables (.env locally, Render dashboard पर production में) में डालो।
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dqhptutne',
-    'API_KEY':    '532347431663133',
-    'API_SECRET': 'v_Ifw51Z6WiYIJMSegqJ6Ahct2o',
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'dqhptutne'),
+    'API_KEY':    os.environ.get('CLOUDINARY_API_KEY', ''),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', ''),
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_URL  = '/media/'

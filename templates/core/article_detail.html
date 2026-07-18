@@ -173,6 +173,13 @@
       <span>⏱ {{ article.reading_time }} min read</span>
       &nbsp;·&nbsp;
       <span>📅 {{ article.created_at|date:"d M Y" }}</span>
+      {% if article.updated_at|date:"d M Y" != article.created_at|date:"d M Y" %}
+      &nbsp;·&nbsp;
+      <span>🔄 Updated {{ article.updated_at|date:"d M Y" }}</span>
+      {% endif %}
+    </p>
+    <p class="sw-page-hero__sub sw-article-byline">
+      <span>✍️ Written by <strong>{{ article.author_name }}</strong>{% if article.author_bio %}, {{ article.author_bio }}{% endif %}</span>
     </p>
   </header>
 

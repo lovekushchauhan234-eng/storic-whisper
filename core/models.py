@@ -71,6 +71,19 @@ class Article(models.Model):
 
     content = RichTextField()
 
+    author_name = models.CharField(
+        max_length=100,
+        default='Lovekush Chauhan',
+        help_text='Byline shown on the article, e.g. "Lovekush Chauhan"'
+    )
+
+    author_bio = models.CharField(
+        max_length=200,
+        default='Founder, Storic Whisper',
+        blank=True,
+        help_text='Short credential line shown under the author name, e.g. "Founder, Storic Whisper"'
+    )
+
     is_published = models.BooleanField(default=True)
 
     is_featured = models.BooleanField(default=False)
@@ -151,3 +164,4 @@ class ArticleContentBackup(models.Model):
     class Meta:
         ordering = ['-created_at']
         indexes = [models.Index(fields=['article', 'run_id'])]
+        
