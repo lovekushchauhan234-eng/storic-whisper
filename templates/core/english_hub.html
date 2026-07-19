@@ -76,13 +76,6 @@
 .en-knowledge-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);line-height:1.3;margin:0}
 .en-knowledge-card p{font-size:14px;color:var(--muted);line-height:1.6;margin:0}
 
-/* Learning Paths */
-.en-learning-paths{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
-.en-learning-path{background:var(--surface);border:1px solid rgba(184,151,61,.12);padding:32px;display:flex;flex-direction:column;gap:12px}
-.en-learning-path h3{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);line-height:1.3;margin:0}
-.en-learning-path p{font-size:14px;color:var(--muted);line-height:1.6;margin:0}
-.en-learning-tag{align-self:flex-start;padding:6px 12px;background:rgba(184,151,61,.1);border:1px solid rgba(184,151,61,.3);border-radius:999px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold)}
-
 /* Encyclopedia */
 .en-encyclopedia{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
 .en-encyclopedia-item{background:var(--surface);border:1px solid rgba(184,151,61,.12);padding:24px}
@@ -132,7 +125,6 @@
   .en-card-body{padding:18px 20px 22px}
   .en-card-thumb{aspect-ratio:16/10;min-height:140px}
   .en-knowledge-grid{grid-template-columns:1fr}
-  .en-learning-paths{grid-template-columns:1fr}
   .en-encyclopedia{grid-template-columns:1fr}
   .en-latest-grid{grid-template-columns:1fr}
   .sw-newsletter-form{flex-direction:column}
@@ -148,9 +140,8 @@
 {% endblock %}
 
 {% block content %}
-<!-- ACTIVE TEMPLATE: c:\Users\bintu\storic_whisper\templates\core\english_hub.html -->
 
-<!-- SECTION 1: HERO SECTION -->
+<!-- HERO -->
 <section class="en-banner" aria-label="English Psychology">
   <div class="en-banner-inner">
     <p class="en-banner-eyebrow">Storic Whisper · English Psychology</p>
@@ -159,7 +150,7 @@
   </div>
 </section>
 
-<!-- SECTION 2: TRUST BAR -->
+<!-- TRUST BAR (real numbers, not hardcoded) -->
 <section class="sw-container">
   <div class="en-trust-bar">
     <div class="en-trust-item">
@@ -167,17 +158,17 @@
       <div class="en-trust-label">Articles</div>
     </div>
     <div class="en-trust-item">
-      <div class="en-trust-number">9</div>
+      <div class="en-trust-number">{{ topic_count }}</div>
       <div class="en-trust-label">Topic Clusters</div>
     </div>
     <div class="en-trust-item">
-      <div class="en-trust-number">2026</div>
-      <div class="en-trust-label">Research</div>
+      <div class="en-trust-number">{% now "Y" %}</div>
+      <div class="en-trust-label">Updated</div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 3: WHAT THIS HUB COVERS -->
+<!-- WHAT THIS HUB COVERS -->
 <section class="sw-section sw-container">
   <div class="sw-section-head sw-reveal">
     <p class="sw-eyebrow">What This Hub Covers</p>
@@ -190,11 +181,11 @@
   </div>
 </section>
 
-<!-- SECTION 4: TOPIC NAVIGATION GRID -->
+<!-- TOPIC NAVIGATION / KNOWLEDGE MAP (anchors match real topic_section keys) -->
 <section class="sw-section sw-container">
   <div class="sw-section-head sw-reveal">
     <p class="sw-eyebrow">Psychology Knowledge Map</p>
-    <h2 class="sw-display sw-display--sm">Explore <em>9 Topic Clusters</em></h2>
+    <h2 class="sw-display sw-display--sm">Explore <em>{{ topic_count }} Topic Clusters</em></h2>
   </div>
   <div class="en-knowledge-grid sw-mt-48">
     <a href="#topic-attachment" class="en-knowledge-card">
@@ -207,62 +198,54 @@
       <h3>Validation Psychology</h3>
       <p>External validation vs internal self-worth</p>
     </a>
-    <a href="#topic-behavior" class="en-knowledge-card">
-      <div class="en-knowledge-icon">👥</div>
-      <h3>Human Behavior</h3>
-      <p>Social psychology and decision patterns</p>
-    </a>
-    <a href="#topic-dark" class="en-knowledge-card">
-      <div class="en-knowledge-icon">🌑</div>
-      <h3>Dark Psychology</h3>
-      <p>Recognizing manipulation and protecting yourself</p>
-    </a>
-    <a href="#topic-dopamine" class="en-knowledge-card">
-      <div class="en-knowledge-icon">⚡</div>
-      <h3>Dopamine Psychology</h3>
-      <p>Reward systems and the modern mind</p>
-    </a>
-    <a href="#topic-stoicism" class="en-knowledge-card">
-      <div class="en-knowledge-icon">🏛️</div>
-      <h3>Stoicism</h3>
-      <p>Practical mental strength philosophy</p>
-    </a>
-    <a href="#topic-transform" class="en-knowledge-card">
-      <div class="en-knowledge-icon">🔄</div>
-      <h3>Self Transformation</h3>
-      <p>Identity change and habit psychology</p>
-    </a>
-    <a href="#topic-ai" class="en-knowledge-card">
-      <div class="en-knowledge-icon">🤖</div>
-      <h3>AI & Human Mind</h3>
-      <p>Emotional AI and cognitive outsourcing</p>
+    <a href="#topic-dependency" class="en-knowledge-card">
+      <div class="en-knowledge-icon">🧷</div>
+      <h3>Emotional Dependency</h3>
+      <p>When your happiness depends on someone else</p>
     </a>
     <a href="#topic-relationship" class="en-knowledge-card">
       <div class="en-knowledge-icon">💑</div>
       <h3>Relationship Psychology</h3>
       <p>Attraction, communication, and intimacy</p>
     </a>
+    <a href="#topic-dark" class="en-knowledge-card">
+      <div class="en-knowledge-icon">🌑</div>
+      <h3>Dark Psychology</h3>
+      <p>Recognizing manipulation and protecting yourself</p>
+    </a>
+    <a href="#topic-stoicism" class="en-knowledge-card">
+      <div class="en-knowledge-icon">🏛️</div>
+      <h3>Stoicism</h3>
+      <p>Practical mental strength philosophy</p>
+    </a>
+    <a href="#topic-dopamine" class="en-knowledge-card">
+      <div class="en-knowledge-icon">⚡</div>
+      <h3>Dopamine Psychology</h3>
+      <p>Reward systems and the modern mind</p>
+    </a>
+    <a href="#topic-transformation" class="en-knowledge-card">
+      <div class="en-knowledge-icon">🔄</div>
+      <h3>Self Transformation</h3>
+      <p>Identity change and habit psychology</p>
+    </a>
+    <a href="#topic-behavior" class="en-knowledge-card">
+      <div class="en-knowledge-icon">👥</div>
+      <h3>Human Behavior</h3>
+      <p>Social psychology and decision patterns</p>
+    </a>
+    <a href="#topic-ai_mind" class="en-knowledge-card">
+      <div class="en-knowledge-icon">🤖</div>
+      <h3>AI & Human Mind</h3>
+      <p>Emotional AI and cognitive outsourcing</p>
+    </a>
   </div>
 </section>
 
-<!-- SECTION 3: WHAT WE STUDY -->
-<section class="sw-section sw-container">
-  <div class="sw-section-head sw-reveal">
-    <p class="sw-eyebrow">What This Hub Covers</p>
-    <h2 class="sw-display sw-display--sm">Deep Psychology <em>for Emotional Experience</em></h2>
-  </div>
-  <div class="sw-content-block sw-mt-32">
-    <p class="sw-body">
-      This hub explores the psychology of being human — in pain, in love, in growth. Not clinical psychology. Not academic psychology. The psychology of emotional experience, attachment patterns, validation seeking, dark psychology awareness, stoic mental strength, dopamine-driven behavior, self-transformation, AI's impact on the human mind, and relationship dynamics. Each topic cluster contains deep-dive articles that move from broad understanding to specific practical application.
-    </p>
-  </div>
-</section>
-
-<!-- SECTION 5: FEATURED PILLAR SECTION -->
+<!-- FEATURED PILLAR -->
 <section class="sw-section sw-container">
   <div class="en-featured-pillar">
     <div class="en-featured-pillar-header">
-      <span class="en-featured-pillar-tag">Featured This Quarter</span>
+      <span class="en-featured-pillar-tag">Featured</span>
       <h3>Dark Psychology: Recognizing Manipulation</h3>
     </div>
     <p class="sw-body">Dark psychology explores the manipulative tactics used by some people to control others. Understanding gaslighting, narcissistic patterns, and emotional manipulation helps protect yourself and recognize toxic dynamics before they cause harm.</p>
@@ -272,7 +255,7 @@
   </div>
 </section>
 
-<!-- SECTION 6: LATEST ARTICLES -->
+<!-- LATEST ARTICLES (real data now, one instance only) -->
 <section class="sw-section sw-container">
   <div class="sw-section-head sw-reveal">
     <p class="sw-eyebrow">Latest Articles</p>
@@ -307,32 +290,29 @@
   </div>
 </section>
 
-<!-- SECTION 7: LEARNING PATHS -->
+<!-- PSYCHOLOGY ENCYCLOPEDIA -->
 <section class="sw-section sw-container">
   <div class="sw-section-head sw-reveal">
-    <p class="sw-eyebrow">Learning Paths</p>
-    <h2 class="sw-display sw-display--sm">Curated Reading <em>Sequences</em></h2>
+    <p class="sw-eyebrow">Psychology Encyclopedia</p>
+    <h2 class="sw-display sw-display--sm">Research Themes & <em>Knowledge Areas</em></h2>
   </div>
-  <div class="en-learning-paths sw-mt-48">
-    <div class="en-learning-path">
-      <h3>Understanding Anxious Attachment</h3>
-      <p>4 articles on attachment patterns and healing</p>
-      <span class="en-learning-tag">Coming Soon</span>
+  <div class="en-encyclopedia sw-mt-32">
+    <div class="en-encyclopedia-item">
+      <h3>The Neuroscience of Emotion</h3>
+      <p>Dopamine, attachment, and emotional regulation</p>
     </div>
-    <div class="en-learning-path">
-      <h3>Breaking Dopamine Addiction</h3>
-      <p>5 articles on reward systems and digital detox</p>
-      <span class="en-learning-tag">Coming Soon</span>
+    <div class="en-encyclopedia-item">
+      <h3>Social Influence & Behaviour</h3>
+      <p>Validation, conformity, and group psychology</p>
     </div>
-    <div class="en-learning-path">
-      <h3>Stoic Mental Strength</h3>
-      <p>4 articles on practical philosophy and resilience</p>
-      <span class="en-learning-tag">Coming Soon</span>
+    <div class="en-encyclopedia-item">
+      <h3>Identity & Change</h3>
+      <p>Self-transformation, habits, and ego dissolution</p>
     </div>
   </div>
 </section>
 
-<!-- SECTION 8-16: 9 PSYCHOLOGY CLUSTERS -->
+<!-- TOPIC CLUSTERS (main content — one clean pass, real data) -->
 <section class="sw-section sw-container">
   <div class="sw-section-head sw-reveal">
     <p class="sw-eyebrow">Featured Topic Clusters</p>
@@ -386,64 +366,7 @@
   </section>
 </section>
 
-<!-- SECTION 6: PSYCHOLOGY ENCYCLOPEDIA -->
-<section class="sw-section sw-container">
-  <div class="sw-section-head sw-reveal">
-    <p class="sw-eyebrow">Psychology Encyclopedia</p>
-    <h2 class="sw-display sw-display--sm">Research Themes & <em>Knowledge Areas</em></h2>
-  </div>
-  <div class="en-encyclopedia sw-mt-32">
-    <div class="en-encyclopedia-item">
-      <h3>The Neuroscience of Emotion</h3>
-      <p>Dopamine, attachment, and emotional regulation</p>
-    </div>
-    <div class="en-encyclopedia-item">
-      <h3>Social Influence & Behaviour</h3>
-      <p>Validation, conformity, and group psychology</p>
-    </div>
-    <div class="en-encyclopedia-item">
-      <h3>Identity & Change</h3>
-      <p>Self-transformation, habits, and ego dissolution</p>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 7: LATEST INSIGHTS -->
-<section class="sw-section sw-container">
-  <div class="sw-section-head sw-reveal">
-    <p class="sw-eyebrow">Latest Insights</p>
-    <h2 class="sw-display sw-display--sm">Recently Published <em>Articles</em></h2>
-  </div>
-  <div class="en-latest-grid sw-mt-48">
-    {% for article in latest_articles %}
-    <a href="{% url 'article_detail' article.slug %}" class="en-card">
-      <div class="en-card-thumb">
-        {% if article.thumbnail %}
-          <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" loading="lazy">
-        {% else %}
-          <div class="en-card-thumb-fallback">✦</div>
-        {% endif %}
-      </div>
-      <div class="en-card-body">
-        <h3 class="en-card-title">{{ article.title }}</h3>
-        <p class="sw-body sw-text-muted" style="font-size:13px;line-height:1.7;margin:0">
-          {{ article.meta_description|default:"Read the full analysis."|truncatechars:120 }}
-        </p>
-        <span class="en-read-btn">Read Article</span>
-        <p class="en-card-meta">⏱ {{ article.reading_time }} min · {{ article.created_at|date:"M d, Y" }}</p>
-      </div>
-    </a>
-    {% empty %}
-    <div class="en-placeholder">
-      <p style="margin:0;font-size:14px;color:var(--fog);line-height:1.6;">
-        More articles coming soon.
-      </p>
-    </div>
-    {% endfor %}
-  </div>
-</section>
-
-<!-- SECTION 18: FAQ -->
+<!-- FAQ -->
 <section class="sw-section sw-container">
   <div class="sw-section-head sw-reveal">
     <p class="sw-eyebrow">FAQ</p>
@@ -485,7 +408,7 @@
   </div>
 </section>
 
-<!-- SECTION 9: AUTHORITY SECTION -->
+<!-- ABOUT THIS HUB (one instance only) -->
 <section class="sw-section sw-container">
   <div class="sw-section-head sw-reveal">
     <p class="sw-eyebrow">About This Hub</p>
@@ -498,7 +421,7 @@
   </div>
 </section>
 
-<!-- SECTION 19: NEWSLETTER SECTION -->
+<!-- NEWSLETTER -->
 <section class="sw-section sw-container">
   <div class="sw-newsletter sw-reveal">
     <h2 class="sw-display sw-display--sm">Stay Connected</h2>
@@ -510,20 +433,7 @@
   </div>
 </section>
 
-<!-- SECTION 20: AUTHORITY SECTION -->
-<section class="sw-section sw-container">
-  <div class="sw-section-head sw-reveal">
-    <p class="sw-eyebrow">About This Hub</p>
-    <h2 class="sw-display sw-display--sm">Evidence-Based <em>Psychology Insights</em></h2>
-  </div>
-  <div class="sw-content-block sw-mt-32">
-    <p class="sw-body">
-      This English Psychology Hub is part of Storic Whisper, a platform dedicated to psychology without noise. Our articles draw from research in attachment theory, social psychology, neuroscience, and practical philosophy. We focus on emotional clarity, self-understanding, and mental strength — not clinical diagnosis or academic theory.
-    </p>
-  </div>
-</section>
-
-<!-- SECTION 21: RELATED HUB LINKS -->
+<!-- RELATED HUB LINKS -->
 <section class="sw-container">
   <div class="en-related-hubs">
     <a href="/" class="en-related-hub-link">← Back to Home</a>
