@@ -44,21 +44,32 @@ def home(request):
 
 
 def english_hub(request):
-    base_qs = Article.objects.filter(
-        is_published=True,
-        language='EN',
-    ).order_by('-created_at')
+    topic_labels = dict(ENGLISH_HUB_TOPICS)
 
-    topic_sections = []
-    for key, label in ENGLISH_HUB_TOPICS:
-        topic_sections.append({
-            'key': key,
-            'label': label,
-            'articles': list(base_qs.filter(topic_section=key)),
-        })
+    articles = list(
+        Article.objects.filter(is_published=True, language='EN')
+        .order_by('-created_at')
+    )
+    for a in articles:
+        a.topic_label = topic_labels.get(a.topic_section, 'Psychology')
+
+    # Only topics that actually have at least one live article get a filter chip —
+    # this guarantees the hub never shows an empty/"coming soon" section.
+    topic_counts = {}
+    for a in articles:
+        topic_counts[a.topic_section] = topic_counts.get(a.topic_section, 0) + 1
+
+    topics = [
+        {'key': key, 'label': label, 'count': topic_counts[key]}
+        for key, label in ENGLISH_HUB_TOPICS
+        if topic_counts.get(key)
+    ]
 
     return render(request, 'core/english_hub.html', {
-        'topic_sections': topic_sections,
+        'articles': articles,
+        'topics': topics,
+        'total_articles': len(articles),
+        'topic_count': len(topics),
     })
 
 
@@ -254,3 +265,4 @@ def article_detail(request, slug):
         'previous_article': previous_article,
         'next_article': next_article,
     })
+    
