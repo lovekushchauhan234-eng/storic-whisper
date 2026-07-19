@@ -1,8 +1,8 @@
 {% extends "core/base.html" %}
 {% load static %}
 
-{% block title %}Storic Whisper | English Psychology — Deep Psychology & Human Behavior{% endblock %}
-{% block meta_desc %}Premium English psychology insights: attachment, validation, dark psychology awareness, stoicism, dopamine, and the modern mind.{% endblock %}
+{% block title %}Storic Whisper | English Psychology — Attachment, Behavior & the Modern Mind{% endblock %}
+{% block meta_desc %}Long-form English psychology essays on attachment, validation, dark psychology, stoicism, dopamine, and how the modern mind actually works.{% endblock %}
 {% block canonical %}https://storicwhisper.com/en/{% endblock %}
 {% block body_class %}en-hub-page{% endblock %}
 {% block nav_english %}active{% endblock %}
@@ -10,131 +10,82 @@
 {% block extra_head %}
 <style>
 .en-hub-page .sw-page{padding-top:0}
-.en-banner{min-height:52vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse 90% 70% at 50% 100%,#12122a 0%,#080810 45%,#050508 100%);border-bottom:1px solid rgba(184,151,61,.12)}
-.en-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,8,.3),rgba(5,5,8,.85) 85%)}
-.en-banner-inner{position:relative;z-index:1;max-width:920px;padding:120px 32px 80px}
-.en-banner-eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
-.en-banner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5.5vw,64px);font-weight:400;color:var(--cream);line-height:1.1;margin-bottom:16px}
-.en-banner h1 em{font-style:italic;color:var(--gold)}
-.en-banner p{font-size:16px;color:var(--muted);line-height:1.85;max-width:640px;margin:0 auto}
-.en-topics{padding:80px 0 100px}
-.en-topic{margin-bottom:72px;padding-bottom:72px;border-bottom:1px solid rgba(184,151,61,.1)}
-.en-topic:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.en-topic-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:32px}
-.en-topic-num{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.7}
-.en-topic-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,40px);font-weight:400;color:var(--cream);line-height:1.15}
-.en-topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+
+/* ── Hero ───────────────────────────────────────────── */
+.en-hero{
+  min-height:44vh;display:flex;align-items:center;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 90% 70% at 50% 100%,#12122a 0%,#080810 45%,#050508 100%);
+  border-bottom:1px solid rgba(184,151,61,.12);
+}
+.en-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,8,.25),rgba(5,5,8,.9) 88%)}
+.en-hero-inner{position:relative;z-index:1;max-width:760px;padding:110px 32px 56px;margin:0 auto;text-align:center}
+.en-hero-eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.en-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,58px);font-weight:400;color:var(--cream);line-height:1.12;margin-bottom:16px}
+.en-hero h1 em{font-style:italic;color:var(--gold)}
+.en-hero p{font-size:15.5px;color:var(--muted);line-height:1.8;max-width:580px;margin:0 auto}
+.en-hero-stats{display:flex;justify-content:center;gap:36px;margin-top:32px;flex-wrap:wrap}
+.en-hero-stat{text-align:center}
+.en-hero-stat b{display:block;font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold);font-weight:400;line-height:1}
+.en-hero-stat span{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+
+/* ── Filter chips ───────────────────────────────────── */
+.en-filters{position:sticky;top:0;z-index:20;background:rgba(8,8,12,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(184,151,61,.12);padding:18px 0}
+.en-filters-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:960px;margin:0 auto;padding:0 24px}
+.en-chip{
+  padding:8px 18px;border-radius:999px;border:1px solid rgba(184,151,61,.25);
+  background:transparent;color:var(--muted);font-size:12.5px;letter-spacing:.3px;
+  cursor:pointer;transition:all .25s;white-space:nowrap;
+}
+.en-chip:hover{border-color:rgba(184,151,61,.55);color:var(--cream)}
+.en-chip.is-active{background:var(--gold);border-color:var(--gold);color:#0a0a0f;font-weight:600}
+
+/* ── Article grid ───────────────────────────────────── */
+.en-grid-wrap{padding:56px 0 100px}
+.en-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
 .en-card{background:var(--surface);border:1px solid rgba(184,151,61,.12);text-decoration:none;color:inherit;display:flex;flex-direction:column;overflow:hidden;transition:border-color .3s,transform .3s}
-.en-card:hover{border-color:rgba(184,151,61,.35);transform:translateY(-3px)}
-.en-card-thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#0c0c18,#181830);overflow:hidden}
+.en-card:hover{border-color:rgba(184,151,61,.4);transform:translateY(-4px)}
+.en-card-thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#0c0c18,#181830);overflow:hidden;position:relative}
 .en-card-thumb img{width:100%;height:100%;object-fit:cover}
-.en-card-thumb-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:48px;color:rgba(184,151,61,.22)}
-.en-card-body{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column}
-.en-card-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);line-height:1.3;margin-bottom:10px}
-.en-read-btn{
-  align-self:flex-start;
-  margin-top:16px;
-  padding:11px 16px;
-  border:1px solid rgba(184,151,61,.35);
-  border-radius:999px;
-  background:rgba(184,151,61,.06);
-  font-size:10.5px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:var(--gold);
-}
-.en-card:hover .en-read-btn{
-  background:rgba(184,151,61,.14);
-  border-color:rgba(184,151,61,.55);
-}
-.en-card-meta{font-size:11px;color:var(--muted);margin-top:auto;padding-top:14px}
-.en-placeholder{display:flex;align-items:center;justify-content:center;min-height:140px;padding:32px;border:1px dashed rgba(184,151,61,.22);background:rgba(184,151,61,.04)}
-.en-placeholder a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;text-align:center;line-height:1.7;transition:color .25s}
-.en-placeholder a:hover{color:var(--cream)}
-.en-empty-btn{
-  margin-top:10px;
-  padding:12px 16px;
-  border:1px solid rgba(184,151,61,.35);
-  border-radius:999px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(184,151,61,.06);
-  text-transform:none !important;
-  letter-spacing:0.2px !important;
-}
-.en-empty-btn:hover{
-  background:rgba(184,151,61,.14);
-  border-color:rgba(184,151,61,.55);
-}
+.en-card-thumb-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:44px;color:rgba(184,151,61,.22)}
+.en-card-topic{position:absolute;top:12px;left:12px;padding:5px 12px;background:rgba(8,8,12,.75);backdrop-filter:blur(4px);border:1px solid rgba(184,151,61,.35);border-radius:999px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold)}
+.en-card-body{padding:22px 24px 24px;flex:1;display:flex;flex-direction:column}
+.en-card-title{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--cream);line-height:1.32;margin-bottom:10px}
+.en-card-desc{font-size:13px;color:var(--muted);line-height:1.7;margin:0 0 16px}
+.en-card-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(184,151,61,.08)}
+.en-card-meta{font-size:11px;color:var(--muted)}
+.en-read-btn{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
 
-/* Knowledge Map */
-.en-knowledge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
-.en-knowledge-card{background:var(--surface);border:1px solid rgba(184,151,61,.12);padding:32px;text-decoration:none;color:inherit;transition:border-color .3s,transform .3s;display:flex;flex-direction:column;gap:12px}
-.en-knowledge-card:hover{border-color:rgba(184,151,61,.35);transform:translateY(-3px)}
-.en-knowledge-icon{font-size:32px;margin-bottom:8px}
-.en-knowledge-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);line-height:1.3;margin:0}
-.en-knowledge-card p{font-size:14px;color:var(--muted);line-height:1.6;margin:0}
+/* ── Empty state (only if literally zero EN articles exist) ── */
+.en-empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding:80px 24px;border:1px solid rgba(184,151,61,.14);background:var(--surface)}
+.en-empty-icon{font-family:'Cormorant Garamond',serif;font-size:40px;color:var(--gold)}
+.en-empty h3{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cream);font-weight:400;margin:0}
+.en-empty p{font-size:14px;color:var(--muted);max-width:420px;line-height:1.7;margin:0}
+.en-empty a{padding:11px 22px;border:1px solid rgba(184,151,61,.4);border-radius:999px;color:var(--gold);text-decoration:none;font-size:12px;letter-spacing:1px;text-transform:uppercase;transition:all .25s}
+.en-empty a:hover{background:rgba(184,151,61,.1);border-color:rgba(184,151,61,.65)}
 
-/* Encyclopedia */
-.en-encyclopedia{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
-.en-encyclopedia-item{background:var(--surface);border:1px solid rgba(184,151,61,.12);padding:24px}
-.en-encyclopedia-item h3{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--cream);line-height:1.3;margin:0 0 8px 0}
-.en-encyclopedia-item p{font-size:14px;color:var(--muted);line-height:1.6;margin:0}
-
-/* Latest Grid */
-.en-latest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
-
-/* FAQ */
-.en-faq{display:flex;flex-direction:column;gap:16px}
-.en-faq-item{background:var(--surface);border:1px solid rgba(184,151,61,.12);padding:24px}
-.en-faq-item summary{cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--cream);line-height:1.3;list-style:none;position:relative;padding-right:32px}
+/* ── FAQ ────────────────────────────────────────────── */
+.en-faq{display:flex;flex-direction:column;gap:14px;max-width:760px;margin:0 auto}
+.en-faq-item{background:var(--surface);border:1px solid rgba(184,151,61,.12);padding:22px 24px}
+.en-faq-item summary{cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--cream);line-height:1.3;list-style:none;position:relative;padding-right:30px}
 .en-faq-item summary::-webkit-details-marker{display:none}
-.en-faq-item summary::after{content:'+';position:absolute;right:0;font-size:24px;color:var(--gold);transition:transform .3s}
+.en-faq-item summary::after{content:'+';position:absolute;right:0;top:-2px;font-size:22px;color:var(--gold);transition:transform .3s}
 .en-faq-item[open] summary::after{transform:rotate(45deg)}
-.en-faq-item p{margin-top:16px;font-size:15px;color:var(--sub);line-height:1.7}
+.en-faq-item p{margin-top:14px;font-size:14.5px;color:var(--sub);line-height:1.75}
 
-/* Newsletter */
-.sw-newsletter{background:var(--surface);border:1px solid rgba(184,151,61,.12);padding:48px;text-align:center;max-width:640px;margin:0 auto}
+/* ── Newsletter ─────────────────────────────────────── */
+.sw-newsletter{background:var(--surface);border:1px solid rgba(184,151,61,.12);padding:44px;text-align:center;max-width:600px;margin:0 auto}
 .sw-newsletter-form{display:flex;gap:12px;max-width:400px;margin:0 auto}
 .sw-newsletter-form input{flex:1;padding:12px 16px;background:var(--dark);border:1px solid rgba(184,151,61,.3);border-radius:999px;color:var(--cream);font-size:14px;outline:none;transition:border-color .3s}
 .sw-newsletter-form input:focus{border-color:rgba(184,151,61,.6)}
 .sw-newsletter-form button{padding:12px 24px;border-radius:999px;font-size:13px;letter-spacing:1px;text-transform:uppercase}
 
-/* Trust Bar */
-.en-trust-bar{display:flex;justify-content:center;gap:48px;padding:32px 0;border-bottom:1px solid rgba(184,151,61,.12);flex-wrap:wrap}
-.en-trust-item{text-align:center}
-.en-trust-number{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold);font-weight:400;line-height:1}
-.en-trust-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px}
-
-/* Featured Pillar */
-.en-featured-pillar{background:var(--surface);border:1px solid rgba(184,151,61,.12);padding:40px;margin-top:48px}
-.en-featured-pillar-header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
-.en-featured-pillar-tag{padding:6px 12px;background:rgba(184,151,61,.1);border:1px solid rgba(184,151,61,.3);border-radius:999px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold)}
-.en-featured-pillar h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--cream);margin:0}
-
-/* Related Hubs */
-.en-related-hubs{display:flex;gap:24px;justify-content:center;padding:32px 0;border-top:1px solid rgba(184,151,61,.12);margin-top:48px}
-.en-related-hub-link{padding:12px 24px;background:rgba(184,151,61,.06);border:1px solid rgba(184,151,61,.3);border-radius:999px;text-decoration:none;color:var(--gold);font-size:12px;letter-spacing:1px;text-transform:uppercase;transition:all .3s}
-.en-related-hub-link:hover{background:rgba(184,151,61,.14);border-color:rgba(184,151,61,.55);color:var(--cream)}
-
 @media(max-width:768px){
-  .en-banner-inner{padding-top:100px}
-  .en-topic-grid{grid-template-columns:1fr}
-  .en-card-title{font-size:16px;line-height:1.3;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;display:-webkit-box}
-  .en-card-body{padding:18px 20px 22px}
-  .en-card-thumb{aspect-ratio:16/10;min-height:140px}
-  .en-knowledge-grid{grid-template-columns:1fr}
-  .en-encyclopedia{grid-template-columns:1fr}
-  .en-latest-grid{grid-template-columns:1fr}
+  .en-hero-inner{padding-top:96px}
+  .en-grid{grid-template-columns:1fr}
+  .en-filters{overflow-x:auto}
+  .en-filters-row{justify-content:flex-start}
   .sw-newsletter-form{flex-direction:column}
   .sw-newsletter-form input,.sw-newsletter-form button{width:100%}
-}
-@media(max-width:414px){
-  .en-card-title{font-size:15px}
-}
-@media(max-width:375px){
-  .en-card-title{font-size:14px}
 }
 </style>
 {% endblock %}
@@ -142,229 +93,85 @@
 {% block content %}
 
 <!-- HERO -->
-<section class="en-banner" aria-label="English Psychology">
-  <div class="en-banner-inner">
-    <p class="en-banner-eyebrow">Storic Whisper · English Psychology</p>
-    <h1>Psychology of Human Behavior, Attachment, and Self-Understanding</h1>
-    <p>Evidence-based insights for emotional clarity — attachment theory, validation psychology, dark psychology awareness, stoicism, dopamine, and the modern mind.</p>
-  </div>
-</section>
-
-<!-- TRUST BAR (real numbers, not hardcoded) -->
-<section class="sw-container">
-  <div class="en-trust-bar">
-    <div class="en-trust-item">
-      <div class="en-trust-number">{{ total_articles }}</div>
-      <div class="en-trust-label">Articles</div>
-    </div>
-    <div class="en-trust-item">
-      <div class="en-trust-number">{{ topic_count }}</div>
-      <div class="en-trust-label">Topic Clusters</div>
-    </div>
-    <div class="en-trust-item">
-      <div class="en-trust-number">{% now "Y" %}</div>
-      <div class="en-trust-label">Updated</div>
+<section class="en-hero" aria-label="English Psychology">
+  <div class="en-hero-inner">
+    <p class="en-hero-eyebrow">Storic Whisper · English Psychology</p>
+    <h1>Understand Your Mind, <em>Not Just Your Feelings</em></h1>
+    <p>Long-form essays on attachment, validation, dark psychology awareness, stoicism, dopamine, and how the modern mind actually works — no fluff, no clickbait.</p>
+    <div class="en-hero-stats">
+      <div class="en-hero-stat"><b>{{ total_articles }}</b><span>Essays</span></div>
+      <div class="en-hero-stat"><b>{{ topic_count }}</b><span>Topics</span></div>
+      <div class="en-hero-stat"><b>{% now "Y" %}</b><span>Updated</span></div>
     </div>
   </div>
 </section>
 
-<!-- WHAT THIS HUB COVERS -->
-<section class="sw-section sw-container">
-  <div class="sw-section-head sw-reveal">
-    <p class="sw-eyebrow">What This Hub Covers</p>
-    <h2 class="sw-display sw-display--sm">Deep Psychology <em>for Emotional Experience</em></h2>
+{% if articles %}
+<!-- FILTER CHIPS -->
+<nav class="en-filters" aria-label="Filter by topic">
+  <div class="en-filters-row" id="en-filter-chips">
+    <button type="button" class="en-chip is-active" data-filter="all">All Topics</button>
+    {% for t in topics %}
+    <button type="button" class="en-chip" data-filter="{{ t.key }}">{{ t.label }} ({{ t.count }})</button>
+    {% endfor %}
   </div>
-  <div class="sw-content-block sw-mt-32">
-    <p class="sw-body">
-      This hub explores the psychology of being human — in pain, in love, in growth. Not clinical psychology. Not academic psychology. The psychology of emotional experience, attachment patterns, validation seeking, dark psychology awareness, stoic mental strength, dopamine-driven behavior, self-transformation, AI's impact on the human mind, and relationship dynamics. Each topic cluster contains deep-dive articles that move from broad understanding to specific practical application.
-    </p>
-  </div>
-</section>
+</nav>
 
-<!-- TOPIC NAVIGATION / KNOWLEDGE MAP (anchors match real topic_section keys) -->
-<section class="sw-section sw-container">
-  <div class="sw-section-head sw-reveal">
-    <p class="sw-eyebrow">Psychology Knowledge Map</p>
-    <h2 class="sw-display sw-display--sm">Explore <em>{{ topic_count }} Topic Clusters</em></h2>
-  </div>
-  <div class="en-knowledge-grid sw-mt-48">
-    <a href="#topic-attachment" class="en-knowledge-card">
-      <div class="en-knowledge-icon">🔗</div>
-      <h3>Attachment Theory</h3>
-      <p>How we bond, attach, and form relationships</p>
-    </a>
-    <a href="#topic-validation" class="en-knowledge-card">
-      <div class="en-knowledge-icon">✓</div>
-      <h3>Validation Psychology</h3>
-      <p>External validation vs internal self-worth</p>
-    </a>
-    <a href="#topic-dependency" class="en-knowledge-card">
-      <div class="en-knowledge-icon">🧷</div>
-      <h3>Emotional Dependency</h3>
-      <p>When your happiness depends on someone else</p>
-    </a>
-    <a href="#topic-relationship" class="en-knowledge-card">
-      <div class="en-knowledge-icon">💑</div>
-      <h3>Relationship Psychology</h3>
-      <p>Attraction, communication, and intimacy</p>
-    </a>
-    <a href="#topic-dark" class="en-knowledge-card">
-      <div class="en-knowledge-icon">🌑</div>
-      <h3>Dark Psychology</h3>
-      <p>Recognizing manipulation and protecting yourself</p>
-    </a>
-    <a href="#topic-stoicism" class="en-knowledge-card">
-      <div class="en-knowledge-icon">🏛️</div>
-      <h3>Stoicism</h3>
-      <p>Practical mental strength philosophy</p>
-    </a>
-    <a href="#topic-dopamine" class="en-knowledge-card">
-      <div class="en-knowledge-icon">⚡</div>
-      <h3>Dopamine Psychology</h3>
-      <p>Reward systems and the modern mind</p>
-    </a>
-    <a href="#topic-transformation" class="en-knowledge-card">
-      <div class="en-knowledge-icon">🔄</div>
-      <h3>Self Transformation</h3>
-      <p>Identity change and habit psychology</p>
-    </a>
-    <a href="#topic-behavior" class="en-knowledge-card">
-      <div class="en-knowledge-icon">👥</div>
-      <h3>Human Behavior</h3>
-      <p>Social psychology and decision patterns</p>
-    </a>
-    <a href="#topic-ai_mind" class="en-knowledge-card">
-      <div class="en-knowledge-icon">🤖</div>
-      <h3>AI & Human Mind</h3>
-      <p>Emotional AI and cognitive outsourcing</p>
-    </a>
-  </div>
-</section>
-
-<!-- FEATURED PILLAR -->
-<section class="sw-section sw-container">
-  <div class="en-featured-pillar">
-    <div class="en-featured-pillar-header">
-      <span class="en-featured-pillar-tag">Featured</span>
-      <h3>Dark Psychology: Recognizing Manipulation</h3>
-    </div>
-    <p class="sw-body">Dark psychology explores the manipulative tactics used by some people to control others. Understanding gaslighting, narcissistic patterns, and emotional manipulation helps protect yourself and recognize toxic dynamics before they cause harm.</p>
-    <div style="margin-top:24px">
-      <a href="#topic-dark" class="en-read-btn">Explore Dark Psychology</a>
-    </div>
-  </div>
-</section>
-
-<!-- LATEST ARTICLES (real data now, one instance only) -->
-<section class="sw-section sw-container">
-  <div class="sw-section-head sw-reveal">
-    <p class="sw-eyebrow">Latest Articles</p>
-    <h2 class="sw-display sw-display--sm">Recently Published <em>Articles</em></h2>
-  </div>
-  <div class="en-latest-grid sw-mt-48">
-    {% for article in latest_articles %}
-    <a href="{% url 'article_detail' article.slug %}" class="en-card">
+<!-- ARTICLE GRID (single unified grid, filtered client-side — never shows an empty/thin section) -->
+<section class="en-grid-wrap sw-container">
+  <div class="en-grid" id="en-article-grid">
+    {% for article in articles %}
+    <a href="{% url 'article_detail' article.slug %}" class="en-card" data-topic="{{ article.topic_section }}">
       <div class="en-card-thumb">
         {% if article.thumbnail %}
           <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" loading="lazy">
         {% else %}
           <div class="en-card-thumb-fallback">✦</div>
         {% endif %}
+        <span class="en-card-topic">{{ article.topic_label }}</span>
       </div>
       <div class="en-card-body">
         <h3 class="en-card-title">{{ article.title }}</h3>
-        <p class="sw-body sw-text-muted" style="font-size:13px;line-height:1.7;margin:0">
-          {{ article.meta_description|default:"Read the full analysis."|truncatechars:120 }}
-        </p>
-        <span class="en-read-btn">Read Article</span>
-        <p class="en-card-meta">⏱ {{ article.reading_time }} min · {{ article.created_at|date:"M d, Y" }}</p>
+        <p class="en-card-desc">{{ article.meta_description|default:"Read the full analysis."|truncatechars:110 }}</p>
+        <div class="en-card-foot">
+          <span class="en-card-meta">⏱ {{ article.reading_time }} min · {{ article.created_at|date:"M d, Y" }}</span>
+          <span class="en-read-btn">Read →</span>
+        </div>
       </div>
     </a>
-    {% empty %}
-    <div class="en-placeholder">
-      <p style="margin:0;font-size:14px;color:var(--fog);line-height:1.6;">
-        More articles coming soon.
-      </p>
-    </div>
     {% endfor %}
   </div>
 </section>
 
-<!-- PSYCHOLOGY ENCYCLOPEDIA -->
-<section class="sw-section sw-container">
-  <div class="sw-section-head sw-reveal">
-    <p class="sw-eyebrow">Psychology Encyclopedia</p>
-    <h2 class="sw-display sw-display--sm">Research Themes & <em>Knowledge Areas</em></h2>
-  </div>
-  <div class="en-encyclopedia sw-mt-32">
-    <div class="en-encyclopedia-item">
-      <h3>The Neuroscience of Emotion</h3>
-      <p>Dopamine, attachment, and emotional regulation</p>
-    </div>
-    <div class="en-encyclopedia-item">
-      <h3>Social Influence & Behaviour</h3>
-      <p>Validation, conformity, and group psychology</p>
-    </div>
-    <div class="en-encyclopedia-item">
-      <h3>Identity & Change</h3>
-      <p>Self-transformation, habits, and ego dissolution</p>
-    </div>
+<script>
+(function(){
+  var chips = document.querySelectorAll('#en-filter-chips .en-chip');
+  var cards = document.querySelectorAll('#en-article-grid .en-card');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('is-active'); });
+      chip.classList.add('is-active');
+      var filter = chip.getAttribute('data-filter');
+      cards.forEach(function(card){
+        var show = (filter === 'all') || (card.getAttribute('data-topic') === filter);
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+
+{% else %}
+<!-- Only shown if there are truly zero published EN articles -->
+<section class="sw-container" style="padding:56px 0 100px">
+  <div class="en-empty">
+    <div class="en-empty-icon">✦</div>
+    <h3>New English essays are on the way</h3>
+    <p>Our English psychology archive is being written right now. In the meantime, explore our full Hindi psychology collection.</p>
+    <a href="{% url 'home' %}">Explore Storic Whisper</a>
   </div>
 </section>
-
-<!-- TOPIC CLUSTERS (main content — one clean pass, real data) -->
-<section class="sw-section sw-container">
-  <div class="sw-section-head sw-reveal">
-    <p class="sw-eyebrow">Featured Topic Clusters</p>
-    <h2 class="sw-display sw-display--sm">Deep-Dive <em>Psychology Topics</em></h2>
-  </div>
-
-  <section class="en-topics sw-mt-48">
-    {% for section in topic_sections %}
-    <article class="en-topic" id="topic-{{ section.key }}">
-      <header class="en-topic-head">
-        <div>
-          <p class="en-topic-num">{{ forloop.counter|stringformat:"02d" }} — Topic</p>
-          <h2 class="en-topic-title">{{ section.label }}</h2>
-        </div>
-      </header>
-
-      {% if section.articles %}
-      <div class="en-topic-grid">
-        {% for article in section.articles %}
-        <a href="{% url 'article_detail' article.slug %}" class="en-card">
-          <div class="en-card-thumb">
-            {% if article.thumbnail %}
-              <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}" loading="lazy">
-            {% else %}
-              <div class="en-card-thumb-fallback">✦</div>
-            {% endif %}
-          </div>
-          <div class="en-card-body">
-            <h3 class="en-card-title">{{ article.title }}</h3>
-            <p class="sw-body sw-text-muted" style="font-size:13px;line-height:1.7;margin:0">
-              {{ article.meta_description|default:"Read the full analysis."|truncatechars:120 }}
-            </p>
-            <span class="en-read-btn">Read Article</span>
-            <p class="en-card-meta">⏱ {{ article.reading_time }} min · {{ article.created_at|date:"M d, Y" }}</p>
-          </div>
-        </a>
-        {% endfor %}
-      </div>
-      {% else %}
-      <div class="en-placeholder">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;">
-          <p style="margin:0;font-size:14px;color:var(--fog);line-height:1.6;">
-            No articles published yet.
-          </p>
-          <a href="{% url 'english_hub' %}" class="en-empty-btn">Explore English Psychology</a>
-        </div>
-      </div>
-      {% endif %}
-    </article>
-    {% endfor %}
-  </section>
-</section>
+{% endif %}
 
 <!-- FAQ -->
 <section class="sw-section sw-container">
@@ -397,27 +204,6 @@
       <summary>How can I change my attachment style?</summary>
       <p>While attachment styles are formed early, they can evolve through conscious effort, therapy, and secure relationship experiences. The process involves self-awareness, boundary work, and gradually building trust in healthy relationships.</p>
     </details>
-    <details class="en-faq-item">
-      <summary>What are signs of gaslighting?</summary>
-      <p>Gaslighting signs include: someone denying your reality, saying you're "crazy" or "too sensitive," shifting blame when confronted, and making you question your own memory and perception. It's a form of emotional manipulation.</p>
-    </details>
-    <details class="en-faq-item">
-      <summary>How does AI affect human psychology?</summary>
-      <p>AI affects psychology through cognitive offloading (relying on AI for thinking), emotional attachment to AI companions, and changes in how we process information. Understanding these effects helps maintain healthy boundaries with technology.</p>
-    </details>
-  </div>
-</section>
-
-<!-- ABOUT THIS HUB (one instance only) -->
-<section class="sw-section sw-container">
-  <div class="sw-section-head sw-reveal">
-    <p class="sw-eyebrow">About This Hub</p>
-    <h2 class="sw-display sw-display--sm">Evidence-Based <em>Psychology Insights</em></h2>
-  </div>
-  <div class="sw-content-block sw-mt-32">
-    <p class="sw-body">
-      This English Psychology Hub is part of Storic Whisper, a platform dedicated to psychology without noise. Our articles draw from research in attachment theory, social psychology, neuroscience, and practical philosophy. We focus on emotional clarity, self-understanding, and mental strength — not clinical diagnosis or academic theory.
-    </p>
   </div>
 </section>
 
@@ -425,19 +211,11 @@
 <section class="sw-section sw-container">
   <div class="sw-newsletter sw-reveal">
     <h2 class="sw-display sw-display--sm">Stay Connected</h2>
-    <p class="sw-body sw-mt-16">New psychology insights, delivered weekly.</p>
+    <p class="sw-body sw-mt-16">New psychology essays, delivered weekly.</p>
     <form action="{% url 'subscribe' %}" method="post" class="sw-newsletter-form sw-mt-24">
       <input type="email" name="email" placeholder="Your email address" required>
       <button type="submit" class="sw-btn sw-btn--primary">Subscribe</button>
     </form>
-  </div>
-</section>
-
-<!-- RELATED HUB LINKS -->
-<section class="sw-container">
-  <div class="en-related-hubs">
-    <a href="/" class="en-related-hub-link">← Back to Home</a>
-    <a href="/articles/" class="en-related-hub-link">All Articles →</a>
   </div>
 </section>
 
