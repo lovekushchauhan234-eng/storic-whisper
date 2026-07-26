@@ -1,7 +1,9 @@
 import json
+import os
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.views.decorators.http import require_POST
 
 from .models import Article
@@ -9,7 +11,24 @@ from .pillar_helpers import get_related_articles
 from .luppi import chat as luppi_chat
 
 
+SLUG_REDIRECTS_PATH = os.path.join(os.path.dirname(__file__), 'slug_redirects.json')
+
+
+def _load_slug_redirects():
+    """
+    old_slug -> new_slug map for renamed articles, so any already-indexed
+    or shared URL 301-redirects instead of breaking. Populated by the
+    `regenerate_broken_slugs --apply` management command.
+    """
+    try:
+        with open(SLUG_REDIRECTS_PATH, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
 ENGLISH_HUB_TOPICS = [
+
     ('attachment', 'Attachment Theory & Traumas'),
     ('validation', 'Validation Psychology'),
     ('dependency', 'Emotional Dependency'),
@@ -263,8 +282,17 @@ def get_previous_next_articles(article):
 
 
 def article_detail(request, slug):
-    article = get_object_or_404(Article, slug=slug, is_published=True)
-    
+    try:
+        article = Article.objects.get(slug=slug, is_published=True)
+    except Article.DoesNotExist:
+        redirects = _load_slug_redirects()
+        new_slug = redirects.get(slug)
+        if new_slug:
+            return HttpResponsePermanentRedirect(
+                reverse('article_detail', kwargs={'slug': new_slug})
+            )
+        raise Http404("Article not found")
+
     related_articles = get_article_related_articles(article, limit=3)
     previous_article, next_article = get_previous_next_articles(article)
 
