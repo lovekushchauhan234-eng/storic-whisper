@@ -39,7 +39,11 @@ def home(request):
     # If no article has been manually marked is_featured=True yet, fall back
     # to the longest-form (deepest) published articles instead of nothing.
     if not cornerstone_articles:
-        cornerstone_articles = list(hindi_qs.order_by('-reading_time')[:3])
+        # reading_time() is a Python method on the model, not a DB column,
+        # so it can't be used in order_by() — sort in Python instead.
+        all_hindi = list(hindi_qs)
+        all_hindi.sort(key=lambda a: a.reading_time(), reverse=True)
+        cornerstone_articles = all_hindi[:3]
     return render(request, 'core/home.html', {
         'featured_articles': featured_articles,
         'english_posts': english_posts,

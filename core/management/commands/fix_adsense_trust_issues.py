@@ -6,9 +6,14 @@ Run this against your PRODUCTION (Supabase) database, e.g.:
 
 What it does:
 1. If no article is currently marked is_featured=True, marks the 3 deepest
-   (longest reading_time) published Hindi articles as featured, so the
-   homepage "Start Here / Cornerstone" section stops relying on the
-   fallback and shows genuinely curated picks.
+   (longest, by computed reading_time) published Hindi articles as
+   featured, so the homepage "Start Here / Cornerstone" section stops
+   relying on the fallback and shows genuinely curated picks.
+   NOTE: reading_time is a plain Python method on the model (derived from
+   `content` word count) — it is NOT a database column. It cannot be used
+   in .order_by(), so this command pulls the queryset into Python and
+   sorts there instead. No migration is needed; only real model fields
+   (is_featured, is_published, language, slug) are queried via the ORM.
 2. Prints an audit list of slugs that look auto-generated/broken (leading
    hyphen, truncated, or inconsistent casing) so you can review and rename
    them by hand — this command does NOT rename slugs automatically, since
@@ -29,10 +34,16 @@ class Command(BaseCommand):
         # 1. Cornerstone / featured articles
         featured_count = hindi_qs.filter(is_featured=True).count()
         if featured_count == 0:
-            candidates = list(hindi_qs.order_by('-reading_time')[:3])
+            # reading_time() is a Python method, not a DB field — order_by()
+            # can't touch it, so sort in Python after fetching.
+            all_articles = list(hindi_qs)
+            all_articles.sort(key=lambda a: a.reading_time(), reverse=True)
+            candidates = all_articles[:3]
+
             for article in candidates:
                 article.is_featured = True
                 article.save(update_fields=['is_featured'])
+
             self.stdout.write(self.style.SUCCESS(
                 f"Marked {len(candidates)} article(s) as is_featured=True: "
                 + ", ".join(a.slug for a in candidates)
