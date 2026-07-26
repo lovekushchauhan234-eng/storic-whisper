@@ -497,6 +497,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
     <li><a href="{% url 'article_list' %}">Hindi Psychology</a></li>
     <li><a href="{% url 'english_hub' %}">English Psychology</a></li>
     <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'contact' %}">Contact</a></li>
     <li><a href="{% url 'ai_assistant' %}" class="nav-luppi">✦ LUPPI AI</a></li>
   </ul>
   <button class="burger" id="burger" aria-label="Menu">
@@ -512,6 +513,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
   <a href="{% url 'article_list' %}">Hindi Psychology</a>
   <a href="{% url 'english_hub' %}">English Psychology</a>
   <a href="{% url 'about' %}">About</a>
+  <a href="{% url 'contact' %}">Contact</a>
   <a href="{% url 'ai_assistant' %}" style="color:var(--gold);border:1px solid rgba(184,151,61,.3)">✦ LUPPI AI</a>
 </div>
 
@@ -587,7 +589,7 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
       </a>
       {% empty %}
       <p class="sw-body sw-text-center" style="grid-column:1/-1;padding:32px 0;color:var(--fog)">
-        Cornerstone articles will appear here.
+        नई cornerstone articles जल्द प्रकाशित होंगी — तब तक <a href="{% url 'article_list' %}">सभी articles यहाँ देखें</a>।
       </p>
       {% endfor %}
     </div>
@@ -900,13 +902,15 @@ footer{background:var(--void);border-top:1px solid var(--border);padding:80px 56
       <ul class="foot-links">
         <li><a href="{% url 'ai_assistant' %}" style="color:var(--gold)">✦ LUPPI AI</a></li>
         <li><a href="#newsletter">Newsletter</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
         <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
         <li><a href="{% url 'terms' %}">Terms</a></li>
+        <li><a href="{% url 'disclaimer' %}">Disclaimer</a></li>
       </ul>
     </div>
   </div>
   <div class="foot-bottom">
-    <span class="foot-copy">© 2025 Storic Whisper — Lovekush Chauhan. All rights reserved.</span>
+    <span class="foot-copy">© {% now "Y" %} Storic Whisper — Lovekush Chauhan. All rights reserved.</span>
     <span class="foot-copy">Made for those who seek clarity.</span>
   </div>
 </footer>

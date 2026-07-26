@@ -34,7 +34,12 @@ def home(request):
     )
     # BUG 1 FIX: Add most_read_articles and cornerstone_articles
     most_read_articles = hindi_qs.order_by('-created_at')[:3]
-    cornerstone_articles = hindi_qs.filter(is_featured=True)[:3]
+    cornerstone_articles = list(hindi_qs.filter(is_featured=True)[:3])
+    # Safety net: never show an empty "cornerstone" section on a live site.
+    # If no article has been manually marked is_featured=True yet, fall back
+    # to the longest-form (deepest) published articles instead of nothing.
+    if not cornerstone_articles:
+        cornerstone_articles = list(hindi_qs.order_by('-reading_time')[:3])
     return render(request, 'core/home.html', {
         'featured_articles': featured_articles,
         'english_posts': english_posts,
